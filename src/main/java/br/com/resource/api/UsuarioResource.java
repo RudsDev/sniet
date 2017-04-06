@@ -2,14 +2,17 @@ package br.com.resource.api;
 
 import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+
 import br.com.app.api.GeraID;
 import br.com.model.api.Usuario;
 import br.com.persist.api.JPAUtil;
@@ -45,7 +48,7 @@ public class UsuarioResource {
 				)
 		)
 	)
-	@Path("/save")
+	@Path("/")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response save(
@@ -62,15 +65,16 @@ public class UsuarioResource {
 		
 		usuario.setId(GeraID.geraId());
 		
-		builder.path(Integer.toString(usuario.getId()));
-
-//Testando persistência
 		
+		//Testando persistência
 		 em.getTransaction().begin();
-		 em.persist(em.merge(usuario));
+		 Usuario usuarioMerged =  em.merge(usuario);
+		 em.persist(usuarioMerged);
 		 em.getTransaction().commit();
 		 em.close();
 		
+		 builder.path(Integer.toString(usuarioMerged.getId()));
+		 
 	    return Response.created(builder.build()).status(201)
 	            .build();
 	}
@@ -110,5 +114,37 @@ public class UsuarioResource {
 		
 	    return Usuario.userToJson(usuario);
 	}
+
+	@ApiOperation(
+			value="Apaga um usuário do sistema.",
+			consumes = MediaType.TEXT_PLAIN
+		)
+		@ApiResponses(
+			@ApiResponse(
+				code=200,
+				message="Usuário apagado do sistema.",
+				response = Usuario.class
+			)
+		)
+		@Path("{id}")
+		@DELETE
+		@Consumes(MediaType.TEXT_PLAIN)
+		public Response delete(
+				@PathParam(value="id")
+				long id,
+				@Context UriInfo uriInfo){
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+			
+			
+			
+			//Chamada do método e lógica de deleção
+			System.out.println("Usuário deletado com sucesso: " + id); 
+			
+			//TODO Retorna ID do usuário apagado
+			//builder.path(Integer.toString(usuario.getId()));
+
+		    return Response.created(builder.build()).status(200)
+		            .build();
+		}
 	
 }
