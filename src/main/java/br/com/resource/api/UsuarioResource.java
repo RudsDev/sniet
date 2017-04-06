@@ -65,15 +65,16 @@ public class UsuarioResource {
 		
 		usuario.setId(GeraID.geraId());
 		
-		builder.path(Integer.toString(usuario.getId()));
-
-//Testando persistência
 		
+		//Testando persistência
 		 em.getTransaction().begin();
-		 em.persist(em.merge(usuario));
+		 Usuario usuarioMerged =  em.merge(usuario);
+		 em.persist(usuarioMerged);
 		 em.getTransaction().commit();
 		 em.close();
 		
+		 builder.path(Integer.toString(usuarioMerged.getId()));
+		 
 	    return Response.created(builder.build()).status(201)
 	            .build();
 	}
