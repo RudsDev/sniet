@@ -48,7 +48,7 @@ public class UsuarioResource {
 				)
 		)
 	)
-	@Path("/save")
+	@Path("/")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response save(
