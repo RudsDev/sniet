@@ -1,6 +1,5 @@
 package br.com.resource.api;
 
-import javax.persistence.EntityManager;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
@@ -13,9 +12,8 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
-import br.com.app.api.GeraID;
 import br.com.model.api.Usuario;
-import br.com.persist.api.JPAUtil;
+import br.com.service.api.UsuarioService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -27,9 +25,12 @@ import io.swagger.annotations.ResponseHeader;
 @Path("/usuarios")
 public class UsuarioResource {
 	
-	private JPAUtil jpaem = new JPAUtil();
-	private EntityManager em = jpaem.getEntityManager();
-
+	UsuarioService userService;
+	
+	public UsuarioResource() {
+		this.userService = new UsuarioService();
+	}
+	
 	@ApiOperation(
 		value="Salva um usuario no sistema.",
 		consumes = MediaType.APPLICATION_JSON,
@@ -61,19 +62,16 @@ public class UsuarioResource {
 			@Context UriInfo uriInfo){
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		
-		Usuario usuario = Usuario.jsonToUser(usuarioJson);
+		Usuario user = Usuario.jsonToUser(usuarioJson);
 		
-		usuario.setId(GeraID.geraId());
+		
 		
 		
 		//Testando persistência
-		 em.getTransaction().begin();
-		 Usuario usuarioMerged =  em.merge(usuario);
-		 em.persist(usuarioMerged);
-		 em.getTransaction().commit();
-		 em.close();
+		userService.save(user);
+
 		
-		 builder.path(Integer.toString(usuarioMerged.getId()));
+		 //builder.path(Integer.toString(usuarioMerged.getId()));
 		 
 	    return Response.created(builder.build()).status(201)
 	            .build();
@@ -107,12 +105,9 @@ public class UsuarioResource {
 			String usuarioJson){
 		
 		Usuario usuario = Usuario.jsonToUser(usuarioJson);
-		
-		System.out.println(usuarioJson);
-		
-		usuario.exibir();
-		
+
 	    return Usuario.userToJson(usuario);
+	    
 	}
 
 	@ApiOperation(
