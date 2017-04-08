@@ -1,7 +1,11 @@
 package br.com.resource.api;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -183,6 +187,45 @@ public class UsuarioResource {
 	    return Response.created(builder.build()).status(201)
 	            .build();
 	}
+	
+	
+	@ApiOperation(
+			value="Busca um usuario pelo seu login.",
+			consumes = MediaType.TEXT_PLAIN,
+			produces = MediaType.APPLICATION_JSON
+		)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Usuario localizado.",
+			response = Usuario.class
+		)
+	)
+	@Path("{login}")
+	@GET
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscaPorLogin(
+			@PathParam(value="login")
+			String login,
+			@Context UriInfo uriInfo){
+		
+		//Chamada do método e lógica de deleção
+		System.out.println("Login usuario: " + login); 
+		
+		
+		List<Usuario> users = this.userService.searchByLogin(login);
+		List<String> usersJson = new ArrayList<>();
+		
+		for(int i=0; i<users.size();i++){
+			usersJson.add(Usuario.userToJson(users.get(i)));
+		}
+		
+		//return usersJson.get(0);
+				
+		return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();
+	}
+
 	
 	
 	

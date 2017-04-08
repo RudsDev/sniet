@@ -1,7 +1,9 @@
 package br.com.service.api;
 
-import br.com.dao.api.Test_UserDao;
+import java.util.List;
+
 import br.com.model.api.Usuario;
+import br.com.test.api.Test_UserDao;
 
 public class UsuarioService {
 	
@@ -21,6 +23,10 @@ public class UsuarioService {
 	
 	public Usuario update (Usuario usuario){
 		return this.usuarioDao.atualizar(usuario);
+	}
+	
+	public  List<Usuario> searchByLogin(String login){
+		return this.usuarioDao.getUsuarioByLogin(login);
 	}
 	
 }
