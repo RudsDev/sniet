@@ -14,12 +14,13 @@ public class UsuarioService {
 		this.usuarioDao = new Test_UserDao();
 	}
 	
-	public void save(Usuario usuario){
-		this.usuarioDao.gravar(usuario);
+	public Usuario save(Usuario usuario){
+		//Tratar exceptions
+		return this.usuarioDao.gravar(usuario);
 	}
 	
-	public void update (Usuario usuario){
-		this.usuarioDao.atualizar(usuario);
+	public Usuario update (Usuario usuario){
+		return this.usuarioDao.atualizar(usuario);
 	}
 	
 }

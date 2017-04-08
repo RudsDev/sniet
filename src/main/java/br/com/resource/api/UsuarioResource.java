@@ -3,6 +3,7 @@ package br.com.resource.api;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -30,6 +31,8 @@ public class UsuarioResource {
 	public UsuarioResource() {
 		this.userService = new UsuarioService();
 	}
+	
+	
 	
 	@ApiOperation(
 		value="Salva um usuario no sistema.",
@@ -60,23 +63,19 @@ public class UsuarioResource {
 			)
 			String usuarioJson,
 			@Context UriInfo uriInfo){
+		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 		
 		Usuario user = Usuario.jsonToUser(usuarioJson);
 		
-		
-		
-		
 		//Testando persistência
 		userService.save(user);
-
-		
-		 //builder.path(Integer.toString(usuarioMerged.getId()));
 		 
 	    return Response.created(builder.build()).status(201)
 	            .build();
 	}
 
+	
 	
 	@ApiOperation(
 			value="Retorna o mesmo usuario que foi submetido."
@@ -110,36 +109,82 @@ public class UsuarioResource {
 	    
 	}
 
+	
+	
 	@ApiOperation(
 			value="Apaga um usuário do sistema.",
 			consumes = MediaType.TEXT_PLAIN
 		)
-		@ApiResponses(
-			@ApiResponse(
-				code=200,
-				message="Usuário apagado do sistema.",
-				response = Usuario.class
-			)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Usuário apagado do sistema.",
+			response = Usuario.class
 		)
-		@Path("{id}")
-		@DELETE
-		@Consumes(MediaType.TEXT_PLAIN)
-		public Response delete(
-				@PathParam(value="id")
-				long id,
-				@Context UriInfo uriInfo){
-			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-			
-			
-			
-			//Chamada do método e lógica de deleção
-			System.out.println("Usuário deletado com sucesso: " + id); 
-			
-			//TODO Retorna ID do usuário apagado
-			//builder.path(Integer.toString(usuario.getId()));
+	)
+	@Path("{id}")
+	@DELETE
+	@Consumes(MediaType.TEXT_PLAIN)
+	public Response delete(
+			@PathParam(value="id")
+			long id,
+			@Context UriInfo uriInfo){
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();	
+		
+		//Chamada do método e lógica de deleção
+		System.out.println("Usuário deletado com sucesso: " + id); 
+		
+		//TODO Retorna ID do usuário apagado
+		//builder.path(Integer.toString(usuario.getId()));
 
-		    return Response.created(builder.build()).status(200)
-		            .build();
-		}
+	    return Response.created(builder.build()).status(200)
+	            .build();
+	}
+	
+	
+	
+	@ApiOperation(
+			value="Atualiza dados de um usuario no sistema.",
+			consumes = MediaType.APPLICATION_JSON,
+			produces = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=201,
+			message="Dados do usuário atualizados.",
+			response = Usuario.class,
+			responseHeaders=
+				@ResponseHeader(
+					name="Location",
+					description="uri usuario criado.",
+					response=String.class
+				)
+		)
+	)
+	@Path("/")
+	@PUT
+	@Consumes(MediaType.TEXT_PLAIN)
+	public Response update(
+			@ApiParam(
+					value="Usuario",
+					name="usuarioJson",
+					required=true
+			)
+			String usuarioJson,
+			@Context UriInfo uriInfo){
+		
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+		
+		Usuario user = Usuario.jsonToUser(usuarioJson);
+		
+		//Testando persistência
+		userService.update(user);
+		 
+	    return Response.created(builder.build()).status(201)
+	            .build();
+	}
+	
+	
+	
 	
 }
