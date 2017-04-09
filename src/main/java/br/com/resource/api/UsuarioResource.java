@@ -118,7 +118,7 @@ public class UsuarioResource {
 	@ApiOperation(
 			value="Apaga um usuário do sistema.",
 			consumes = MediaType.TEXT_PLAIN
-		)
+	)
 	@ApiResponses(
 		@ApiResponse(
 			code=200,
@@ -135,12 +135,6 @@ public class UsuarioResource {
 			@Context UriInfo uriInfo){
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();	
 		
-		//Chamada do método e lógica de deleção
-		System.out.println("Usuário deletado com sucesso: " + id); 
-		
-		//TODO Retorna ID do usuário apagado
-		//builder.path(Integer.toString(usuario.getId()));
-
 	    return Response.created(builder.build()).status(200)
 	            .build();
 	}
@@ -193,7 +187,7 @@ public class UsuarioResource {
 			value="Busca um usuario pelo seu login.",
 			consumes = MediaType.TEXT_PLAIN,
 			produces = MediaType.APPLICATION_JSON
-		)
+	)
 	@ApiResponses(
 		@ApiResponse(
 			code=200,
@@ -210,24 +204,13 @@ public class UsuarioResource {
 			String login,
 			@Context UriInfo uriInfo){
 		
-		//Chamada do método e lógica de deleção
-		System.out.println("Login usuario: " + login); 
-		
-		
 		List<Usuario> users = this.userService.searchByLogin(login);
 		List<String> usersJson = new ArrayList<>();
 		
 		for(int i=0; i<users.size();i++){
 			usersJson.add(Usuario.userToJson(users.get(i)));
 		}
-		
-		//return usersJson.get(0);
-				
+
 		return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();
 	}
-
-	
-	
-	
-	
 }
