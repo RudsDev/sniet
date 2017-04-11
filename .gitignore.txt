@@ -63,6 +63,9 @@ local.properties
 *.orig
 
 ### Java ###
+#Project ignored files
+src/main/java/br/com/test/
+
 # Compiled class file
 *.class
 
