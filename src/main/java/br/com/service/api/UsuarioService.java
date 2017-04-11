@@ -1,13 +1,11 @@
 package br.com.service.api;
 
 import java.util.List;
-
 import br.com.model.api.Usuario;
 import br.com.test.api.Test_UserDao;
 
 public class UsuarioService {
 	
-	//TODO Aplicar singleton aos daos
 	//TODO Substituir pelos DAOS do Alexandre
 	private Test_UserDao usuarioDao;
 	
