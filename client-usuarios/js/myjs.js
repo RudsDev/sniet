@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-$(document).ready(function (){
-
-=======
 
 
 $(document).ready(function (){
@@ -27,7 +23,6 @@ $(document).ready(function (){
 	  }
 
 
->>>>>>> c8c63bd... arquivos de cliente para testes
 
 	$('#command').on('click', function(){
 
@@ -44,16 +39,11 @@ $(document).ready(function (){
 	  }
 
 	  $.ajax({
-<<<<<<< HEAD
-			//url:'http://localhost:8282/apirestex/servlet/usuarios/save',
-			url:'http://localhost:8282/apirestex/servlet/usuarios/retornaMesmoUsuario',
-=======
 			//url:'http://localhost:8383/sniet_api/servlet/usuarios/save',
 			url:'http://localhost:8282/sniet_api/servlet/usuarios/',
  
 			//url:'http://localhost:8282/apirestex/servlet/usuarios/save',
 			//url:'http://localhost:8282/sniet_api/servlet/usuarios/retornaMesmoUsuario',
->>>>>>> c8c63bd... arquivos de cliente para testes
 			//url:'http://52.14.130.196/apirestex/servlet/usuarios/save',
 			data: JSON.stringify(user),
 			type:'POST',
@@ -71,8 +61,6 @@ $(document).ready(function (){
 	  });
 
 	});
-<<<<<<< HEAD
-=======
 
 
 	$('#btn-delete').on('click', function(){
@@ -126,5 +114,4 @@ $(document).ready(function (){
 
 
 
->>>>>>> c8c63bd... arquivos de cliente para testes
 });
