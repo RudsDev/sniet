@@ -23,6 +23,14 @@ public class UsuarioService {
 		return this.usuarioDao.atualizar(usuario);
 	}
 	
+	public void deleteById (Integer id){
+		this.usuarioDao.apagarUsuarioPorId(id);
+	}
+	
+	public void deleteByObj (Usuario usuario){
+		this.usuarioDao.apagarUsuarioPorObjeto(usuario);
+	}
+	
 	public  List<Usuario> searchByLogin(String login){
 		return this.usuarioDao.getUsuarioByLogin(login);
 	}
