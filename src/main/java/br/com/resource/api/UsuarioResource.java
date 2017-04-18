@@ -68,12 +68,14 @@ public class UsuarioResource {
 			String usuarioJson,
 			@Context UriInfo uriInfo){
 		
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
-		
-		Usuario user = Usuario.jsonToUser(usuarioJson);
+		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 		
 		//Testando persistência
-		userService.save(user);
+		Usuario userSaved = userService.save(Usuario.jsonToUser(usuarioJson));
+		
+		//Coloca o ID do user recém salvo na resposta para o client (Location)
+		builder.path(Integer.toString(userSaved.getId()));
+		
 		 
 	    return Response.created(builder.build()).status(201)
 	            .build();
@@ -116,7 +118,7 @@ public class UsuarioResource {
 	
 	
 	@ApiOperation(
-			value="Apaga um usuário do sistema.",
+			value="Apaga um usuário do sistema a partir de seu id.",
 			consumes = MediaType.TEXT_PLAIN
 	)
 	@ApiResponses(
@@ -129,14 +131,41 @@ public class UsuarioResource {
 	@Path("{id}")
 	@DELETE
 	@Consumes(MediaType.TEXT_PLAIN)
-	public Response delete(
+	public Response deleteById(
 			@PathParam(value="id")
-			long id,
+			int id,
 			@Context UriInfo uriInfo){
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();	
+
+		this.userService.deleteById(id);
 		
-	    return Response.created(builder.build()).status(200)
-	            .build();
+	    return Response.ok().build();
+	}
+	
+	
+	@ApiOperation(
+			value="Apaga um usuário do sistema.",
+			consumes = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Usuário apagado do sistema.",
+			response = Usuario.class
+		)
+	)
+	@Path("/")
+	@DELETE
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response delete(
+			@ApiParam(
+					value="Usuario",
+					name="usuarioJson",
+					required=true
+			)String usuarioJson,
+			@Context UriInfo uriInfo){
+		userService.deleteByObj(Usuario.jsonToUser(usuarioJson));	
+		
+	    return Response.ok().build();
 	}
 	
 	
@@ -161,7 +190,7 @@ public class UsuarioResource {
 	)
 	@Path("/")
 	@PUT
-	@Consumes(MediaType.TEXT_PLAIN)
+	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(
 			@ApiParam(
 					value="Usuario",
@@ -172,11 +201,12 @@ public class UsuarioResource {
 			@Context UriInfo uriInfo){
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+
+		Usuario userSaved = userService.update(Usuario.jsonToUser(usuarioJson));
 		
-		Usuario user = Usuario.jsonToUser(usuarioJson);
+		//Coloca o ID do user recém salvo na resposta para o client (Location)
+		builder.path(Integer.toString(userSaved.getId()));
 		
-		//Testando persistência
-		userService.update(user);
 		 
 	    return Response.created(builder.build()).status(201)
 	            .build();
