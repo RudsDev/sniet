@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import com.google.gson.Gson;
 
 @Entity
-@Table(name="Família")
+@Table(name="Familia")
 public class Familia {
 
 	@Id
@@ -50,12 +50,12 @@ public class Familia {
 	}
 
 
-	public static Familia jsonToFamília(String json){
+	public static Familia jsonToFamilia(String json){
 		return new Gson().fromJson(json, Familia.class);
 	}
 
-	public static String famíliaToJson(Familia família){
-		return new Gson().toJson(família);
+	public static String familiaToJson(Familia familia){
+		return new Gson().toJson(familia);
 	}
 
 }
