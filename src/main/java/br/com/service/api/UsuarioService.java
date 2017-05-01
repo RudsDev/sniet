@@ -1,38 +1,37 @@
 package br.com.service.api;
-
 import java.util.List;
+import br.com.dao.api.UsuarioDao;
 import br.com.model.api.Usuario;
-import br.com.test.api.Test_UserDao;
 
 public class UsuarioService {
 	
-	//TODO Substituir pelos DAOS do Alexandre
-	private Test_UserDao usuarioDao;
+	
+	private UsuarioDao dao;
 	
 	
 	public UsuarioService(){
-		this.usuarioDao = new Test_UserDao();
+		this.dao = new UsuarioDao();
 	}
 	
 	public Usuario save(Usuario usuario){
 		//Tratar exceptions
-		return this.usuarioDao.gravar(usuario);
+		return this.dao.gravar(usuario);
 	}
 	
 	public Usuario update (Usuario usuario){
-		return this.usuarioDao.atualizar(usuario);
+		return this.dao.atualizar(usuario);
 	}
 	
 	public void deleteById (Integer id){
-		this.usuarioDao.apagarUsuarioPorId(id);
+		this.dao.apagarUsuarioPorId(id);
 	}
 	
 	public void deleteByObj (Usuario usuario){
-		this.usuarioDao.apagarUsuarioPorObjeto(usuario);
+		this.dao.apagarUsuarioPorObjeto(usuario);
 	}
 	
 	public  List<Usuario> searchByLogin(String login){
-		return this.usuarioDao.getUsuarioByLogin(login);
+		return this.dao.getUsuarioByLogin(login);
 	}
 	
 }
