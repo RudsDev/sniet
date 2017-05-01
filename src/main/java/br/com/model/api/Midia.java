@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Midia")
 public class Midia {
@@ -58,15 +56,6 @@ public class Midia {
 
 	public void setLegendaMidia(String legendaMidia) {
 		this.legendaMidia = legendaMidia;
-	}
-
-	
-	public static Midia jsonToMidia(String json){
-		return new Gson().fromJson(json, Midia.class);
-	}
-
-	public static String midiaToJson(Midia midia){
-		return new Gson().toJson(midia);
 	}
 
 }

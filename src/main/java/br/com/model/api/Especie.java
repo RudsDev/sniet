@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Especie")
 public class Especie {
@@ -115,12 +113,4 @@ public class Especie {
 		this.statusExtincao = statusExtincao;
 	}
 
-
-	public static Especie jsonToEspecie(String json){
-		return new Gson().fromJson(json, Especie.class);
-	}
-
-	public static String especieToJson(Especie especie){
-		return new Gson().toJson(especie);
-	}
 }

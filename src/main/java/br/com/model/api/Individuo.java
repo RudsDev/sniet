@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Individuo")
 public class Individuo {
@@ -82,12 +80,4 @@ public class Individuo {
 		this.sexoIndiv = sexoIndiv;
 	}
 
-	
-	public static Individuo jsonToIndividuo(String json){
-		return new Gson().fromJson(json, Individuo.class);
-	}
-
-	public static String individuoToJson(Individuo individuo){
-		return new Gson().toJson(individuo);
-	}
 }

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Pais")
 public class Pais {
@@ -47,15 +45,6 @@ public class Pais {
 
 	public void setDescPais(String descPais) {
 		this.descPais = descPais;
-	}
-
-
-	public static Pais jsonToPais(String json){
-		return new Gson().fromJson(json, Pais.class);
-	}
-
-	public static String paisToJson(Pais pais){
-		return new Gson().toJson(pais);
 	}
 
 }

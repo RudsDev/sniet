@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Localidade")
 public class Localidade {
@@ -58,15 +56,6 @@ public class Localidade {
 
 	public void setStatusLocalidade(String statusLocalidade) {
 		this.statusLocalidade = statusLocalidade;
-	}
-
-	
-	public static Localidade jsonToLocalidade(String json){
-		return new Gson().fromJson(json, Localidade.class);
-	}
-
-	public static String localidadeToJson(Localidade localidade){
-		return new Gson().toJson(localidade);
 	}
 
 }

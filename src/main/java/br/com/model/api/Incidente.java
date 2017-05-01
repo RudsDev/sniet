@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Incidente")
 public class Incidente {
@@ -46,12 +44,4 @@ public class Incidente {
 		this.dataHoraIncidente = dataHoraIncidente;
 	}
 
-
-	public static Incidente jsonToIncidente(String json){
-		return new Gson().fromJson(json, Incidente.class);
-	}
-
-	public static String incidenteToJson(Incidente incidente){
-		return new Gson().toJson(incidente);
-	}
 }

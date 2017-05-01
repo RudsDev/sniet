@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Tubarao")
 public class Tubarao {
@@ -49,12 +47,4 @@ public class Tubarao {
 		this.sexo = sexo;
 	}
 
-	
-	public static Tubarao jsonToTubarao(String json){
-		return new Gson().fromJson(json, Tubarao.class);
-	}
-
-	public static String tubaraoToJson(Tubarao tubarao){
-		return new Gson().toJson(tubarao);
-	}
 }

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Ordem")
 public class Ordem {
@@ -82,12 +80,4 @@ public class Ordem {
 		this.posicaoBoca = posicaoBoca;
 	}
 
-
-	public static Ordem jsonToOrdem(String json){
-		return new Gson().fromJson(json, Ordem.class);
-	}
-
-	public static String ordemToJson(Ordem ordem){
-		return new Gson().toJson(ordem);
-	}
 }

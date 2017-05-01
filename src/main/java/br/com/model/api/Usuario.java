@@ -161,11 +161,10 @@ public class Usuario {
 		System.out.println("Status: " +  this.getStatus());
 	}
 
+ 	public static Usuario jsonToUser(String json){
+ 		return new Gson().fromJson(json, Usuario.class);
+ 	}
 	
-	public static Usuario jsonToUser(String json){
-		return new Gson().fromJson(json, Usuario.class);
-	}
-
 	public static String userToJson(Usuario user){
 		return new Gson().toJson(user);
 	}

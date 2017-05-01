@@ -9,8 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Fonte")
 public class Fonte {
@@ -73,12 +71,4 @@ public class Fonte {
 		this.tipoFonte = tipoFonte;
 	}
 
-	
-	public static Fonte jsonToFonte(String json){
-		return new Gson().fromJson(json, Fonte.class);
-	}
-
-	public static String fonteToJson(Fonte fonte){
-		return new Gson().toJson(fonte);
-	}
 }

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Area")
 public class Area {
@@ -36,15 +34,6 @@ public class Area {
 
 	public void setNomeArea(String nomeArea) {
 		this.nomeArea = nomeArea;
-	}
-
-	
-	public static Area jsonToArea(String json){
-		return new Gson().fromJson(json, Area.class);
-	}
-
-	public static String areaToJson(Area area){
-		return new Gson().toJson(area);
 	}
 
 }

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="BarbDorsal")
 public class BarbDorsal {
@@ -37,12 +35,4 @@ public class BarbDorsal {
 		this.descBarbDorsal = descBarbDorsal;
 	}
 
-
-	public static BarbDorsal jsonToBarbDorsal(String json){
-		return new Gson().fromJson(json, BarbDorsal.class);
-	}
-
-	public static String barbDorsalToJson(BarbDorsal barbDorsal){
-		return new Gson().toJson(barbDorsal);
-	}
 }

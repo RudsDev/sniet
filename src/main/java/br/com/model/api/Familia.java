@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Familia")
 public class Familia {
@@ -47,15 +45,6 @@ public class Familia {
 
 	public void setDescFamilia(String descFamilia) {
 		this.descFamilia = descFamilia;
-	}
-
-
-	public static Familia jsonToFamilia(String json){
-		return new Gson().fromJson(json, Familia.class);
-	}
-
-	public static String familiaToJson(Familia familia){
-		return new Gson().toJson(familia);
 	}
 
 }

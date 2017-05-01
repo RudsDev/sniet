@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="Nome")
 public class Nome {
@@ -58,15 +56,6 @@ public class Nome {
 
 	public void setUF(String uf) {
 		this.uf = uf;
-	}
-
-
-	public static Nome jsonToNome(String json){
-		return new Gson().fromJson(json, Nome.class);
-	}
-
-	public static String nomeToJson(Nome nome){
-		return new Gson().toJson(nome);
 	}
 
 }

@@ -7,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
 @Entity
 @Table(name="FendasBranquiais")
 public class FendasBranquiais {
@@ -57,15 +55,6 @@ public class FendasBranquiais {
 
 	public void setDescricaoFendasBranquiais(String descricaoFendasBranquiais) {
 		this.descricaoFendasBranquiais = descricaoFendasBranquiais;
-	}
-
-
-	public static FendasBranquiais jsonToFendasBranquiais(String json){
-		return new Gson().fromJson(json, FendasBranquiais.class);
-	}
-
-	public static String fendasBranquiaisToJson(FendasBranquiais fendasBranquiais){
-		return new Gson().toJson(fendasBranquiais);
 	}
 
 }
