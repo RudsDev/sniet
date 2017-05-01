@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 
 import br.com.model.api.Usuario;
 import br.com.service.api.UsuarioService;
+import br.com.util.api.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -71,10 +72,12 @@ public class UsuarioResource {
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 		
 		//Testando persistência
-		Usuario userSaved = userService.save(Usuario.jsonToUser(usuarioJson));
+		//Usuario userSaved = userService.save(Usuario.jsonToUser(usuarioJson));
+		
+		Usuario userSaved = (Usuario) Util.jsonToObject(usuarioJson, Usuario.class);
 		
 		//Coloca o ID do user recém salvo na resposta para o client (Location)
-		builder.path(Integer.toString(userSaved.getId()));
+		builder.path(Integer.toString(userSaved.getIdUsuario()));
 		
 		 
 	    return Response.created(builder.build()).status(201)
@@ -205,7 +208,7 @@ public class UsuarioResource {
 		Usuario userSaved = userService.update(Usuario.jsonToUser(usuarioJson));
 		
 		//Coloca o ID do user recém salvo na resposta para o client (Location)
-		builder.path(Integer.toString(userSaved.getId()));
+		builder.path(Integer.toString(userSaved.getIdUsuario()));
 		
 		 
 	    return Response.created(builder.build()).status(201)
