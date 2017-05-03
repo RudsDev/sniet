@@ -2,7 +2,6 @@ package br.com.resource.api;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,7 +15,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
-
 import br.com.model.api.Usuario;
 import br.com.service.api.UsuarioService;
 import br.com.util.api.Util;
@@ -70,12 +68,9 @@ public class UsuarioResource {
 			@Context UriInfo uriInfo){
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
-		
-		//Testando persistência
+
 		Usuario userSaved = userService.save((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));
-		
-		userSaved.exibir();
-		
+
 		//Coloca o ID do user recém salvo na resposta para o client (Location)
 		builder.path(Integer.toString(userSaved.getIdUsuario()));
 		
@@ -112,9 +107,9 @@ public class UsuarioResource {
 			)
 			String usuarioJson){
 		
-		Usuario usuario = Usuario.jsonToUser(usuarioJson);
+		Usuario usuario = (Usuario) Util.jsonToObject(usuarioJson, Usuario.class);
 
-	    return Usuario.userToJson(usuario);
+	    return Util.objectToJson(usuario);
 	    
 	}
 
@@ -166,7 +161,7 @@ public class UsuarioResource {
 					required=true
 			)String usuarioJson,
 			@Context UriInfo uriInfo){
-		userService.deleteByObj(Usuario.jsonToUser(usuarioJson));	
+		userService.deleteByObj((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));	
 		
 	    return Response.ok().build();
 	}
@@ -205,7 +200,7 @@ public class UsuarioResource {
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 
-		Usuario userSaved = userService.update(Usuario.jsonToUser(usuarioJson));
+		Usuario userSaved = userService.update((Usuario)Util.jsonToObject(usuarioJson,Usuario.class));
 		
 		//Coloca o ID do user recém salvo na resposta para o client (Location)
 		builder.path(Integer.toString(userSaved.getIdUsuario()));
@@ -241,7 +236,7 @@ public class UsuarioResource {
 		List<String> usersJson = new ArrayList<>();
 		
 		for(int i=0; i<users.size();i++){
-			usersJson.add(Usuario.userToJson(users.get(i)));
+			usersJson.add(Util.objectToJson(users.get(i)));
 		}
 
 		return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();

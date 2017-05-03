@@ -1,10 +1,13 @@
 package br.com.model.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.google.gson.Gson;
@@ -18,32 +21,36 @@ public class Usuario {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idUsuario")
 	private Integer idUsuario;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="IDInst")
+	private Instituicao instituicao;
 
-	@Column(name="nome")
+	@Column(name="Nome", length=60)
 	private String name;
 
-	@Column(name="sobrenome")
+	@Column(name="Sobrenome", length=60)
 	private String secondName;
 
-	@Column(name="sexo")
+	@Column(name="Sexo", length=1)
 	private char sex;
 
-	@Column(name="nivelAcesso")
+	@Column(name="NivelAcesso", length=1)
 	private Integer acessLevel;
 
-	@Column(name="email")
+	@Column(name="Email", length=60)
 	private String email;
 
-	@Column(name="telefone")
+	@Column(name="Telefone", length=11)
 	private String telefone;
 
-	@Column(name="login")
+	@Column(name="Login", length=100)
 	private String login;
 
-	@Column(name="senha")
+	@Column(name="Senha", length=20)
 	private String password;
 
-	@Column(name="status")
+	@Column(name="Status", length=20)
 	private String status;
 
 	
@@ -145,6 +152,13 @@ public class Usuario {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	
+	public Instituicao getInstituicao() {
+		return instituicao;
+	}
+	public void setInstituicao(Instituicao instituicao) {
+		this.instituicao = instituicao;
+	}
 
 
 	public void exibir(){
@@ -159,6 +173,8 @@ public class Usuario {
 		System.out.println("Nivel de Acesso: " + 
 				this.getAcessLevel());
 		System.out.println("Status: " +  this.getStatus());
+		System.out.println("Instituicao: " +  this.getInstituicao().getNome());
+		System.out.println("Registro instituicao: " +  this.getInstituicao().getRegistro());
 	}
 
  	public static Usuario jsonToUser(String json){
