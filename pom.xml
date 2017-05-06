@@ -50,6 +50,13 @@
 		<version>9.4.1212</version>
 	</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/com.google.maps/google-maps-services -->
+		<dependency>
+			<groupId>com.google.maps</groupId>
+			<artifactId>google-maps-services</artifactId>
+			<version>0.1.20</version>
+		</dependency>
+	
   </dependencies>
   
   <build>
