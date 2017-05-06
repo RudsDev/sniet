@@ -14,22 +14,22 @@ public class Ataque {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	@Column(name="idAtaque")
-	public Integer idAtaque;
+	private Integer idAtaque;
 	
 	@Column(name="statusSequela")
-	public String statusSequela;
+	private String statusSequela;
 	
 	@Column(name="statusTubarao")
-	public String statusTubarao;
+	private String statusTubarao;
 	
 	@Column(name="obsAtaque")
-	public String obsAtaque;
+	private String obsAtaque;
 	
 	@Column(name="statusFatalidade")
-	public String statusFatalidade;
+	private String statusFatalidade;
 	
 	@Column(name="localCorpo")
-	public String localCorpo;
+	private String localCorpo;
 	
 		
 	public Integer getIdAtaque() {
