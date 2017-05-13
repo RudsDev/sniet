@@ -19,10 +19,6 @@ public class Pais {
 	@Column(name="nomePais")
 	private String nomePais;
 
-	@Column(name="descPais")
-	private String descPais;
-
-
 	public Integer getCodPais() {
 		return codPais;
 	}
@@ -37,14 +33,6 @@ public class Pais {
 
 	public void setNomePais(String nomePais) {
 		this.nomePais = nomePais;
-	}
-
-	public String getDescPais() {
-		return descPais;
-	}
-
-	public void setDescPais(String descPais) {
-		this.descPais = descPais;
 	}
 
 }
