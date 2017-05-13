@@ -1,10 +1,16 @@
 package br.com.model.api;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -18,13 +24,13 @@ public class Nome {
 
 	@Column(name="nomePopular")
 	private String nomePopular;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="IDEspecie")
+	private Especie especie;
 
-	@Column(name="cidade")
-	private String cidade;
-
-	@Column(name="uf")
-	private String uf;
-
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Pais> pais;
 
 	public Integer getIDNome() {
 		return idNome;
@@ -40,22 +46,6 @@ public class Nome {
 
 	public void setNomePopular(String nomePopular) {
 		this.nomePopular = nomePopular;
-	}
-
-	public String getCidade() {
-		return cidade;
-	}
-
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-
-	public String getUF() {
-		return uf;
-	}
-
-	public void setUF(String uf) {
-		this.uf = uf;
 	}
 
 }

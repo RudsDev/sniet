@@ -1,47 +1,92 @@
 package br.com.model.api;
 
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Especie")
+@Table(name = "Especie")
 public class Especie {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="idEspecie")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_especie")
+	@SequenceGenerator(name = "seq_especie", sequenceName = "seq_especie", initialValue = 1, allocationSize = 1)
+	@Column(name = "IDEspecie")
 	private Integer idEspecie;
-
-	@Column(name="nomeCientifico")
+	
+	@Column(name = "NomeCientifico", length=50)
 	private String nomeCientifico;
 	
-	@Column(name="nomePopular")
-	private String nomePopular;
-
-	@Column(name="descricao")
+	@Column(name = "Descricao", length=200)
 	private String descricao;
-
-	@Column(name="fotoPadrao")
-	private String fotoPadrao;
-
-	@Column(name="tamMenor")
+	
+	@Column(name = "TamMenor", precision=5, scale=2)
 	private Double tamMenor;
-
-	@Column(name="tamMaior")
-	private Double tamMaior;
-
-	@Column(name="tamMedio")
+	
+	@Column(name = "TamMedio", precision=5, scale=2)
 	private Double tamMedio;
-
-	@Column(name="tamMedioFilhote")
+	
+	@Column(name = "TamMaior", precision=5, scale=2)
+	private Double tamMaior;
+	
+	@Column(name = "TamMedioFilhote", precision=5, scale=2)
 	private Double tamMedioFilhote;
+	
+	@Column (name = "StatusExtincao", length=1)
+	private String extincao;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Nome> nomes;
+	
+	@OneToMany(cascade=CascadeType.ALL)
+	private List<Pais> pais;
 
-	@Column(name="statusExtincao")
-	private String statusExtincao;
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodHabitat")
+	private Habitat habitat;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodReprod")
+	private Reproducao reproducao;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodFocinho")
+	private Focinho focinho;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "IdFamilia")
+	private Familia familia;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodDorso")
+	private Dorso dorso;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodVentre")
+	private Ventre ventre;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodDenticao")
+	private Denticao denticao;
+
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "CodBarbatana")
+	private Barbatana Barbatana;
+
+	
+	public Especie() {
+
+	}
 
 
 	public Integer getIdEspecie() {
@@ -59,14 +104,6 @@ public class Especie {
 	public void setNomeCientifico(String nomeCientifico) {
 		this.nomeCientifico = nomeCientifico;
 	}
-	
-	public String getNomePopular() {
-		return nomePopular;
-	}
-
-	public void setNomePopular(String nomePopular) {
-		this.nomePopular = nomePopular;
-	}
 
 	public String getDescricao() {
 		return descricao;
@@ -74,14 +111,6 @@ public class Especie {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public String getFotoPadrao() {
-		return fotoPadrao;
-	}
-
-	public void setFotoPadrao(String fotoPadrao) {
-		this.fotoPadrao = fotoPadrao;
 	}
 
 	public Double getTamMenor() {
@@ -92,20 +121,20 @@ public class Especie {
 		this.tamMenor = tamMenor;
 	}
 
-	public Double getTamMaior() {
-		return tamMaior;
-	}
-
-	public void setTamMaior(Double tamMaior) {
-		this.tamMaior = tamMaior;
-	}
-
 	public Double getTamMedio() {
 		return tamMedio;
 	}
 
 	public void setTamMedio(Double tamMedio) {
 		this.tamMedio = tamMedio;
+	}
+
+	public Double getTamMaior() {
+		return tamMaior;
+	}
+
+	public void setTamMaior(Double tamMaior) {
+		this.tamMaior = tamMaior;
 	}
 
 	public Double getTamMedioFilhote() {
@@ -116,12 +145,84 @@ public class Especie {
 		this.tamMedioFilhote = tamMedioFilhote;
 	}
 
-	public String getStatusExtincao() {
-		return statusExtincao;
+	public String getExtincao() {
+		return extincao;
 	}
 
-	public void setStatusExtincao(String statusExtincao) {
-		this.statusExtincao = statusExtincao;
+	public void setExtincao(String extincao) {
+		this.extincao = extincao;
+	}
+
+	public Habitat getHabitat() {
+		return habitat;
+	}
+
+	public void setHabitat(Habitat habitat) {
+		this.habitat = habitat;
+	}
+
+	public Reproducao getReproducao() {
+		return reproducao;
+	}
+
+	public void setReproducao(Reproducao reproducao) {
+		this.reproducao = reproducao;
+	}
+
+	public Focinho getFocinho() {
+		return focinho;
+	}
+
+	public void setFocinho(Focinho focinho) {
+		this.focinho = focinho;
+	}
+
+	public Familia getFamilia() {
+		return familia;
+	}
+
+	public void setFamilia(Familia familia) {
+		this.familia = familia;
+	}
+
+	public Dorso getDorso() {
+		return dorso;
+	}
+
+	public void setDorso(Dorso dorso) {
+		this.dorso = dorso;
+	}
+
+	public Ventre getVentre() {
+		return ventre;
+	}
+
+	public void setVentre(Ventre ventre) {
+		this.ventre = ventre;
+	}
+
+	public Denticao getDenticao() {
+		return denticao;
+	}
+
+	public void setDenticao(Denticao denticao) {
+		this.denticao = denticao;
+	}
+
+	public Barbatana getBarbatana() {
+		return Barbatana;
+	}
+
+	public void setBarbatana(Barbatana barbatana) {
+		Barbatana = barbatana;
+	}
+
+	public List<Nome> getNomes() {
+		return nomes;
+	}
+
+	public void setNomes(List<Nome> nomes) {
+		this.nomes = nomes;
 	}
 
 }
