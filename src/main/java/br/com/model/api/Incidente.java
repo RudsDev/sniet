@@ -18,6 +18,12 @@ public class Incidente {
 	@Column(name="idIncidente")
 	private Integer idIncidente;
 
+	@Column(name="latitude")
+	private Double latitude;
+
+	@Column(name="longitude")
+	private Double longitude;
+
 	@Column(name="descIncidente")
 	private String descIncidente;
 
@@ -31,6 +37,18 @@ public class Incidente {
 	public void setIdIncidente(Integer idIncidente) {
 		this.idIncidente = idIncidente;
 	}
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
 	public String getDescIncidente() {
 		return descIncidente;
 	}
@@ -43,5 +61,4 @@ public class Incidente {
 	public void setDataHoraIncidente(Date dataHoraIncidente) {
 		this.dataHoraIncidente = dataHoraIncidente;
 	}
-
 }
