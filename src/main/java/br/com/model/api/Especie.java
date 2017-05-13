@@ -18,6 +18,9 @@ public class Especie {
 
 	@Column(name="nomeCientifico")
 	private String nomeCientifico;
+	
+	@Column(name="nomePopular")
+	private String nomePopular;
 
 	@Column(name="descricao")
 	private String descricao;
@@ -55,6 +58,14 @@ public class Especie {
 
 	public void setNomeCientifico(String nomeCientifico) {
 		this.nomeCientifico = nomeCientifico;
+	}
+	
+	public String getNomePopular() {
+		return nomePopular;
+	}
+
+	public void setNomePopular(String nomePopular) {
+		this.nomePopular = nomePopular;
 	}
 
 	public String getDescricao() {
