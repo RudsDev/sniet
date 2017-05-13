@@ -1,10 +1,13 @@
 package br.com.model.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -13,7 +16,8 @@ import javax.persistence.Table;
 public class Instituicao {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq_instituicao")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,
+					generator="seq_instituicao")
 	@SequenceGenerator(
 		    name="seq_instituicao",
 		    sequenceName="seq_instituicao",
@@ -22,12 +26,18 @@ public class Instituicao {
 	@Column(name="IDInst")
 	private Integer id;
 	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="IDEndereco")
+	private Endereco endereco;
+	
 	@Column(name="NomeInstituicao", length=50)
 	private String nome;
 	
 	@Column(name="Registro", length=20)
 	private String registro;
 	
+	@Column(name="Tipo_instituicao", length=20)
+	private String tipoInstituicao;
 	
 	public Instituicao(){
 		
@@ -55,5 +65,21 @@ public class Instituicao {
 
 	public void setRegistro(String registro) {
 		this.registro = registro;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTipoInstituicao() {
+		return tipoInstituicao;
+	}
+
+	public void setTipoInstituicao(String tipoInstituicao) {
+		this.tipoInstituicao = tipoInstituicao;
 	}
 }
