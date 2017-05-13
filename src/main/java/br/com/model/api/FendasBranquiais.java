@@ -5,32 +5,39 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="FendasBranquiais")
+@Table(name = "FendasBranquiais")
 public class FendasBranquiais {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="idFendaBranquial")
-	private Integer idFendaBranquial;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fendasbranquiais")
+	@SequenceGenerator(name = "seq_fendasbranquiais", sequenceName = "seq_fendasbranquiais", initialValue = 1, allocationSize = 1)
 
-	@Column(name="qtdFendasBranquiais")
+	@Column(name = "IDFendasBranquiais")
+	private Integer id;
+	
+	@Column(name = "QtdFendasBranquiais", length=15)
 	private Integer qtdFendasBranquiais;
-
-	@Column(name="posicaoFendasBranquiais")
+	
+	@Column(name = "PosicaoFendasBranquiais", length=15)
 	private String posicaoFendasBranquiais;
-
-	@Column(name="descricaoFendasBranquiais")
+	
+	@Column(name = "DescricaoFendasBranquiais", length=200)
 	private String descricaoFendasBranquiais;
 
-	public Integer getIdFendaBranquial() {
-		return idFendaBranquial;
+	public FendasBranquiais() {
+		// TODO Auto-generated constructor stub
 	}
 
-	public void setIdFendaBranquial(Integer idFendaBranquial) {
-		this.idFendaBranquial = idFendaBranquial;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getQtdFendasBranquiais() {

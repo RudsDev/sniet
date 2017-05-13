@@ -10,11 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.google.gson.Gson;
-
-
-@Entity
-@Table(name="Usuario")
+@Entity 
+@Table(name="usuario")
 public class Usuario {
 
 	@Id
@@ -175,14 +172,6 @@ public class Usuario {
 		System.out.println("Status: " +  this.getStatus());
 		System.out.println("Instituicao: " +  this.getInstituicao().getNome());
 		System.out.println("Registro instituicao: " +  this.getInstituicao().getRegistro());
-	}
-
- 	public static Usuario jsonToUser(String json){
- 		return new Gson().fromJson(json, Usuario.class);
- 	}
-	
-	public static String userToJson(Usuario user){
-		return new Gson().toJson(user);
 	}
 
 }

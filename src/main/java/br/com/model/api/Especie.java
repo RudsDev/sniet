@@ -1,6 +1,7 @@
 package br.com.model.api;
 
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -45,11 +46,9 @@ public class Especie {
 	@Column (name = "StatusExtincao", length=1)
 	private String extincao;
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	private List<Nome> nomes;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<Pais> pais;
+	private List<Nome> nomes;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "CodHabitat")
@@ -83,11 +82,18 @@ public class Especie {
 	@JoinColumn(name = "CodBarbatana")
 	private Barbatana Barbatana;
 
-	
 	public Especie() {
-
+		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Especie [idEspecie=" + idEspecie + ", nomeCientifico=" + nomeCientifico + ", descricao=" + descricao
+				+ ", fotoPadrao=" + ", tamMenor=" + tamMenor + ", tamMedio=" + tamMedio + ", tamMaior="
+				+ tamMaior + ", tamMedioFilhote=" + tamMedioFilhote + ", habitat=" + habitat + ", reproducao="
+				+ reproducao + ", focinho=" + focinho + ", familia=" + familia + ", dorso=" + dorso + ", ventre="
+				+ ventre + ", denticao=" + denticao + ", Barbatana=" + Barbatana + "]";
+	}
 
 	public Integer getIdEspecie() {
 		return idEspecie;

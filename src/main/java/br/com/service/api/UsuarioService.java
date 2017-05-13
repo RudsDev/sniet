@@ -2,15 +2,18 @@ package br.com.service.api;
 import java.util.List;
 import br.com.dao.api.UsuarioDao;
 import br.com.model.api.Usuario;
+import br.com.test.api.Test_UserDao;
 
 public class UsuarioService {
 	
 	
-	private UsuarioDao dao;
+	//private UsuarioDao dao;
+	private Test_UserDao dao;
 	
 	
 	public UsuarioService(){
-		this.dao = new UsuarioDao();
+		//this.dao = new UsuarioDao();
+		this.dao = new Test_UserDao();
 	}
 	
 	public Usuario save(Usuario usuario){

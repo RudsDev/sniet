@@ -5,19 +5,26 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BarbDorsal")
+@Table(name = "BarbDorsal")
 public class BarbDorsal {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="codBarbDorsal")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_barbDorsal")
+	@SequenceGenerator(name = "seq_barbDorsal", sequenceName = "seq_barbDorsal", initialValue = 1, allocationSize = 1)
+
+	@Column(name = "CodBarbDorsal")
 	private Integer codBarbDorsal;
-
-	@Column(name="descBarbDorsal")
+	
+	@Column(name = "DescBarbDorsal", length=50)
 	private String descBarbDorsal;
-
+	
+	public BarbDorsal() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Integer getCodBarbDorsal() {
 		return codBarbDorsal;

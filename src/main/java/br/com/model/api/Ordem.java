@@ -26,14 +26,14 @@ public class Ordem {
 	@Column(name = "DescOrdem", length=500)
 	private String descOrdem;
 	
-	@Column(name = "MembranaNictante", length=1)
-	private char MembranaNictante;
+	@Column(name = "MembranaNictante", length=30)
+	private  String membranaNictante;
 	
-	@Column(name = "CorpoAchatado", length=1)
-	private char corpoAchatado;
+	@Column(name = "CorpoAchatado", length=30)
+	private String corpoAchatado;
 	
-	@Column(name = "PosicaoBoca", length=1)
-	private char posicaoBoca;
+	@Column(name = "PosicaoBoca", length=30)
+	private String posicaoBoca;
 	
 	@ManyToOne
 	@JoinColumn(name="CodBarbPeitoral")
@@ -56,7 +56,7 @@ public class Ordem {
 
 
 	public Ordem() {
-		// TODO Auto-generated constructor stub
+	
 	}
 
 
@@ -90,32 +90,32 @@ public class Ordem {
 	}
 
 
-	public char getMembranaNictante() {
-		return MembranaNictante;
+	public String getMembranaNictante() {
+		return membranaNictante;
 	}
 
 
-	public void setMembranaNictante(char membranaNictante) {
-		MembranaNictante = membranaNictante;
+	public void setMembranaNictante(String membranaNictante) {
+		this.membranaNictante = membranaNictante;
 	}
 
 
-	public char getCorpoAchatado() {
+	public String getCorpoAchatado() {
 		return corpoAchatado;
 	}
 
 
-	public void setCorpoAchatado(char corpoAchatado) {
+	public void setCorpoAchatado(String corpoAchatado) {
 		this.corpoAchatado = corpoAchatado;
 	}
 
 
-	public char getPosicaoBoca() {
+	public String getPosicaoBoca() {
 		return posicaoBoca;
 	}
 
 
-	public void setPosicaoBoca(char posicaoBoca) {
+	public void setPosicaoBoca(String posicaoBoca) {
 		this.posicaoBoca = posicaoBoca;
 	}
 

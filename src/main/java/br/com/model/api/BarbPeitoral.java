@@ -5,20 +5,23 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="BarbPeitoral")
+@Table(name = "BarbPeitoral")
 public class BarbPeitoral {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="codBarbPeitoral")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_barbPeitoral")
+	@SequenceGenerator(name = "seq_barbPeitoral", sequenceName = "seq_barbPeitoral", initialValue = 1, allocationSize = 1)
+
+	@Column(name = "CodBarbPeitoral")
 	private Integer codBarbPeitoral;
-
-	@Column(name="descBarbPeitoral")
+	
+	@Column(name = "DescBarbPeitoral", length=50)
 	private String descBarbPeitoral;
-
-
+	
 	public Integer getCodBarbPeitoral() {
 		return codBarbPeitoral;
 	}

@@ -5,48 +5,49 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Pratica")
+@Table(name = "PRATICA")
 public class Pratica {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="idPratica")
-	private Integer idPratica;
-
-	@Column(name="tipoPratica")
-	private String tipoPratica;
-
-	@Column(name="statusPratica")
-	private String statusPratica;
-
-	@Column(name="descPratica")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_pratica")
+	@SequenceGenerator(name = "seq_pratica", sequenceName = "seq_pratica", initialValue = 1, allocationSize = 1)
+	@Column(name="IDPratica")
+	private Integer id;
+	
+	@Column(name="TipoPratica")
+	private char tipoPratica;
+	
+	@Column(name="StatusPratica")
+	private char statusPratica;
+	
+	@Column(name="descPratica", length=100)
 	private String descPratica;
 
-
-	public Integer getIdPratica() {
-		return idPratica;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setIdPratica(Integer idPratica) {
-		this.idPratica = idPratica;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getTipoPratica() {
+	public char getTipoPratica() {
 		return tipoPratica;
 	}
 
-	public void setTipoPratica(String tipoPratica) {
+	public void setTipoPratica(char tipoPratica) {
 		this.tipoPratica = tipoPratica;
 	}
 
-	public String getStatusPratica() {
+	public char getStatusPratica() {
 		return statusPratica;
 	}
 
-	public void setStatusPratica(String statusPratica) {
+	public void setStatusPratica(char statusPratica) {
 		this.statusPratica = statusPratica;
 	}
 
@@ -57,5 +58,5 @@ public class Pratica {
 	public void setDescPratica(String descPratica) {
 		this.descPratica = descPratica;
 	}
-
+	
 }

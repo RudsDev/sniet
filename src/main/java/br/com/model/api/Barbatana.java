@@ -5,19 +5,31 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Barbatana")
+@Table(name = "Barbatana")
 public class Barbatana {
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="codBarbatana")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_barbatana")
+	@SequenceGenerator(name = "seq_barbatana", sequenceName = "seq_barbatana", initialValue = 1, allocationSize = 1)
+
+	@Column(name = "CodBarbatana")
 	private Integer codBarbatana;
+	
+	@Column(name = "DescCorBarbatana", length=50)
+	private String descCorBarbatana;
 
-	@Column(name="descBarbatana")
-	private String descBarbatana;
+	public Barbatana() {
+		// TODO Auto-generated constructor stub
+	}
 
+	@Override
+	public String toString() {
+		return "Barbatana [codBarbatana=" + codBarbatana + ", descCorBarbatana=" + descCorBarbatana + "]";
+	}
 
 	public Integer getCodBarbatana() {
 		return codBarbatana;
@@ -27,12 +39,11 @@ public class Barbatana {
 		this.codBarbatana = codBarbatana;
 	}
 
-	public String getDescBarbatana() {
-		return descBarbatana;
+	public String getDescCorBarbatana() {
+		return descCorBarbatana;
 	}
 
-	public void setDescBarbatana(String descBarbatana) {
-		this.descBarbatana = descBarbatana;
+	public void setDescCorBarbatana(String descCorBarbatana) {
+		this.descCorBarbatana = descCorBarbatana;
 	}
-
 }

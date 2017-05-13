@@ -5,39 +5,51 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Individuo")
+@Table(name = "INDIVIDUO")
 public class Individuo {
-
-	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="idIndividuo")
-	private Integer idIndividuo;
 	
-	@Column(name="idade")
+	@Id 
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_individuo")
+	@SequenceGenerator(name = "seq_individuo", sequenceName = "seq_individuo", initialValue = 1, allocationSize = 1)
+	@Column(name="IDIndividuo")
+	private Integer id;
+
+	@Column(name="Idade")
 	private Integer idade;
 	
-	@Column(name="nomeIndiv")
-	private String nomeIndiv;
+	@Column(name="Nome", length=60)
+	private String nome;
 	
-	@Column(name="residencia")
-	private String residencia;
-	
-	@Column(name="profissao")
+	@Column(name="Profissao", length=60)
 	private String profissao;
 	
-	@Column(name="sexoIndiv")
-	private String sexoIndiv;
+	@Column(name="Sexo", length=1)
+	private char sex;
 	
-		
-	public Integer getIdIndividuo() {
-		return idIndividuo;
+	@ManyToOne
+	@JoinColumn(name="IDIncidente")
+	private Incidente incidente;
+	
+	@ManyToOne
+	@JoinColumn(name="IDPratica")
+	private Pratica pratica;
+	
+	public Individuo() {
+	
 	}
 
-	public void setIdIndividuo(Integer idIndividuo) {
-		this.idIndividuo = idIndividuo;
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getIdade() {
@@ -48,20 +60,12 @@ public class Individuo {
 		this.idade = idade;
 	}
 
-	public String getNomeIndiv() {
-		return nomeIndiv;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeIndiv(String nomeIndiv) {
-		this.nomeIndiv = nomeIndiv;
-	}
-
-	public String getResidencia() {
-		return residencia;
-	}
-
-	public void setResidencia(String residencia) {
-		this.residencia = residencia;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getProfissao() {
@@ -72,12 +76,28 @@ public class Individuo {
 		this.profissao = profissao;
 	}
 
-	public String getSexoIndiv() {
-		return sexoIndiv;
+	public char getSex() {
+		return sex;
 	}
 
-	public void setSexoIndiv(String sexoIndiv) {
-		this.sexoIndiv = sexoIndiv;
+	public void setSex(char sex) {
+		this.sex = sex;
 	}
 
+	public Incidente getIncidente() {
+		return incidente;
+	}
+
+	public void setIncidente(Incidente incidente) {
+		this.incidente = incidente;
+	}
+
+	public Pratica getPratica() {
+		return pratica;
+	}
+
+	public void setPratica(Pratica pratica) {
+		this.pratica = pratica;
+	}
+	
 }
