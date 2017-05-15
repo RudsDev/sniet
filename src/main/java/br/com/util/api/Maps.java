@@ -25,13 +25,13 @@ public class Maps {
 
 		try {
 			GeocodingResult[] T = reverso.await();
-			//Aqui terÃ¡ na saÃ­da o endereÃ§o mais prÃ³ximo em riqueza de detalhes 
-			System.out.println("\nEndereÃ§o Formatado: "+T[0].formattedAddress);
+			//Aqui terá na saída o endereço mais próximo em riqueza de detalhes 
+			System.out.println("\nEndereço Formatado: "+T[0].formattedAddress);
 			System.out.println("\nPlace ID: "+T[0].placeId);
 			
-			//Aqui terÃ¡ na saÃ­da todos os endereÃ§os que foi recebido.
+			//Aqui terá na saída todos os endereços que foi recebido.
 			for (int i=1; i<T.length;i++){
-				System.out.println("\nEndereÃ§o Formatado: "+T[i].formattedAddress);
+				System.out.println("\nEndereço Formatado: "+T[i].formattedAddress);
 				System.out.println("\nPlace ID: "+T[i].placeId);
 			}
 			//Existem outros atributos dentro do objeto.
