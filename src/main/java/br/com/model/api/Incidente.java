@@ -39,6 +39,11 @@ public class Incidente {
 	public Integer getId() {
 		return id;
 	}
+	@Column(name="latitude")
+	private Double latitude;
+
+	@Column(name="longitude")
+	private Double longitude;
 
 	public void setId(Integer id) {
 		this.id = id;
@@ -59,6 +64,19 @@ public class Incidente {
 	public void setDataIncidente(Date dataIncidente) {
 		this.dataIncidente = dataIncidente;
 	}
+	
+	public Double getLatitude() {
+		return latitude;
+	}
+	public void setLatitude(Double latitude) {
+		this.latitude = latitude;
+	}
+	public Double getLongitude() {
+		return longitude;
+	}
+	public void setLongitude(Double longitude) {
+		this.longitude = longitude;
+	}
 
 	public String getStatus() {
 		return status;
@@ -75,5 +93,5 @@ public class Incidente {
 	public void setTubarao(Tubarao tubarao) {
 		this.tubarao = tubarao;
 	}
-
 }
+
