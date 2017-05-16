@@ -82,4 +82,11 @@ public class Instituicao {
 	public void setTipoInstituicao(String tipoInstituicao) {
 		this.tipoInstituicao = tipoInstituicao;
 	}
+	
+	public void exibir(){
+		System.out.println("Registro: " +  this.getRegistro());
+		System.out.println("Tipo Instituicao: " +  this.getTipoInstituicao());
+		System.out.println("Instituicao: " +  this.getNome());
+	}
+
 }

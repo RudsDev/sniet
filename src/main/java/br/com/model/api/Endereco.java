@@ -130,4 +130,17 @@ public class Endereco {
 		this.cep = cep;
 	}
 	
+	
+	public void exibir(){
+		System.out.println("Pais: " +  this.getPais());
+		System.out.println("UF: " +  this.getUf());
+		System.out.println("Cidade: " +  this.getCidade());
+		System.out.println("Bairro: " +  this.getBairro());
+		System.out.println("Tipo: " +  this.getTipoLogradouro());
+		System.out.println("Logradouro: " +  this.getLogradouro());
+		System.out.println("Num: " + this.getNumero());
+		System.out.println("CEP: " + this.getCep());
+	}
+
+	
 }

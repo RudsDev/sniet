@@ -173,8 +173,6 @@ public class Usuario {
 		System.out.println("Nivel de Acesso: " + 
 				this.getAcessLevel());
 		System.out.println("Status: " +  this.getStatus());
-		System.out.println("Instituicao: " +  this.getInstituicao().getNome());
-		System.out.println("Registro instituicao: " +  this.getInstituicao().getRegistro());
 	}
 
  	public static Usuario jsonToUser(String json){
