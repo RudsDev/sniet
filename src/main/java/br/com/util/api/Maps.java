@@ -16,7 +16,7 @@ public class Maps {
 	private LatLng location;
 	private GeocodingApiRequest reverso, direto;
 	private String address = "Rua minas gerais rio de janeiro";
-	
+
 	public void teste(){
 
 		incidente.setLatitude(-22.820721);//(-22.792438);
@@ -26,24 +26,24 @@ public class Maps {
 		direto = GeocodingApi.geocode(context, address);
 		try {
 			GeocodingResult[] T = reverso.await();
-			//Aqui ter� na sa�da o endere�o mais pr�ximo em riqueza de detalhes 
-			System.out.println("\nEndere�o Formatado: "+T[0].formattedAddress);
+			//Aqui terá na saída o endereço mais próximo em riqueza de detalhes 
+			System.out.println("\nEndereço Formatado: "+T[0].formattedAddress);
 			System.out.println("\nPlace ID: "+T[0].placeId);
-			
+
 
 			/*Aqui terá na saída todos os endereços que foi recebido.
 			for (int i=1; i<T.length;i++){
-				System.out.println("\nEndere�o Formatado: "+T[i].formattedAddress);
+				System.out.println("\nEndereço Formatado: "+T[i].formattedAddress);
 				System.out.println("\nPlace ID: "+T[i].placeId);
 			}*/
 			//Existem outros atributos dentro do objeto.
 
 		} catch (ApiException | InterruptedException | IOException e) {
 			// TODO Auto-generated catch block
-		//	e.printStackTrace();
+			//	e.printStackTrace();
 			System.out.println("Deu erro!");
 		}
-		
+
 		try {
 			GeocodingResult[] T = direto.await();
 			System.out.println("FormattedAddress: "+T[0].formattedAddress);
