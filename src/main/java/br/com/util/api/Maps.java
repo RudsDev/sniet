@@ -15,8 +15,36 @@ public class Maps {
 	private Incidente incidente = new Incidente();
 	private LatLng location;
 	private GeocodingApiRequest reverso, direto;
-	private String address = "Rua minas gerais rio de janeiro";
+	private String address = "Rua comendador bastos rio de janeiro";
 
+	public Double latitude(){
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			return T[0].geometry.location.lat;
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return 1.1;
+		}
+	}
+	
+	public Double longitude(){
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			return T[0].geometry.location.lng;
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return 1.1;
+		}
+	}
+	
+	
+	
 	public void teste(){
 
 		incidente.setLatitude(-22.820721);//(-22.792438);
