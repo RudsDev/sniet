@@ -35,6 +35,8 @@ public class Instituicao {
 	@Column(name="Registro", length=20)
 	private String registro;
 	
+	@Column(name="Tipo_instituicao", length=20)
+	private String tipoInstituicao;
 	
 	public Instituicao(){
 		
@@ -62,5 +64,27 @@ public class Instituicao {
 
 	public void setRegistro(String registro) {
 		this.registro = registro;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public String getTipoInstituicao() {
+		return tipoInstituicao;
+	}
+
+	public void setTipoInstituicao(String tipoInstituicao) {
+		this.tipoInstituicao = tipoInstituicao;
+	}
+	
+	public void exibir(){
+		System.out.println("Registro: " +  this.getRegistro());
+		System.out.println("Tipo Instituicao: " +  this.getTipoInstituicao());
+		System.out.println("Instituicao: " +  this.getNome());
 	}
 }

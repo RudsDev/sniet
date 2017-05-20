@@ -69,6 +69,8 @@ public class UsuarioResource {
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 
+		System.out.println(usuarioJson);
+		
 		Usuario userSaved = userService.save((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));
 		
 		//Usuario userSaved = (Usuario) Util.jsonToObject(usuarioJson, Usuario.class);
