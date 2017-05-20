@@ -72,12 +72,6 @@ public class UsuarioResource {
 		System.out.println(usuarioJson);
 		
 		Usuario userSaved = userService.save((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));
-		
-		//Usuario userSaved = (Usuario) Util.jsonToObject(usuarioJson, Usuario.class);
-		
-		userSaved.exibir();
-		userSaved.getInstituicao().exibir();
-		userSaved.getInstituicao().getEndereco().exibir();
 
 		//Coloca o ID do user recém salvo na resposta para o client (Location)
 		builder.path(Integer.toString(userSaved.getIdUsuario()));
