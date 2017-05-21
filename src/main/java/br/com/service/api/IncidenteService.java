@@ -19,6 +19,7 @@ public class IncidenteService {
 		return this.dao.getIncidenteById(id);
 	}
 	
+	//TODO converter para o formato correto de Date aqui
 	public  List<Incidente> searchByPeriodo(Date dataInicial, Date dataFinal){
 		return this.dao.getByPeriodo(dataInicial, dataFinal);
 	}
