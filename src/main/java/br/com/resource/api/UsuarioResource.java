@@ -29,7 +29,7 @@ import io.swagger.annotations.ResponseHeader;
 @Path("/usuarios")
 public class UsuarioResource {
 	
-	UsuarioService userService;
+	private UsuarioService userService;
 	
 	public UsuarioResource() {
 		this.userService = new UsuarioService();
