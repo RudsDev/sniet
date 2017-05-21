@@ -36,7 +36,7 @@ public class UsuarioDao {
 	//RETRIEVE idUsuario
 
 	@SuppressWarnings("unchecked")
-	public List<Usuario> getUsuarioByIdUsuario(String idUsuario){
+	public List<Usuario> getUsuarioById(String idUsuario){
 
 		Query query = em.createQuery("select u from Usuario u where u.idUsuario = :idUsuario",
 				Usuario.class);
@@ -46,7 +46,7 @@ public class UsuarioDao {
 		return query.getResultList();
 	}
 
-
+	//TODO Retirar. ID é unique.
 	public Integer qtdUsuariosIdUsuario(String idUsuario){
 
 		Query query  = em.createQuery("select COUNT(u.idUsuario) from Usuario u where u.idUsuario = :idUsuario");
@@ -71,7 +71,7 @@ public class UsuarioDao {
 		return query.getResultList();
 	}
 
-
+	//TODO Avaliar real necessidade
 	public Integer qtdUsuariosNome(String nome){
 
 		Query query  = em.createQuery("select COUNT(u.nome) from Usuario u where u.nome = :nome");
@@ -96,7 +96,7 @@ public class UsuarioDao {
 		return query.getResultList();
 	}
 
-
+	//TODO Retirar. Não faz sentido.
 	public Integer qtdUsuariosSobrenome(String sobrenome){
 
 		Query query  = em.createQuery("select COUNT(u.sobrenome) from Usuario u where u.sobrenome = :sobrenome");
@@ -110,6 +110,7 @@ public class UsuarioDao {
 
 	//RETRIEVE SEXO
 
+	//TODO Avaliar real necessidade
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuarioBySexo(String sexo){
 
@@ -170,7 +171,7 @@ public class UsuarioDao {
 		return query.getResultList();
 	}
 
-
+	//TODO Retirar. Email será unique.
 	public Integer qtdUsuariosEmail(String email){
 
 		Query query  = em.createQuery("select COUNT(u.email) from Usuario u where u.email = :email");
@@ -195,7 +196,7 @@ public class UsuarioDao {
 		return query.getResultList();
 	}
 
-
+	//TODO Retirar. Um mesmo telefone não poderá pertencer a mais de um usuario.
 	public Integer qtdUsuariosTelefone(String telefone){
 
 		Query query  = em.createQuery("select COUNT(u.telefone) from Usuario u where u.telefone = :telefone");
@@ -207,6 +208,7 @@ public class UsuarioDao {
 
 	//------------------------------------------------------------------------------------------
 	
+	//TODO Retornar apenas um resultado
 	//RETRIEVE LOGIN
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuarioByLogin(String login){
@@ -231,6 +233,9 @@ public class UsuarioDao {
 
 	//------------------------------------------------------------------------------------------
 
+	//TODO Refatorar getUsuarioBySenha
+	/*A senha deverá ser recuperada através de uma identificacao do usuário*/
+	
 	//RETRIEVE SENHA
 	@SuppressWarnings("unchecked")
 	public List<Usuario> getUsuarioBySenha(String senha){
@@ -243,7 +248,8 @@ public class UsuarioDao {
 		return query.getResultList();
 	}
 
-
+	
+	//TODO Retirar. Não faz sentido.
 	public Integer qtdUsuariosSenha(String senha){
 
 		Query query  = em.createQuery("select COUNT(u.senha) from Usuario u where u.senha = :senha");
