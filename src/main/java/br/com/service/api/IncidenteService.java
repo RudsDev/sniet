@@ -1,6 +1,5 @@
 package br.com.service.api;
 
-import java.util.Date;
 import java.util.List;
 import br.com.dao.api.IncidenteDao;
 import br.com.model.api.Incidente;
