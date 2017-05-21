@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import br.com.model.api.Incidente;
 import br.com.persist.api.JPAUtil;
 
@@ -20,24 +19,6 @@ public class IncidenteDao {
 		em.close();
 	}
 	
-	
-	//TODO Refazer método após implementar relacionamentos pendentes
-	@SuppressWarnings("unchecked")
-	public List<Incidente> getByNomeCientifico(String nomeCientifico){
-		Query query = this.em.createQuery("select incidente from Incidente incidente where "
-				+ "incidente.dataIncidente between :dataInicial and :dataFinal",
-				Incidente.class);
-		
-		query.setParameter("nomeCientifico", nomeCientifico);
-		
-		return query.getResultList();
-	}
-	
-	
-	//TODO Refazer método após implementar relacionamentos pendentes
-	/*public List<Incidente> getByNomePopular(String nomePopular){
-		return em.find(Incidente.class, nomePopular);
-	}*/
 	
 	@SuppressWarnings("unchecked")
 	public List<Incidente> getByPeriodo (Date dataInicial, Date dataFinal){
@@ -74,5 +55,15 @@ public class IncidenteDao {
 		return (Integer) query.getSingleResult();
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<Incidente> buscarTodosInicidentes(){
+
+		List<Incidente>listaDeIncidentes;
+		em.getTransaction().begin();
+		Query query = em.createQuery("select i from Incidente i");
+		listaDeIncidentes =  query.getResultList();
+		em.close();
+		return listaDeIncidentes;
+	}
 
 }
