@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import br.com.model.api.Especie;
-import br.com.model.api.Usuario;
 import br.com.persist.api.JPAUtil;
 
 public class EspecieDao {
@@ -31,10 +30,10 @@ public class EspecieDao {
 	}
 
 
-	public Especie getEspecieById(String idEspecie){
+	public Especie getEspecieById(Integer idEspecie){
 
-		Query query = em.createQuery("select e from Especie e where e.idespecie = :idEspecie",
-				Usuario.class);
+		Query query = em.createQuery("select e from Especie e where e.idEspecie = :idEspecie",
+				Especie.class);
 
 		query.setParameter("idEspecie", idEspecie);
 
@@ -44,8 +43,8 @@ public class EspecieDao {
 
 	public Especie getEspecieByNomeCientifico(String nomeCientifico){
 
-		Query query = em.createQuery("select e from Especie e where e.nomecientifico = :nomeCientifico",
-				Usuario.class);
+		Query query = em.createQuery("select e from Especie e where e.nomeCientifico = :nomeCientifico",
+				Especie.class);
 
 		query.setParameter("nomeCientifico", nomeCientifico);
 
@@ -53,4 +52,3 @@ public class EspecieDao {
 	}
 
 }
-

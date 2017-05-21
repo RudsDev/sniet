@@ -47,7 +47,7 @@ public class Especie {
 	private String extincao;
 	
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<Nome> nomes;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -229,6 +229,15 @@ public class Especie {
 
 	public void setNomes(List<Nome> nomes) {
 		this.nomes = nomes;
+	}
+	
+	
+	public void exibir(){
+		System.out.println("Objeto: " +  this);
+		System.out.println("ID: " +  this.getIdEspecie());
+		System.out.println("Nome: " +  this.getNomeCientifico());
+		System.out.println("Tamanho Medio: " +  this.getTamMedio());
+		System.out.println("Descricao: " +  this.getDescricao());
 	}
 
 }

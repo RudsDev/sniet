@@ -14,7 +14,7 @@ public class EspecieService {
 		this.dao = new EspecieDao();
 	}
 	
-	public  Especie searchByID(String id){
+	public  Especie searchByID(Integer id){
 		return this.dao.getEspecieById(id);
 	}
 	

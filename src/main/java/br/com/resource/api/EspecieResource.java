@@ -25,8 +25,8 @@ public class EspecieResource {
 	
 	private EspecieService service;
 
-	public EspecieResource(EspecieService service) {
-		this.service = service;
+	public EspecieResource() {
+		this.service = new EspecieService();
 	}
 	
 	
@@ -76,10 +76,13 @@ public class EspecieResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscaPorId(
 			@PathParam(value="id")
-			String id,
+			int id,
 			@Context UriInfo uriInfo){
 		
 		Especie especie = this.service.searchByID(id);
+		
+		especie.exibir();
+		
 		String especieJson = Util.objectToJson(especie);
 
 		return Response.ok(especieJson.toString(), MediaType.APPLICATION_JSON).build();
@@ -98,12 +101,12 @@ public class EspecieResource {
 			response = Especie.class
 		)
 	)
-	@Path("{nomeCientifico}")
+	@Path("cientifico/{nomeCientifico}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscaPorNomeCientifico(
-			@PathParam(value="id")
+			@PathParam(value="nomeCientifico")
 			String nomeCientifico,
 			@Context UriInfo uriInfo){
 		
