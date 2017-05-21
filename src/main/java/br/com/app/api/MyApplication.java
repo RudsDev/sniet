@@ -7,6 +7,7 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import br.com.resource.api.EspecieResource;
+import br.com.resource.api.IncidenteResource;
 import br.com.resource.api.UsuarioResource;
 import br.com.web.api.CORSFilter;
 import io.swagger.jaxrs.config.BeanConfig;
@@ -39,6 +40,7 @@ public class MyApplication extends Application {
 		
 		// register resources and features
 		classes.add(EspecieResource.class);
+		classes.add(IncidenteResource.class);
 		classes.add(UsuarioResource.class);
 		classes.add(CORSFilter.class);
 		classes.add(ApiListingResource.class);
