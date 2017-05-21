@@ -21,7 +21,7 @@ public class Incidente {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_incidente")
 	@SequenceGenerator(name = "seq_incidente", sequenceName = "seq_incidente", initialValue = 1, allocationSize = 1)
 	@Column(name="IDIncidente")
-	private Integer id;
+	private Integer idIncidente;
 		
 	@Column(name="DescIncidente", length=300)
 	private String descricaoIncidente;
@@ -36,8 +36,8 @@ public class Incidente {
 	@JoinColumn(name="IdTubarao")
 	private Tubarao tubarao;
 
-	public Integer getId() {
-		return id;
+	public Integer getidIncidente() {
+		return idIncidente;
 	}
 	@Column(name="latitude")
 	private Double latitude;
@@ -45,8 +45,8 @@ public class Incidente {
 	@Column(name="longitude")
 	private Double longitude;
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer idIncidente) {
+		this.idIncidente = idIncidente;
 	}
 
 	public String getDescricaoIncidente() {
@@ -92,6 +92,13 @@ public class Incidente {
 
 	public void setTubarao(Tubarao tubarao) {
 		this.tubarao = tubarao;
+	}
+	
+	public void exibir(){
+		System.out.println("ID: " +  this.getidIncidente());
+		System.out.println("Descricao: " +  this.getDescricaoIncidente());
+		System.out.println("Data: " +  this.getDataIncidente());
+		System.out.println("Status: " +  this.getStatus());
 	}
 }
 
