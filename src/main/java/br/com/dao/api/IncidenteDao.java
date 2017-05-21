@@ -19,6 +19,17 @@ public class IncidenteDao {
 		em.close();
 	}
 	
+
+	public Incidente getIncidenteById(Integer idIncidente){
+
+		Query query = em.createQuery("select e from Incidente e where e.idIncidente = :idIncidente",
+				Incidente.class);
+
+		query.setParameter("idIncidente", idIncidente);
+
+		return (Incidente) query.getSingleResult();
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<Incidente> getByPeriodo (Date dataInicial, Date dataFinal){
