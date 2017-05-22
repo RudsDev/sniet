@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public class JPAUtil {
 
-	public EntityManagerFactory emf = Persistence.createEntityManagerFactory("teste");
+	public EntityManagerFactory emf = Persistence.createEntityManagerFactory("aws-docker");
 	public EntityManager em;
 	
 	public EntityManager getEntityManager() {
