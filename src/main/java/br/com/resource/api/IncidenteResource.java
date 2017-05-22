@@ -2,7 +2,6 @@ package br.com.resource.api;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -12,14 +11,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-
 import br.com.model.api.Incidente;
 import br.com.service.api.IncidenteService;
 import br.com.util.api.Util;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
+
+@Api
+@Path("/incidentes")
 public class IncidenteResource {
 	
 	private IncidenteService service;
@@ -101,7 +103,8 @@ public class IncidenteResource {
 			response = Incidente.class
 		)
 	)
-	@Path("periodo/{dataInicial+dataFinal}")
+	//TODO Melhorar esse path...
+	@Path("datainicial/{dataInicial}/datainicial/{dataFinal}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
