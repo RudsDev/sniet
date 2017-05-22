@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,8 +24,8 @@ public class Incidente {
 	@Column(name="IDIncidente")
 	private Integer idIncidente;
 		
-	@Column(name="DescIncidente", length=300)
-	private String descricaoIncidente;
+	@Column(name="descIncidente", length=300)
+	private String descIncidente;
 	
 	@Column(name="DataHoraIncidente")
 	private Date dataIncidente;
@@ -32,7 +33,7 @@ public class Incidente {
 	@Column(name="status")
 	private String status;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="IdTubarao")
 	private Tubarao tubarao;
 
@@ -49,12 +50,12 @@ public class Incidente {
 		this.idIncidente = idIncidente;
 	}
 
-	public String getDescricaoIncidente() {
-		return descricaoIncidente;
+	public String getDescIncidente() {
+		return descIncidente;
 	}
 
-	public void setDescricaoIncidente(String descricaoIncidente) {
-		this.descricaoIncidente = descricaoIncidente;
+	public void setDescIncidente(String descricaoIncidente) {
+		this.descIncidente = descricaoIncidente;
 	}
 
 	public Date getDataIncidente() {
@@ -96,9 +97,8 @@ public class Incidente {
 	
 	public void exibir(){
 		System.out.println("ID: " +  this.getidIncidente());
-		System.out.println("Descricao: " +  this.getDescricaoIncidente());
+		System.out.println("Descricao: " +  this.getDescIncidente());
 		System.out.println("Data: " +  this.getDataIncidente());
 		System.out.println("Status: " +  this.getStatus());
 	}
 }
-
