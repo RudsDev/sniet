@@ -10,9 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "Incidente")
@@ -33,23 +36,16 @@ public class Incidente {
 	@Column(name="status")
 	private String status;
 	
+	@JsonIgnore
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="IdTubarao")
 	private Tubarao tubarao;
+	
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name="IdLocal")
+	private Local local;
 
-	public Integer getidIncidente() {
-		return idIncidente;
-	}
-	@Column(name="latitude")
-	private Double latitude;
-
-	@Column(name="longitude")
-	private Double longitude;
-
-	public void setId(Integer idIncidente) {
-		this.idIncidente = idIncidente;
-	}
-
+	
 	public String getDescIncidente() {
 		return descIncidente;
 	}
@@ -64,19 +60,6 @@ public class Incidente {
 
 	public void setDataIncidente(Date dataIncidente) {
 		this.dataIncidente = dataIncidente;
-	}
-	
-	public Double getLatitude() {
-		return latitude;
-	}
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-	public Double getLongitude() {
-		return longitude;
-	}
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
 	}
 
 	public String getStatus() {
@@ -95,10 +78,24 @@ public class Incidente {
 		this.tubarao = tubarao;
 	}
 	
+	public Local getLocal() {
+		return local;
+	}
+
+	public void setLocal(Local local) {
+		this.local = local;
+	}
+	
+	public Integer getidIncidente() {
+		return idIncidente;
+	}
+
+	
 	public void exibir(){
 		System.out.println("ID: " +  this.getidIncidente());
 		System.out.println("Descricao: " +  this.getDescIncidente());
 		System.out.println("Data: " +  this.getDataIncidente());
 		System.out.println("Status: " +  this.getStatus());
 	}
+
 }

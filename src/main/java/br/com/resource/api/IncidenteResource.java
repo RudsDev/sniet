@@ -4,20 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import br.com.model.api.Incidente;
 import br.com.service.api.IncidenteService;
+import br.com.test.api.IncidenteWrapper;
 import br.com.util.api.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ResponseHeader;
 
 
 @Api
@@ -29,6 +34,55 @@ public class IncidenteResource {
 	public IncidenteResource() {
 		this.service = new IncidenteService();
 	}
+	
+	
+	@ApiOperation(
+			value="Salva um incidente no sistema.",
+			consumes = MediaType.APPLICATION_JSON,
+			produces = MediaType.APPLICATION_JSON
+		)
+		@ApiResponses(
+			@ApiResponse(
+				code=201,
+				message="incidente salvo no sistema.",
+				response = IncidenteWrapper.class,
+				responseHeaders=
+					@ResponseHeader(
+						name="Location",
+						description="uri incidente criado.",
+						response=String.class
+					)
+			)
+		)
+		@Path("/")
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Response save(
+				@ApiParam(
+					value="incidenteWrapper",
+					name="incidenteWrapperJson",
+					required=true
+				)
+				String incidenteWrapperJson,
+				@Context UriInfo uriInfo){
+			
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
+
+			System.out.println(incidenteWrapperJson);
+			
+			//Incidente incidenteSaved = service.save((Incidente) Util.jsonToObject(incidenteJson, Incidente.class));
+			
+			Incidente incidenteSaved = (Incidente) Util.jsonToObject(incidenteWrapperJson, Incidente.class);
+
+			incidenteSaved.exibir();
+			
+			//Coloca o ID do user recém salvo na resposta para o client (Location)
+			builder.path(Integer.toString(incidenteSaved.getidIncidente()));
+			
+			 
+		    return Response.created(builder.build()).status(201)
+		            .build();
+		}
 	
 	
 	@ApiOperation(

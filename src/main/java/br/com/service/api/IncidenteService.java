@@ -14,6 +14,10 @@ public class IncidenteService {
 		this.dao = new IncidenteDao();
 	}
 	
+	public  Incidente save(Incidente incidente){
+		return this.dao.gravar(incidente);
+	}
+	
 	public  Incidente searchByID(Integer id){
 		return this.dao.getIncidenteById(id);
 	}

@@ -19,9 +19,9 @@ public class Maps {
 	
 	public void teste(){
 
-		incidente.setLatitude(-22.820721);//(-22.792438);
-		incidente.setLongitude(-43.360028);//(-43.169765);
-		location = new LatLng(incidente.getLatitude(), incidente.getLongitude());
+		incidente.getLocal().setLatitude(-22.820721);//(-22.792438);
+		incidente.getLocal().setLongitude(-43.360028);//(-43.169765);
+		location = new LatLng(incidente.getLocal().getLatitude(), incidente.getLocal().getLongitude());
 		reverso = GeocodingApi.reverseGeocode(context, location);
 		direto = GeocodingApi.geocode(context, address);
 		try {
