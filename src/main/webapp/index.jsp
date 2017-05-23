@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="br.com.model.api.Incidente"%>
+<%@page import="br.com.dao.api.IncidenteDao"%>
 <%@page import="br.com.util.api.Maps"%>
 <html>
 <head>
@@ -21,20 +23,52 @@ html, body {
 </style>
 </head>
 <body>
-
-	<%
+	<% 
 		Maps maps = new Maps();
-		out.println(maps.latitude());
-		out.println("<br>"+maps.longitude());
+		//out.println(maps.latitude());
+		//out.println("<br>"+maps.longitude());
+		//out.println("<br>" + maps.teste());
+		
 	%>
 	<div id="map"></div>
+	
+	<form>
+		<label>nome</label>
+		<input type="text" name="nome">
+		<input type="submit" value="Clique">
+	</form>
 
+	<script>
+		function initMap() {
+			var uluru = {lat:-25.363, lng:131.044};
+			var map = new google.maps.Map(document.getElementById('map'), {
+				zoom : 4,
+				center : uluru,
+			});
+
+			var marker = new google.maps.Marker({
+				  position: {lat:-25.363, lng:131.044},
+				  map: map
+				});
+				<% 
+					for (Incidente incidente : maps.testeLatitude()){
+						out.println("var marker = new google.maps.Marker({");
+						out.println("position: {lat: "+incidente.getLatitude()+","+"lng: "+incidente.getLongitude()+"},");
+						out.println("map: map");
+						out.println("});");
+					}
+				
+				%>
+		}
+	</script>
+
+	<!-- 
 	<script>
 		var map;
 		function initMap() {
 			map = new google.maps.Map(document.getElementById('map'), {
-				zoom : 15,
-				center : new google.maps.LatLng(<%out.println(maps.latitude());%>, <%out.println(maps.longitude());%>),
+				zoom : 5,
+				center : new google.maps.LatLng(<%//out.print(maps.latitude());%>, <%//out.print(maps.longitude());%>),
 				mapTypeId : 'terrain'
 			});
 
@@ -59,7 +93,7 @@ html, body {
 			}
 		}
 	</script>
-
+ -->
 	<!-- Renderização assíncrona do mapa Google carregando todos os dados que foram tratados acima -->
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL3U0sz0c75omwtSikefpx2AIXLqoQLuk&callback=initMap">
@@ -67,17 +101,3 @@ html, body {
 	</script>
 </body>
 </html>
-
-<!--
-<%@page import="br.com.util.api.Maps"%>
-<html>
-<body>
-<h2>Hello World!</h2>
-<h4>Está me procurando</h4>
-<%//Maps maps = new Maps();
-
-			//maps.teste();%>
-
-</body>
-</html>
-  -->
