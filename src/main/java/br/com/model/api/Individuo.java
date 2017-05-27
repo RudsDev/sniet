@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "INDIVIDUO")
 public class Individuo {
@@ -32,6 +34,7 @@ public class Individuo {
 	@Column(name="Sexo", length=1)
 	private char sex;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="IDIncidente")
 	private Incidente incidente;
