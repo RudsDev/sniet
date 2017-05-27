@@ -1,5 +1,6 @@
 package br.com.model.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "INDIVIDUO")
@@ -32,11 +35,12 @@ public class Individuo {
 	@Column(name="Sexo", length=1)
 	private char sex;
 	
-	@ManyToOne
+	@JsonIgnore
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="IDIncidente")
 	private Incidente incidente;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="IDPratica")
 	private Pratica pratica;
 	
@@ -98,6 +102,14 @@ public class Individuo {
 
 	public void setPratica(Pratica pratica) {
 		this.pratica = pratica;
+	}
+	
+	public void exibir(){
+		System.out.println("ID: " +  this.getId());
+		System.out.println("Nome: " +  this.getNome());
+		System.out.println("Idade: " +  this.getIdade());
+		System.out.println("Profissao: " +  this.getProfissao());
+		System.out.println("Incidente: " +  this.getIncidente());
 	}
 	
 }

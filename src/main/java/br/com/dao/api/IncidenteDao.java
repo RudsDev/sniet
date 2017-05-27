@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import br.com.model.api.Incidente;
 import br.com.persist.api.JPAUtil;
 
@@ -12,11 +13,13 @@ public class IncidenteDao {
 	
 	private EntityManager em = new JPAUtil().getEntityManager();
 	
-	public void gravar(Incidente incidente){
+	public Incidente gravar(Incidente incidente){
 		em.getTransaction().begin();
-		em.persist(incidente);
+		Incidente incidenteManaged = em.merge(incidente);
 		em.getTransaction().commit();
 		em.close();
+		
+		return incidenteManaged;
 	}
 	
 

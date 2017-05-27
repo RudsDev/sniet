@@ -59,4 +59,11 @@ public class Pratica {
 		this.descPratica = descPratica;
 	}
 	
+	public void exibir(){
+		System.out.println("ID: " +  this.getId());
+		System.out.println("Descricao: " +  this.getDescPratica());
+		System.out.println("Tipo Pratica: " +  this.getTipoPratica());
+		System.out.println("Status Pratica: " +  this.getStatusPratica());
+	}
+	
 }
