@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import br.com.model.api.Incidente;
+import br.com.model.api.Individuo;
 import br.com.service.api.IncidenteService;
 import br.com.test.api.IncidenteWrapper;
 import br.com.util.api.Util;
@@ -38,14 +39,13 @@ public class IncidenteResource {
 	
 	@ApiOperation(
 			value="Salva um incidente no sistema.",
-			consumes = MediaType.APPLICATION_JSON,
-			produces = MediaType.APPLICATION_JSON
+			consumes = MediaType.APPLICATION_JSON
 		)
 		@ApiResponses(
 			@ApiResponse(
 				code=201,
 				message="incidente salvo no sistema.",
-				response = IncidenteWrapper.class,
+				response = String.class,
 				responseHeaders=
 					@ResponseHeader(
 						name="Location",
@@ -68,21 +68,22 @@ public class IncidenteResource {
 			
 			UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 
-			System.out.println(incidenteWrapperJson);
+			IncidenteWrapper incidenteWrapper = (IncidenteWrapper) 
+					Util.jsonToObject(incidenteWrapperJson, IncidenteWrapper.class);
 			
-			//Incidente incidenteSaved = service.save((Incidente) Util.jsonToObject(incidenteJson, Incidente.class));
+			Incidente incidente = incidenteWrapper.getIncidente();
+			Individuo individuo = incidenteWrapper.getIndividuo();
 			
-			Incidente incidenteSaved = (Incidente) Util.jsonToObject(incidenteWrapperJson, Incidente.class);
-
-			incidenteSaved.exibir();
+			Individuo individuoSaved = service.save(incidente,individuo);
+			Incidente incidenteSaved = individuoSaved.getIncidente();
+			
+			System.out.println(incidenteSaved.getidIncidente());
 			
 			//Coloca o ID do user recém salvo na resposta para o client (Location)
 			builder.path(Integer.toString(incidenteSaved.getidIncidente()));
 			
-			 
-		    return Response.created(builder.build()).status(201)
-		            .build();
-		}
+		    return Response.status(201).header("Location", builder.build()).build();
+		} 
 	
 	
 	@ApiOperation(
