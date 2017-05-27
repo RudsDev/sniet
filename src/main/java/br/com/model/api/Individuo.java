@@ -103,4 +103,12 @@ public class Individuo {
 		this.pratica = pratica;
 	}
 	
+	public void exibir(){
+		System.out.println("ID: " +  this.getId());
+		System.out.println("Nome: " +  this.getNome());
+		System.out.println("Idade: " +  this.getIdade());
+		System.out.println("Profissao: " +  this.getProfissao());
+		System.out.println("Incidente: " +  this.getIncidente());
+	}
+	
 }
