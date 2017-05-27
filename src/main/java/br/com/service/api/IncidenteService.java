@@ -1,21 +1,34 @@
 package br.com.service.api;
 
 import java.util.List;
+
 import br.com.dao.api.IncidenteDao;
 import br.com.model.api.Incidente;
+import br.com.model.api.Individuo;
 
 
 public class IncidenteService {
 
 	private IncidenteDao dao;
+	private IndividuoService individuoService;
 	
 	
 	public IncidenteService(){
 		this.dao = new IncidenteDao();
+		this.individuoService = new IndividuoService();
 	}
 	
-	public  Incidente save(Incidente incidente){
-		return this.dao.gravar(incidente);
+	public  Individuo save(Incidente incidente, Individuo individuo){
+		
+		incidente.exibir();
+		incidente.getLocal().exibir();
+		individuo.setIncidente(incidente);
+		
+		Individuo saved = this.individuoService.gravar(individuo);
+		
+		saved.exibir();
+		
+		return saved;
 	}
 	
 	public  Incidente searchByID(Integer id){

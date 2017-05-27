@@ -12,8 +12,8 @@ public class IndividuoService {
 		this.individuoDao = new IndividuoDao();
 	}
 	
-	public void gravar(Individuo individuo){
-		this.individuoDao.gravar(individuo);
+	public Individuo gravar(Individuo individuo){
+		return this.individuoDao.gravar(individuo);
 	}
 
 }
