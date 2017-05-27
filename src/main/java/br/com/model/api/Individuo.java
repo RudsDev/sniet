@@ -1,5 +1,6 @@
 package br.com.model.api;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,11 +36,11 @@ public class Individuo {
 	private char sex;
 	
 	@JsonIgnore
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="IDIncidente")
 	private Incidente incidente;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="IDPratica")
 	private Pratica pratica;
 	
