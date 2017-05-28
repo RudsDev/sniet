@@ -115,6 +115,34 @@ public class IncidenteResource {
 	
 	
 	@ApiOperation(
+			value="Retorna todos incidentes (com individuos) existentes na base de dados.",
+			produces = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Retornada listagem de incidentes com individuos.",
+			response = Incidente.class
+		)
+	)
+	@Path("/full")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscaTodasIncidentesComIndividuos(
+			@Context UriInfo uriInfo){
+		
+		List<Individuo> individuos = this.service.getAllIncidentesFull();
+		List<String> incidentesJson = new ArrayList<>();
+		
+		for(int i=0; i<individuos.size();i++){
+			incidentesJson.add(Util.objectToJson(individuos.get(i)));
+		}
+
+		return Response.ok(incidentesJson.toString(), MediaType.APPLICATION_JSON).build();
+	}
+	
+	
+	@ApiOperation(
 			value="Busca uma incidente a partir de seu ID.",
 			consumes = MediaType.TEXT_PLAIN,
 			produces = MediaType.APPLICATION_JSON

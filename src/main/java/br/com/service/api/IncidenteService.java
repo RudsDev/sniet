@@ -47,4 +47,8 @@ public class IncidenteService {
 		return this.dao.buscarTodosInicidentes();
 	}
 	
+	public List<Individuo> getAllIncidentesFull(){
+		return this.individuoService.getAllIndividuos();
+	}
+	
 }

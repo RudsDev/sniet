@@ -1,6 +1,8 @@
 package br.com.dao.api;
 
+import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import br.com.model.api.Individuo;
 import br.com.persist.api.JPAUtil;
 
@@ -15,4 +17,16 @@ public class IndividuoDao {
 		em.close();
 		return individuoManaged;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Individuo> buscarTodosIndividuos(){
+
+		List<Individuo>listaDeIndividuos;
+		em.getTransaction().begin();
+		Query query = em.createQuery("select i from Individuo i");
+		listaDeIndividuos =  query.getResultList();
+		em.close();
+		return listaDeIndividuos;
+	}	
+	
 }
