@@ -30,6 +30,15 @@ public class IncidenteDao {
 		return i;
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public List<Incidente> teste1(){
+		//Realizando teste
+		Query query = this.em.createQuery("select incidente from Incidente incidente");
+		//query.setParameter("nomeCientifico", nomeCientifico);
+		  
+		return query.getResultList();
+	}	
 
 	public Incidente getIncidenteById(Integer idIncidente){
 

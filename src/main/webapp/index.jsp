@@ -32,33 +32,24 @@ html, body {
 		
 	%>
 	<div id="map"></div>
-	
+
 
 	<script>
 		function initMap() {
-			var uluru = {lat:-25.363, lng:131.044};
+			var rj = {lat:-22.951695, lng:-43.2108};
 			var map = new google.maps.Map(document.getElementById('map'), {
-				zoom : 4,
-				center : uluru,
+				zoom : 10,
+				center : rj,
 			});
 			
 			var contentString = '<div id="content">'+
 		      '<div id="siteNotice">'+
 		      '</div>'+
-		      '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
+		      '<h1 id="firstHeading" class="firstHeading">Rio de Janeiro</h1>'+
 		      '<div id="bodyContent">'+
-		      '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-		      'sandstone rock formation in the southern part of the '+
-		      'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-		      'south west of the nearest large town, Alice Springs; 450&#160;km '+
-		      '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-		      'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-		      'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-		      'Aboriginal people of the area. It has many springs, waterholes, '+
-		      'rock caves and ancient paintings. Uluru is listed as a World '+
-		      'Heritage Site.</p>'+
-		      '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-		      'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+		      '<p>Silvio Santos Ipsum estamos em ritmo de festamm. O prêmio é em barras de ouro, que vale mais que dinheiroam. Você veio da caravana de ondeammm? O Raul Gil é gayam! ... Maa O Ah Ae! Ih Ih! O Raul Gil é gayamm! É bom ou não éam? Mah roda a roduamm. Você veio da caravana de ondeammm? Vem pra lá, mah você vai pra cá. Agora vai, agora vem pra láamm. Mah você mora com o papai ou com a mamãem? Ma quem quer dinheiroam? Um, dois três, quatro, PIM, entendeuam? Eu só acreditoammmm.... Vendoammmm. O Raul Gil é gayam! ... Maa O Ah Ae! Ih Ih! O Raul Gil é gayamm! Qual é a musicamm?</p>'+
+		      '<p>Attribution: Silvio Santos Ipsum, <a href="http://silviosantosipsum.com/">'+
+		      'http://silviosantosipsum.com/</a> '+
 		      '(last visited June 22, 2009).</p>'+
 		      '</div>'+
 		      '</div>';
@@ -68,9 +59,9 @@ html, body {
 		  });
 
 			var marker = new google.maps.Marker({
-				  position: {lat:-25.363, lng:131.044},
+				  position: {lat:-22.951695, lng:-43.2108},
 				  map: map,		
-				  title: 'Uluru (Ayers Rock)'
+				  title: 'Rio de Janeiro'
 				});
 			
 			marker.addListener('click', function() {
