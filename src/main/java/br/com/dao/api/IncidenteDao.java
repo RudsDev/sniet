@@ -30,7 +30,7 @@ public class IncidenteDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Incidente> teste1(){
-		
+		//Realizando teste
 		Query query = this.em.createQuery("select incidente from Incidente incidente");
 		//query.setParameter("nomeCientifico", nomeCientifico);
 		  
