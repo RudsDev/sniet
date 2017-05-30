@@ -32,6 +32,15 @@ public class Maps {
 			return "Erro!";
 		}
 	}
+	
+	public String testeJson(){
+		
+		IncidenteDao i = new IncidenteDao();
+		List<Incidente> incidentes = i.teste1();
+		
+		return Util.objectToJson(incidentes);
+		
+	}
 
 	public List<Incidente> testeLatitude(){
 
