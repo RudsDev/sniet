@@ -36,7 +36,7 @@ public class Maps {
 	public String testeJson(){
 		
 		IncidenteDao i = new IncidenteDao();
-		List<Incidente> incidentes = (List<Incidente>) i.teste();
+		List<Incidente> incidentes =  i.teste1();
 		
 		return Util.objectToJson(incidentes);
 		
@@ -45,7 +45,7 @@ public class Maps {
 	public List<Incidente> testeLatitude(){
 
 		IncidenteDao i = new IncidenteDao();
-		List<Incidente> incidentes = (List<Incidente>) i.teste();
+		List<Incidente> incidentes =  i.teste1();
 		
 		return incidentes;
 	}
