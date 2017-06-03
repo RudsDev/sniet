@@ -13,6 +13,8 @@ package br.com.dao.api;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
+
 import br.com.model.api.Usuario;
 import br.com.persist.api.JPAUtil;
 
@@ -320,6 +322,16 @@ public class UsuarioDao {
 	}
 	
 	
+	//==========================================================================================	
 	
-	
+	public Number getQuantByStatus(String status){
+		
+		String consulta = "SELECT COUNT(u) FROM Usuario u where u.status = :status";
+		TypedQuery<Number> query = em.createQuery(consulta, Number.class);
+		query.setParameter("status", status);
+		Number result = query.getSingleResult();
+		
+		return result.intValue();
+	}	
+
 }
