@@ -59,7 +59,7 @@ html, body {
 		  });
 
 			var marker = new google.maps.Marker({
-				  position: {lat:-22.951695, lng:-43.2108},
+				  position: rj,
 				  map: map,		
 				  title: 'Rio de Janeiro'
 				});
@@ -69,14 +69,15 @@ html, body {
 			  });
 
 				<% 
-				/*
-					for (Incidente incidente : maps.testeLatitude()){
+				
+					/*for (Incidente incidente : maps.testeLatitude()){
 						out.println("var marker = new google.maps.Marker({");
-						out.println("position: {lat: "+incidente.getLatitude()+","+"lng: "+incidente.getLongitude()+"},");
+						out.println("position: {lat: "+incidente.getLocal().getLatitude()+
+									","+"lng: "+incidente.getLocal().getLongitude()+"},");
 						out.println("map: map");
 						out.println("});");
-					}
-				*/
+					}*/
+				
 				%>
 		}
 	</script>

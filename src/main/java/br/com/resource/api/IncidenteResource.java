@@ -208,4 +208,40 @@ public class IncidenteResource {
 
 		return Response.ok(incidentesJson.toString(), MediaType.APPLICATION_JSON).build();
 	}
+	
+	//TODO Terminar essa endpoind para receber local
+	@ApiOperation(
+			value="Busca um local de incidente (teste).",
+			consumes = MediaType.TEXT_PLAIN,
+			produces = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Incidente localizado.",
+			response = Incidente.class
+		)
+	)
+	@Path("local/{nomeLocal}")
+	@GET
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void local(
+			@PathParam(value="nomeLocal")
+			String nomeLocal,
+			@Context UriInfo uriInfo){
+		
+		//Incidente incidente = this.service.searchByID(0);
+		
+		//incidente.exibir();
+		
+		System.out.println("----------------------------------");
+		
+		System.out.println(nomeLocal);
+		
+		//String incidenteJson = Util.objectToJson(incidente);
+
+		//return Response.ok(incidenteJson.toString(), MediaType.APPLICATION_JSON).build();
+	}
+	
 }
