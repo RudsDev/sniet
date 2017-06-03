@@ -37,4 +37,8 @@ public class UsuarioService {
 		return this.dao.getUsuarioByLogin(login);
 	}
 	
+	public Integer quantidadeStatus(String status){
+		return (Integer) this.dao.getQuantByStatus(status);
+	}
+	
 }

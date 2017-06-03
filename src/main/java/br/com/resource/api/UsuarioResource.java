@@ -67,6 +67,8 @@ public class UsuarioResource {
 			String usuarioJson,
 			@Context UriInfo uriInfo){
 		
+		System.out.println(usuarioJson);
+		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 	
 		Usuario userSaved = userService.save((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));
@@ -239,5 +241,35 @@ public class UsuarioResource {
 		}
 
 		return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();
+	}
+	
+	
+	
+	@ApiOperation(
+			value="Retorna a quantidade de usuarios com o status informado.",
+			consumes = MediaType.TEXT_PLAIN,
+			produces = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="status localizado.",
+			response = Usuario.class
+		)
+	)
+	@Path("/status/{status}")
+	@GET
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response qtdStatus(
+			@PathParam(value="status")
+			String status,
+			@Context UriInfo uriInfo){
+		
+		Integer quantidade = this.userService.quantidadeStatus(status);
+		
+		System.out.println("Quantidade: " + quantidade);
+
+		return Response.ok(quantidade.toString(), MediaType.APPLICATION_JSON).build();
 	}
 }
