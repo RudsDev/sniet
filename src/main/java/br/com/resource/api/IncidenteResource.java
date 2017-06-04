@@ -15,6 +15,7 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import br.com.model.api.Incidente;
 import br.com.model.api.Individuo;
+import br.com.model.api.Local;
 import br.com.service.api.IncidenteService;
 import br.com.test.api.IncidenteWrapper;
 import br.com.util.api.Util;
@@ -36,7 +37,6 @@ public class IncidenteResource {
 		this.service = new IncidenteService();
 	}
 	
-	
 	@ApiOperation(
 			value="Salva um incidente no sistema.",
 			consumes = MediaType.APPLICATION_JSON
@@ -45,7 +45,7 @@ public class IncidenteResource {
 			@ApiResponse(
 				code=201,
 				message="incidente salvo no sistema.",
-				response = String.class,
+				response = IncidenteWrapper.class,
 				responseHeaders=
 					@ResponseHeader(
 						name="Location",
@@ -209,9 +209,11 @@ public class IncidenteResource {
 		return Response.ok(incidentesJson.toString(), MediaType.APPLICATION_JSON).build();
 	}
 	
-	//TODO Terminar essa endpoind para receber local
+	
 	@ApiOperation(
-			value="Busca um local de incidente (teste).",
+			value="Retorna uma lista de locais de incidente "
+					+ "de acordo com o nome de local passado"
+					+ "como parâmetro.",
 			consumes = MediaType.TEXT_PLAIN,
 			produces = MediaType.APPLICATION_JSON
 	)
@@ -219,29 +221,29 @@ public class IncidenteResource {
 		@ApiResponse(
 			code=200,
 			message="Incidente localizado.",
-			response = Incidente.class
+			response = Local.class
 		)
 	)
-	@Path("local/{nomeLocal}")
+	@Path("/local/{nomeLocal}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void local(
+	public Response localIncidente(
 			@PathParam(value="nomeLocal")
 			String nomeLocal,
 			@Context UriInfo uriInfo){
 		
-		//Incidente incidente = this.service.searchByID(0);
-		
-		//incidente.exibir();
-		
-		System.out.println("----------------------------------");
-		
 		System.out.println(nomeLocal);
 		
-		//String incidenteJson = Util.objectToJson(incidente);
+		List<Incidente> listaIncidente = this.service.searchByLocalNameIncidente(nomeLocal);
+		List<String> listaIncidenteJson = new ArrayList<>();
+		
+		for(int i=0; i<listaIncidente.size();i++){
+			listaIncidenteJson.add(Util.objectToJson(listaIncidente.get(i)));
+		}
 
-		//return Response.ok(incidenteJson.toString(), MediaType.APPLICATION_JSON).build();
+		return Response.ok(listaIncidenteJson.toString(), MediaType.APPLICATION_JSON).build();
+		
 	}
 	
 }

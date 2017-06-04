@@ -76,6 +76,18 @@ public class IncidenteDao {
 
 		return query.getResultList();
 	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Incidente> getIncidenteByNomeLocal(String nomeLocal){
+
+		Query query = em.createQuery("select i from Incidente i where i.local.nomeLocal = :nomeLocal",
+				Incidente.class);
+
+		query.setParameter("nomeLocal", nomeLocal);
+
+		return query.getResultList();
+	}
 
 
 	public Integer qtdIncidenteStatus(String status){

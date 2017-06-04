@@ -36,6 +36,11 @@ public class IncidenteService {
 	}
 	
 	
+	public List<Incidente> searchByLocalNameIncidente(String nomeLocal){
+		return this.dao.getIncidenteByNomeLocal(nomeLocal);
+	}
+	
+	
 	public  List<Incidente> searchByPeriodo(String dataInicial, String dataFinal){
 		//TODO converter para o formato correto de Date aqui
 		//return this.dao.getByPeriodo(dataInicial, dataFinal);

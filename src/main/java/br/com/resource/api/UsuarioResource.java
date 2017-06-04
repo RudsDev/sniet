@@ -71,7 +71,8 @@ public class UsuarioResource {
 		
 		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 	
-		Usuario userSaved = userService.save((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));
+		Usuario userSaved = userService.save((Usuario) 
+				Util.jsonToObject(usuarioJson, Usuario.class));
 		
 		//Coloca o ID do user recém salvo na resposta para o client (Location)
 		builder.path(Integer.toString(userSaved.getIdUsuario()));
