@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="br.com.util.api.Geografico"%>
 <%@page import="br.com.model.api.Incidente"%>
 <%@page import="br.com.dao.api.IncidenteDao"%>
 <%@page import="br.com.util.api.Maps"%>
@@ -24,15 +25,15 @@ html, body {
 </head>
 <body>
 	<% 
-		Maps maps = new Maps();
-		//out.println(maps.testeJson());
+		Geografico geo = new Geografico();
+		out.println(geo.getPais());
 		//out.println(maps.latitude());
 		//out.println("<br>"+maps.longitude());
 		//out.println("<br>" + maps.teste());
 		
 	%>
 	<div id="map"></div>
-
+<!-- 
 
 	<script>
 		function initMap() {
@@ -81,7 +82,7 @@ html, body {
 				%>
 		}
 	</script>
-
+ -->
 	<!-- 
 	<script>
 		var map;

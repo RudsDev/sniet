@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="bower_components\jquery\dist\jquery.js"></script>
+  <script src="js/search-especies.js"></script>
+  <link rel="stylesheet" href="bower_components\bootstrap\dist\css\bootstrap.css" >
+
+  <meta charset="UTF-8">
+  <title>Buscar Especie</title>
+</head>
+
+ <body>
+
+<h2>Buscar Especie</h2>
+
+<div id="busca">
+  ID especie: <input type="text" id="search-id"/>
+  <input type="button" id="buscar-id" value="Buscar">
+
+  <br/>
+
+  Nome Cientifico: <input type="text" id="search-cientifico"/>
+  <input type="button" id="buscar-cientifico" value="Buscar">
+
+  <br/><br/>
+  
+  <input type="button" id="buscar-all" value="Buscar todas especies">
+</div>
+
+<br/><br/><br/>
+
+<table id="tbl-especies" class="table">
+			<thead>
+				<tr> 
+					<th>ID</th>
+					<th>Nome</th>
+					<th>Descricao</th>
+					<th>Tamanho médio</th>
+			 </tr>
+		 </thead>
+		 <tbody id="tbl-especies-body"></tbody>
+</table>
+
+
+</body>
+
+</html>

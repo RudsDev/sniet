@@ -8,17 +8,18 @@ import com.google.maps.GeocodingApiRequest;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
-import br.com.dao.api.IncidenteDao;
-import br.com.model.api.Incidente;
+
+import br.com.model.api.Local;
 
 public class Maps {
 
 	private GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBL3U0sz0c75omwtSikefpx2AIXLqoQLuk");
-	private Incidente incidente = new Incidente();
 	private LatLng location;
+	private Local nomelocal;
 	private GeocodingApiRequest reverso, direto; //reverso
 	private String address = "praia de copacabana";
-
+	
+	/*
 	public String latitude(){
 		direto = GeocodingApi.geocode(context, address);
 		GeocodingResult[] T;
@@ -117,20 +118,20 @@ public class Maps {
 		direto = GeocodingApi.geocode(context, address);
 		try {
 			GeocodingResult[] T = reverso.await();
-			//Aqui terá na saída o endereço mais próximo em riqueza de detalhes 
-			//System.out.println("\nEndereço Formatado: "+T[0].formattedAddress);
+			//Aqui terï¿½ na saï¿½da o endereï¿½o mais prï¿½ximo em riqueza de detalhes 
+			//System.out.println("\nEndereï¿½o Formatado: "+T[0].formattedAddress);
 			//System.out.println("\nPlace ID: "+T[0].placeId);
 			
 			return T[0].formattedAddress;
 
 
-			/*Aqui terá na saída todos os endereços que foi recebido.
+			/*Aqui terï¿½ na saï¿½da todos os endereï¿½os que foi recebido.
 			for (int i=1; i<T.length;i++){
-				System.out.println("\nEndereço Formatado: "+T[i].formattedAddress);
+				System.out.println("\nEndereï¿½o Formatado: "+T[i].formattedAddress);
 				System.out.println("\nPlace ID: "+T[i].placeId);
 			}*/
 			//Existem outros atributos dentro do objeto.
-
+/*
 		} catch (ApiException | InterruptedException | IOException e) {
 			// TODO Auto-generated catch block
 			//	e.printStackTrace();
@@ -149,7 +150,7 @@ public class Maps {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-*/
+
 	}
-	 
+*/	 
 }

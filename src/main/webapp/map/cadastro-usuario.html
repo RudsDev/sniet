@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="bower_components\jquery\dist\jquery.js"></script>
+  <script src="js/cad-usuario.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Cadastro Usuario</title>
+</head>
+
+ <body>
+
+<h2>Usuario</h2>
+
+	<!--<form action="serviceUsuario.php" method="get">-->
+  <form action="" method="get">
+	  Nome: <input type="text" id="name"/><br/>
+
+    Sobrenome: <input type="text" id="secondName"/><br/>
+
+	  Sexo: <select id="sex">
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+          </select></br>
+
+    Instituicao: <input type="text" id="instituicao"/><br/>
+    Tipo Instituicao: <input type="text" id="tipo_instituicao"/><br/>
+    Registro: <input type="text" id="registro_inst"/><br/>
+    Pais: <input type="text" id="pais_inst"/><br/>
+    UF: <input type="text" id="uf_inst"/><br/>
+    Cidade: <input type="text" id="cidade_inst"/><br/>
+    Bairro: <input type="text" id="bairro_inst"/><br/>
+    Tipo de logradouro: <input type="text" id="tipoLogradouro_inst"/><br/>
+    Logradouro: <input type="text" id="logradouro_inst"/><br/>
+    Numero: <input type="text" id="numero_inst"/><br/>
+    CEP: <input type="text" id="cep_inst"/><br/>
+
+    Nivel de acesso:
+        <select id="acessLevel">
+          <option value="3">Comum</option>
+          <option value="2">Pesquisador</option>
+          <option value="1">Administrador</option>
+        </select></br>
+
+    Status:
+        <select id="status">
+          <option value="1">Ativo</option>
+          <option value="2">Inativo</option>
+          <option value="3">Pendente</option>
+        </select></br>
+
+    E-mail: <input type="text" id="email"/><br/>
+	  Telefone: <input type="text" id="telefone"/><br/>
+	  Login: <input type="text" id="login"/><br/>
+	  Senha: <input type="password" id="password"/><br/>
+    ID: <input type="text" id="id-user"/><br/>
+
+	  <br/><br/>
+
+	  <input type="button" id="command" value="Salvar">
+
+    <input type="button" id="btn-delete" value="Apagar">
+
+	</form>
+
+
+
+ </body>
+
+</html>

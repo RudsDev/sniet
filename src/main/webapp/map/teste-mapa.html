@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <script src="bower_components\jquery\dist\jquery.js"></script>
+  <script src="js/teste-mapa.js"></script>
+  <script src="js/map.js"></script>
+
+  <meta charset="UTF-8">
+  <title>Teste Mapa</title>
+</head>
+
+ <body>
+
+<h2>Teste Mapa</h2>
+
+
+  <form action="" method="get">
+
+    <h3>Dados Local Incidente</h3>
+
+	  Nome local: <input type="text" id="name_local"/><br/>
+
+    Pais: <input type="text" id="pais"/><br/>
+
+    UF: <input type="text" id="uf"/><br/>
+
+	  Cidade:<input type="text" id="cidade"/><br/>
+
+    Bairro:<input type="text" id="bairro"/><br/>
+
+    Latitude:<input type="text" id="latitude"/><br/>
+
+    Longitude:<input type="text" id="longitude"/><br/>
+
+	  <br/><br/>
+
+	  <input type="button" id="command" value="Pesquisar">
+    
+    
+
+	</form>
+
+	<div id="map" style="height: 300px; width: 700px">
+  </div>
+
+
+
+
+	<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBL3U0sz0c75omwtSikefpx2AIXLqoQLuk&callback=initMap">	
+	</script>
+
+ </body>
+
+</html>
