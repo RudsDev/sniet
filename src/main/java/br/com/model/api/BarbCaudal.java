@@ -16,15 +16,11 @@ public class BarbCaudal {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_barbcaudal")
 	@SequenceGenerator(name = "seq_barbcaudal", sequenceName = "seq_barbcaudal", initialValue = 1, allocationSize = 1)
 
-	@Column(name = "CodBarbCaudal")
+	@Column(name = "codbarbcaudal")
 	private Integer codBarbCaudal;
 	
-	@Column(name = "DescBarbCaudal", length=60)
+	@Column(name = "descbarbcaudal", length=60)
 	private String descBarbAnal;
-
-	public BarbCaudal() {
-		// TODO Auto-generated constructor stub
-	}
 
 	public Integer getCodBarbCaudal() {
 		return codBarbCaudal;

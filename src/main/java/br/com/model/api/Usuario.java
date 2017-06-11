@@ -47,8 +47,8 @@ public class Usuario {
 	@Column(name="Senha", length=20)
 	private String password;
 
-	@Column(name="Status", length=20)
-	private String status;
+	@Column(name="Status", length=1)
+	private char status;
 
 	
 	public Integer getIdUsuario() {
@@ -141,12 +141,11 @@ public class Usuario {
 	}
 
 
-	public String getStatus() {
+	public char getStatus() {
 		return status;
 	}
 
-
-	public void setStatus(String status) {
+	public void setStatus(char status) {
 		this.status = status;
 	}
 	

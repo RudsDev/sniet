@@ -16,20 +16,12 @@ public class Denticao {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_denticao")
 	@SequenceGenerator(name = "seq_denticao", sequenceName = "seq_denticao", initialValue = 1, allocationSize = 1)
 
-	@Column(name = "CodDenticao")
+	@Column(name = "coddenticao")
 	private Integer codDenticao;
 	
-	@Column(name = "CaracDenticao", length=80)
+	@Column(name = "caracdenticao", length=80)
 	private String caracDenticao;
 	
-	public Denticao() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Denticao [codDenticao=" + codDenticao + ", CaracDenticao=" + caracDenticao + "]";
-	}
 
 	public Integer getCodDenticao() {
 		return codDenticao;

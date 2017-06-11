@@ -17,26 +17,26 @@ public class Ataque {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_ataque")
 	@SequenceGenerator(name = "seq_ataque", sequenceName = "seq_ataque", initialValue = 1, allocationSize = 1)
-	@Column(name="IDAtaque")
+	@Column(name="idataque")
 	private Integer id;
 	
 	@OneToOne
-	@JoinColumn(name="IDIncidente")
+	@JoinColumn(name="idincidente")
 	private Incidente incidente;
 	
-	@Column(name="LocalCorpo", length=20)
+	@Column(name="localcorpo", length=20)
 	private String localCorpo;
 	
-	@Column(name="StatusSequela", length=30)
+	@Column(name="statussequela", length=30)
 	private String statusSequela;
 	
-	@Column(name="StatusFatalidade", length=1)
+	@Column(name="statusfatalidade", length=1)
 	private char statusFatalidade;
 	
-	@Column(name="StatusTubarao", length=30)
+	@Column(name="statustubarao", length=30)
 	private String statusTubarao;
 	
-	@Column(name="OBSAtaque", length=300)
+	@Column(name="obsataque", length=300)
 	private String obsAtaque;
 
 

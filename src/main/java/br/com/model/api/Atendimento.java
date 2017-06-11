@@ -1,4 +1,4 @@
-package br.com.model.api;
+	package br.com.model.api;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,24 +19,20 @@ public class Atendimento {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_atendimento")
 	@SequenceGenerator(name = "seq_atendimento", sequenceName = "seq_atendimento", initialValue = 1, allocationSize = 1)
-	@Column(name="IDAtendimento")
+	@Column(name="idatendimento")
 	private Integer id;
 
 	@OneToOne
-	@JoinColumn(name="IDIndividuo")
+	@JoinColumn(name="idindividuo")
 	private Individuo individuo;
 	
-	@OneToOne
-	@JoinColumn(name="IDIncidente")
-	private Incidente incidente;
-	
-	@Column(name="Encaminhamento", length=50)
+	@Column(name="encaminhamento", length=50)
 	private String encaminhamento;
 	
-	@Column(name="OBSAtendimento", length=200)
+	@Column(name="obsatendimento", length=200)
 	private String obsAtendimento;
 	
-	@Column(name="TempoRecuperacao", length=3)
+	@Column(name="temporecuperacao", length=3)
 	private Integer tempoDeRecuperacao;
 	
 	@Column(name="StatusAtendimento", length=1)
@@ -78,11 +74,5 @@ public class Atendimento {
 	}
 	public void setStatusAtendimento(char statusAtendimento) {
 		this.statusAtendimento = statusAtendimento;
-	}
-	public Incidente getIncidente() {
-		return incidente;
-	}
-	public void setIncidente(Incidente incidente) {
-		this.incidente = incidente;
 	}
 }

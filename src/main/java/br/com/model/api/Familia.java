@@ -17,34 +17,23 @@ public class Familia {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_familia")
 	@SequenceGenerator(name = "seq_familia", sequenceName = "seq_familia", initialValue = 1, allocationSize = 1)
-	@Column(name = "IDFamilia")
+	@Column(name = "idfamilia")
 	private Integer idFamilia;
 	
-	@Column(name = "NomeFamilia", length=50)
+	@Column(name = "nomefamilia", length=50)
 	private String nomeFamilia;
 	
-	@Column(name = "DescFamilia", length=500)
+	@Column(name = "descfamilia", length=500)
 	private String descFamilia;
 	
 	@ManyToOne
-	@JoinColumn(name = "IDFendaBranquial")
+	@JoinColumn(name = "idfendabranquial")
 	private FendasBranquiais fendasBranquiais; 
 	
 	@ManyToOne
-	@JoinColumn(name = "IDOrdem")
+	@JoinColumn(name = "idordem")
 	private Ordem ordem; 
 	
-	
-	public Familia() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Familia [idFamilia=" + idFamilia + ", nomeFamilia=" + nomeFamilia + ", descFamilia=" + descFamilia
-				+ "]";
-	}
-
 	public Integer getIdFamilia() {
 		return idFamilia;
 	}

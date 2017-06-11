@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "Especie")
 public class Especie {
@@ -25,25 +27,29 @@ public class Especie {
 	@Column(name = "IDEspecie")
 	private Integer idEspecie;
 	
-	@Column(name = "NomeCientifico", length=50)
+	@Column(name = "nomecientifico", length=50)
 	private String nomeCientifico;
 	
-	@Column(name = "Descricao", length=200)
+	@Column(name = "descricao", length=200)
 	private String descricao;
 	
-	@Column(name = "TamMenor", precision=5, scale=2)
+	@JsonIgnore
+	@Column(name = "fotopadrao", length=60)
+	private String fotoPadrao;
+	
+	@Column(name = "tammenor", precision=5, scale=2)
 	private Double tamMenor;
 	
-	@Column(name = "TamMedio", precision=5, scale=2)
+	@Column(name = "tammedio", precision=5, scale=2)
 	private Double tamMedio;
 	
-	@Column(name = "TamMaior", precision=5, scale=2)
+	@Column(name = "tammaior", precision=5, scale=2)
 	private Double tamMaior;
 	
-	@Column(name = "TamMedioFilhote", precision=5, scale=2)
+	@Column(name = "tammediofilhote", precision=5, scale=2)
 	private Double tamMedioFilhote;
 	
-	@Column (name = "StatusExtincao", length=1)
+	@Column (name = "statusextincao", length=1)
 	private String extincao;
 	
 	
@@ -51,39 +57,39 @@ public class Especie {
 	private List<Nome> nomes;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodHabitat")
+	@JoinColumn(name = "codhabitat")
 	private Habitat habitat;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodReprod")
+	@JoinColumn(name = "codreprod")
 	private Reproducao reproducao;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodFocinho")
+	@JoinColumn(name = "codfocinho")
 	private Focinho focinho;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "IdFamilia")
+	@JoinColumn(name = "idfamilia")
 	private Familia familia;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodDorso")
+	@JoinColumn(name = "coddorso")
 	private Dorso dorso;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodVentre")
+	@JoinColumn(name = "codventre")
 	private Ventre ventre;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodDenticao")
+	@JoinColumn(name = "coddenticao")
 	private Denticao denticao;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "CodBarbatana")
+	@JoinColumn(name = "codbarbatana")
 	private Barbatana Barbatana;
 
 	public Especie() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	@Override
@@ -231,6 +237,13 @@ public class Especie {
 		this.nomes = nomes;
 	}
 	
+	public String getFotoPadrao() {
+		return fotoPadrao;
+	}
+
+	public void setFotoPadrao(String fotoPadrao) {
+		this.fotoPadrao = fotoPadrao;
+	}
 	
 	public void exibir(){
 		System.out.println("Objeto: " +  this);
@@ -239,5 +252,4 @@ public class Especie {
 		System.out.println("Tamanho Medio: " +  this.getTamMedio());
 		System.out.println("Descricao: " +  this.getDescricao());
 	}
-
 }

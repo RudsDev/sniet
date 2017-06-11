@@ -16,10 +16,10 @@ public class BarbPeitoral {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_barbPeitoral")
 	@SequenceGenerator(name = "seq_barbPeitoral", sequenceName = "seq_barbPeitoral", initialValue = 1, allocationSize = 1)
 
-	@Column(name = "CodBarbPeitoral")
+	@Column(name = "codbarbpeitoral")
 	private Integer codBarbPeitoral;
 	
-	@Column(name = "DescBarbPeitoral", length=50)
+	@Column(name = "descbarbpeitoral", length=50)
 	private String descBarbPeitoral;
 	
 	public Integer getCodBarbPeitoral() {

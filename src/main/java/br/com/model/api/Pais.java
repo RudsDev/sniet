@@ -13,19 +13,11 @@ public class Pais {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
-	@Column(name="codPais")
-	private Integer codPais;
+	@Column(name="idPais")
+	private Integer idPais;
 
 	@Column(name="nomePais")
 	private String nomePais;
-
-	public Integer getCodPais() {
-		return codPais;
-	}
-
-	public void setCodPais(Integer codPais) {
-		this.codPais = codPais;
-	}
 
 	public String getNomePais() {
 		return nomePais;
@@ -33,6 +25,14 @@ public class Pais {
 
 	public void setNomePais(String nomePais) {
 		this.nomePais = nomePais;
+	}
+
+	public Integer getIdPais() {
+		return idPais;
+	}
+
+	public void setIdPais(Integer idPais) {
+		this.idPais = idPais;
 	}
 
 }

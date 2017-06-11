@@ -16,11 +16,11 @@ public class Local {
 	@Column(name="idLocal")
 	private Integer idLocal;
 
+	@Column(name="Pais")
+	private String pais;
+	
 	@Column(name="nomeLocal")
 	private String nomeLocal;
-	
-	@Column(name="pais")
-	private String pais;
 	
 	@Column(name="uf")
 	private String uf;
@@ -93,19 +93,10 @@ public class Local {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	
-	public String getPais() {
-		return pais;
-	}
-
-	public void setPais(String pais) {
-		this.pais = pais;
-	}
 
 	public void exibir(){
 		System.out.println("ID: " +  this.getIdLocal());
 		System.out.println("Nome: " +  this.getNomeLocal());
-		System.out.println("Pais: " +  this.getPais());
 		System.out.println("UF: " +  this.getUf());
 		System.out.println("Cidade: " +  this.getCidade());
 	}

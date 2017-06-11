@@ -15,10 +15,10 @@ public class Dorso {
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_dorso")
 	@SequenceGenerator(name = "seq_dorso", sequenceName = "seq_dorso", initialValue = 1, allocationSize = 1)
-	@Column(name = "CodDorso")
+	@Column(name = "coddorso")
 	private Integer codDorso;
 	
-	@Column(name = "DescCorDorso", length=50)
+	@Column(name = "desccordorso", length=50)
 	private String descCorDorso;
 
 		public Dorso() {

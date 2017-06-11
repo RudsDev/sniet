@@ -33,9 +33,6 @@ public class Incidente {
 	@Column(name="DataHoraIncidente")
 	private Date dataIncidente;
 	
-	@Column(name="status")
-	private String status;
-	
 	@JsonIgnore
 	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
 	@JoinColumn(name="IdTubarao")
@@ -60,14 +57,6 @@ public class Incidente {
 
 	public void setDataIncidente(Date dataIncidente) {
 		this.dataIncidente = dataIncidente;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public Tubarao getTubarao() {
@@ -95,7 +84,6 @@ public class Incidente {
 		System.out.println("ID: " +  this.getidIncidente());
 		System.out.println("Descricao: " +  this.getDescIncidente());
 		System.out.println("Data: " +  this.getDataIncidente());
-		System.out.println("Status: " +  this.getStatus());
 	}
 
 }

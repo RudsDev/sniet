@@ -16,21 +16,13 @@ public class Barbatana {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_barbatana")
 	@SequenceGenerator(name = "seq_barbatana", sequenceName = "seq_barbatana", initialValue = 1, allocationSize = 1)
 
-	@Column(name = "CodBarbatana")
+	@Column(name = "codbarbatana")
 	private Integer codBarbatana;
 	
-	@Column(name = "DescCorBarbatana", length=50)
+	@Column(name = "desccorbarbatana", length=50)
 	private String descCorBarbatana;
 
-	public Barbatana() {
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public String toString() {
-		return "Barbatana [codBarbatana=" + codBarbatana + ", descCorBarbatana=" + descCorBarbatana + "]";
-	}
-
+	
 	public Integer getCodBarbatana() {
 		return codBarbatana;
 	}
