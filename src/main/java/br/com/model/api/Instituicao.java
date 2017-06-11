@@ -1,13 +1,10 @@
 package br.com.model.api;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,9 +22,9 @@ public class Instituicao {
 	@Column(name="IDInst")
 	private Integer id;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	/*@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="IDEndereco")
-	private Endereco endereco;
+	private Endereco endereco;*/
 	
 	@Column(name="NomeInstituicao", length=50)
 	private String nome;
@@ -35,7 +32,7 @@ public class Instituicao {
 	@Column(name="Registro", length=20)
 	private String registro;
 	
-	@Column(name="Tipo_instituicao", length=20)
+	@Column(name="tipoinst", length=2)
 	private String tipoInstituicao;
 	
 	public Instituicao(){
@@ -66,13 +63,13 @@ public class Instituicao {
 		this.registro = registro;
 	}
 
-	public Endereco getEndereco() {
+	/*public Endereco getEndereco() {
 		return endereco;
 	}
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
+	}*/
 
 	public String getTipoInstituicao() {
 		return tipoInstituicao;
