@@ -18,10 +18,10 @@ public class Pratica {
 	@Column(name="IDPratica")
 	private Integer id;
 	
-	@Column(name="TipoPratica")
+	@Column(name="TipoPratica", length=1)
 	private char tipoPratica;
 	
-	@Column(name="StatusPratica")
+	@Column(name="StatusPratica", length=1)
 	private char statusPratica;
 	
 	@Column(name="descPratica", length=100)
