@@ -1,17 +1,24 @@
 package br.com.service.api;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import br.com.dao.api.IncidenteDao;
 import br.com.model.api.Incidente;
 import br.com.model.api.Individuo;
+import br.com.util.api.Util;
 
 
 public class IncidenteService {
 
 	private IncidenteDao dao;
 	private IndividuoService individuoService;
-	
+	private static final JsonParser parser = new JsonParser();
 	
 	public IncidenteService(){
 		this.dao = new IncidenteDao();
@@ -54,6 +61,37 @@ public class IncidenteService {
 	
 	public List<Individuo> getAllIncidentesFull(){
 		return this.individuoService.getAllIndividuos();
+	}
+	
+	public Incidente convertToIncidenteObject(String incidenteWrapperJson){
+		
+		JsonObject jsonObj = parser.parse(incidenteWrapperJson).getAsJsonObject();
+		JsonObject incidente = jsonObj.get("incidente").getAsJsonObject();
+		
+		String dataIncidente = incidente.get("dataIncidente").getAsString();
+
+		incidente.addProperty("dataIncidente", "0");
+		
+		Incidente incidenteObj = (Incidente)Util.jsonToObject(incidente.toString(), Incidente.class);
+		
+		incidenteObj.exibir();
+		
+		incidenteObj.setDataIncidente(this.convertData(dataIncidente));
+		
+		
+		System.out.println(incidente.get("dataIncidente").getAsString());
+		return incidenteObj;
+	}
+	
+	private Date convertData(String data){
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+		
+		try {
+			return formato.parse(data);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 }

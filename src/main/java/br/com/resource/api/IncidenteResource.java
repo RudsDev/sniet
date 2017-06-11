@@ -2,6 +2,7 @@ package br.com.resource.api;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -13,10 +14,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+
 import br.com.model.api.Incidente;
 import br.com.model.api.Individuo;
 import br.com.model.api.Local;
 import br.com.service.api.IncidenteService;
+import br.com.service.api.IndividuoService;
 import br.com.test.api.IncidenteWrapper;
 import br.com.util.api.Util;
 import io.swagger.annotations.Api;
@@ -31,10 +34,13 @@ import io.swagger.annotations.ResponseHeader;
 @Path("/incidentes")
 public class IncidenteResource {
 	
-	private IncidenteService service;
+	
+	private IncidenteService incidenteService;
+	private IndividuoService individuoService;
 
 	public IncidenteResource() {
-		this.service = new IncidenteService();
+		this.incidenteService = new IncidenteService();
+		this.individuoService = new IndividuoService();
 	}
 	
 	@ApiOperation(
@@ -66,23 +72,22 @@ public class IncidenteResource {
 				String incidenteWrapperJson,
 				@Context UriInfo uriInfo){
 			
-			UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();	
 
-			IncidenteWrapper incidenteWrapper = (IncidenteWrapper) 
-					Util.jsonToObject(incidenteWrapperJson, IncidenteWrapper.class);
 			
-			Incidente incidente = incidenteWrapper.getIncidente();
-			Individuo individuo = incidenteWrapper.getIndividuo();
+			Incidente incidente = this.incidenteService.convertToIncidenteObject(incidenteWrapperJson);
+			Individuo individuo = this.individuoService.convertToIndividuoObject(incidenteWrapperJson);
 			
-			Individuo individuoSaved = service.save(incidente,individuo);
+			Individuo individuoSaved = incidenteService.save(incidente,individuo);
 			Incidente incidenteSaved = individuoSaved.getIncidente();
 			
-			System.out.println(incidenteSaved.getidIncidente());
+			incidenteSaved.exibir();
 			
 			//Coloca o ID do user recém salvo na resposta para o client (Location)
 			builder.path(Integer.toString(incidenteSaved.getidIncidente()));
 			
 		    return Response.status(201).header("Location", builder.build()).build();
+
 		} 
 	
 	
@@ -103,7 +108,7 @@ public class IncidenteResource {
 	public Response buscaTodasIncidentes(
 			@Context UriInfo uriInfo){
 		
-		List<Incidente> incidentes = this.service.getAllIncidentes();
+		List<Incidente> incidentes = this.incidenteService.getAllIncidentes();
 		List<String> incidentesJson = new ArrayList<>();
 		
 		for(int i=0; i<incidentes.size();i++){
@@ -131,7 +136,7 @@ public class IncidenteResource {
 	public Response buscaTodasIncidentesComIndividuos(
 			@Context UriInfo uriInfo){
 		
-		List<Individuo> individuos = this.service.getAllIncidentesFull();
+		List<Individuo> individuos = this.incidenteService.getAllIncidentesFull();
 		List<String> incidentesJson = new ArrayList<>();
 		
 		for(int i=0; i<individuos.size();i++){
@@ -163,7 +168,7 @@ public class IncidenteResource {
 			int id,
 			@Context UriInfo uriInfo){
 		
-		Incidente especie = this.service.searchByID(id);
+		Incidente especie = this.incidenteService.searchByID(id);
 		
 		especie.exibir();
 		
@@ -198,7 +203,7 @@ public class IncidenteResource {
 			String dataFinal,
 			@Context UriInfo uriInfo){
 		
-		List<Incidente> incidentes = this.service.searchByPeriodo(dataInicial, dataFinal);
+		List<Incidente> incidentes = this.incidenteService.searchByPeriodo(dataInicial, dataFinal);
 		
 		List<String> incidentesJson = new ArrayList<>();
 		
@@ -235,7 +240,7 @@ public class IncidenteResource {
 		
 		System.out.println(nomeLocal);
 		
-		List<Incidente> listaIncidente = this.service.searchByLocalNameIncidente(nomeLocal);
+		List<Incidente> listaIncidente = this.incidenteService.searchByLocalNameIncidente(nomeLocal);
 		List<String> listaIncidenteJson = new ArrayList<>();
 		
 		for(int i=0; i<listaIncidente.size();i++){
