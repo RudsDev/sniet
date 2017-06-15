@@ -2,18 +2,15 @@ package br.com.service.api;
 import java.util.List;
 import br.com.dao.api.UsuarioDao;
 import br.com.model.api.Usuario;
-import br.com.test.api.Test_UserDao;
 
 public class UsuarioService {
 	
 	
-	//private UsuarioDao dao;
-	private Test_UserDao dao;
+	private UsuarioDao dao;
 	
 	
 	public UsuarioService(){
-		//this.dao = new UsuarioDao();
-		this.dao = new Test_UserDao();
+		this.dao = new UsuarioDao();
 	}
 	
 	public Usuario save(Usuario usuario){
@@ -39,6 +36,10 @@ public class UsuarioService {
 	
 	public Integer quantidadeStatus(String status){
 		return (Integer) this.dao.getQuantByStatus(status);
+	}
+
+	public List<Usuario> getAllUsers() {
+		return this.dao.buscarTodosUsuario();
 	}
 	
 }

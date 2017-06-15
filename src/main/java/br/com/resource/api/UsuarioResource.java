@@ -15,6 +15,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
+
+import br.com.model.api.Incidente;
 import br.com.model.api.Usuario;
 import br.com.service.api.UsuarioService;
 import br.com.util.api.Util;
@@ -178,7 +180,34 @@ public class UsuarioResource {
 	            .build();
 	}
 	
+
+	@ApiOperation(
+			value="Retorna todos usuarios cadastrados.",
+			produces = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Retornada listagem de usuarios cadastrados.",
+			response = Incidente.class
+		)
+	)
+	@Path("/")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response buscaTodosUsuarios(
+			@Context UriInfo uriInfo){
+		
+		List<Usuario> usuarios = this.userService.getAllUsers();
+		List<String> usuariosJson = new ArrayList<>();
+		
+		for(int i=0; i<usuarios.size();i++){
+			usuariosJson.add(Util.objectToJson(usuarios.get(i)));
+		}
+		return Response.ok(usuariosJson.toString(), MediaType.APPLICATION_JSON).build();
+	}
 	
+
 	@ApiOperation(
 			value="Busca um usuario pelo seu login.",
 			consumes = MediaType.TEXT_PLAIN,

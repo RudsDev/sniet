@@ -7,14 +7,12 @@
  	possui uma name.
  */
 
-
 package br.com.dao.api;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-
 import br.com.model.api.Usuario;
 import br.com.persist.api.JPAUtil;
 
@@ -332,6 +330,16 @@ public class UsuarioDao {
 		Number result = query.getSingleResult();
 		
 		return result.intValue();
-	}	
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Usuario> buscarTodosUsuario(){
+		List<Usuario>listaDeUsuarios;
+		em.getTransaction().begin();
+		Query query = em.createQuery("select u from Usuario u");
+		listaDeUsuarios =  query.getResultList();
+		em.close();
+		return listaDeUsuarios;
+	}
 
 }
