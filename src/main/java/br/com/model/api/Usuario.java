@@ -39,7 +39,7 @@ public class Usuario {
 	private String email;
 
 	@Column(name="Telefone", length=11)
-	private String telefone;
+	private String phone;
 
 	@Column(name="Login", length=100)
 	private String login;
@@ -111,13 +111,13 @@ public class Usuario {
 	}
 
 
-	public String getTelefone() {
-		return telefone;
+	public String getPhone() {
+		return phone;
 	}
 
 
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 
 
@@ -163,7 +163,7 @@ public class Usuario {
 		System.out.println("Sobrenome: " +  this.getSecondName());
 		System.out.println("Sexo: " +  this.getSex());
 		System.out.println("E-mail: " +  this.getEmail());
-		System.out.println("Telefone: " +  this.getTelefone());
+		System.out.println("Telefone: " +  this.getPhone());
 		System.out.println("Login: " + this.getLogin());
 		System.out.println("Senha: " + this.getPassword());
 		System.out.println("Nivel de Acesso: " + 
