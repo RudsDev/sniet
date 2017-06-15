@@ -84,40 +84,6 @@ public class UsuarioResource {
 	
 	
 	@ApiOperation(
-			value="Retorna o mesmo usuario que foi submetido."
-					+ " Converte de JSON para um objeto Usuario"
-					+ " e de pois para JSON novamente.",
-			consumes = MediaType.APPLICATION_JSON,
-			produces = MediaType.APPLICATION_JSON
-	)
-	@ApiResponses(
-		@ApiResponse(
-			code=200,
-			message="usuario retornado.",
-			response = Usuario.class
-		)
-	)
-	@Path("/retornaMesmoUsuario")
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public String retornaMesmoUsuario(	
-			@ApiParam(
-				value="Usuario",
-				name="usuarioJson",
-				required=true
-			)
-			String usuarioJson){
-		
-		Usuario usuario = (Usuario) Util.jsonToObject(usuarioJson, Usuario.class);
-
-	    return Util.objectToJson(usuario);
-	    
-	}
-
-	
-	
-	@ApiOperation(
 			value="Apaga um usuário do sistema a partir de seu id.",
 			consumes = MediaType.TEXT_PLAIN
 	)
