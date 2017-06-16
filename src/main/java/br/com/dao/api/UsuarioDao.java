@@ -11,6 +11,7 @@ package br.com.dao.api;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import br.com.model.api.Usuario;
@@ -340,6 +341,22 @@ public class UsuarioDao {
 		listaDeUsuarios =  query.getResultList();
 		em.close();
 		return listaDeUsuarios;
+	}
+	
+	
+	
+	public Usuario logar(Usuario usuario) throws NoResultException{
+		Usuario usuarioLogado;
+		em.getTransaction().begin();
+		
+		Query query = em.createQuery("select u from Usuario u where u.login = :login "
+										+ "and u.password = :password", Usuario.class);
+		query.setParameter("login", usuario.getLogin());
+		query.setParameter("password", usuario.getPassword());
+		usuarioLogado =(Usuario) query.getSingleResult();
+		em.close();
+		
+		return usuarioLogado;
 	}
 
 }

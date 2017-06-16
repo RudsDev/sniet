@@ -9,12 +9,14 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
 public class Util {
 	
+	private static final JsonParser parser = new JsonParser();
 
 	private static JsonSerializer<Date> ser = new JsonSerializer<Date>(){
 		@Override
@@ -42,6 +44,10 @@ public class Util {
 	
 	public static String objectToJson(Object objeto){
 		return gson.toJson(objeto);
+	}
+
+	public static JsonParser getParser() {
+		return parser;
 	}
 
 }

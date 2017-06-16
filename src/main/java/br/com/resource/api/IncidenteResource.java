@@ -127,7 +127,7 @@ public class IncidenteResource {
 		@ApiResponse(
 			code=200,
 			message="Retornada listagem de incidentes com individuos.",
-			response = Incidente.class
+			response = Individuo.class
 		)
 	)
 	@Path("/full")

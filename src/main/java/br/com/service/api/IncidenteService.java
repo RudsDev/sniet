@@ -18,7 +18,7 @@ public class IncidenteService {
 
 	private IncidenteDao dao;
 	private IndividuoService individuoService;
-	private static final JsonParser parser = new JsonParser();
+	
 	
 	public IncidenteService(){
 		this.dao = new IncidenteDao();
@@ -65,7 +65,7 @@ public class IncidenteService {
 	
 	public Incidente convertToIncidenteObject(String incidenteWrapperJson){
 		
-		JsonObject jsonObj = parser.parse(incidenteWrapperJson).getAsJsonObject();
+		JsonObject jsonObj = Util.getParser().parse(incidenteWrapperJson).getAsJsonObject();
 		JsonObject incidente = jsonObj.get("incidente").getAsJsonObject();
 		
 		String dataIncidente = incidente.get("dataIncidente").getAsString();

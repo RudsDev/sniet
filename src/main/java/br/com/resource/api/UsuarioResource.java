@@ -268,4 +268,59 @@ public class UsuarioResource {
 
 		return Response.ok(quantidade.toString(), MediaType.APPLICATION_JSON).build();
 	}
+	
+
+	@ApiOperation(
+			value="Logar no sistema.",
+			consumes = MediaType.APPLICATION_JSON,
+			produces = MediaType.APPLICATION_JSON
+		)
+		@ApiResponses({
+			@ApiResponse(
+				code=200,
+				message="Logado com sucesso!.",
+				response = Usuario.class,
+				responseHeaders=
+					@ResponseHeader(
+						name="Location",
+						description="uri usuario logado.",
+						response=Usuario.class
+					)
+			),
+			@ApiResponse(
+					code=401,
+					message="Acesso inválido!.",
+					response = String.class
+				)
+			
+		})
+		@Path("/login")
+		@POST
+		@Consumes(MediaType.APPLICATION_JSON)
+		public Response login(
+				@ApiParam(
+					value="JSON contendo login e senha.",
+					name="login",
+					required=true
+				)
+				String loginJson,
+				@Context UriInfo uriInfo){
+
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
+		
+			Usuario userLogado = userService.logar(loginJson);
+			
+			System.out.println(userLogado);
+			
+			if(userLogado!=null){
+				//Coloca o ID do user recém salvo na resposta para o client (Location)
+				builder.path(Integer.toString(userLogado.getIdUsuario()));
+				return Response.created(builder.build()).status(200)
+			            .build();	
+			}
+			
+			
+		    return Response.status(401)
+		            .build();
+		}
 }

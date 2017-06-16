@@ -50,6 +50,14 @@ public class Usuario {
 	@Column(name="Status", length=1)
 	private char status;
 
+	public Usuario(){
+		
+	}
+	
+	public Usuario(String login, String password){
+		this.login = login;
+		this.password = password;
+	}
 	
 	public Integer getIdUsuario() {
 		return idUsuario;

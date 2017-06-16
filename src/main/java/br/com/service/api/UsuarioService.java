@@ -1,7 +1,11 @@
 package br.com.service.api;
+
 import java.util.List;
+import javax.persistence.NoResultException;
+import com.google.gson.JsonObject;
 import br.com.dao.api.UsuarioDao;
 import br.com.model.api.Usuario;
+import br.com.util.api.Util;
 
 public class UsuarioService {
 	
@@ -40,6 +44,33 @@ public class UsuarioService {
 
 	public List<Usuario> getAllUsers() {
 		return this.dao.buscarTodosUsuario();
+	}
+	
+	
+	@SuppressWarnings("finally")
+	public Usuario logar(String loginJson){
+		
+		Usuario usuario = null;
+		
+		try {
+			usuario = this.dao.logar(this.convertToUsuarioLoginObject(loginJson));
+		} catch (NoResultException e) {
+			System.out.println("Login ou senha inválidos.");
+		}
+		finally {
+			return usuario;
+		}
+	}
+	
+	
+	private Usuario convertToUsuarioLoginObject(String loginJson){
+
+		JsonObject jsonObj = Util.getParser().parse(loginJson).getAsJsonObject();
+
+		String login = jsonObj.get("login").getAsString();
+		String password = jsonObj.get("password").getAsString();
+
+		return new Usuario(login, password);
 	}
 	
 }
