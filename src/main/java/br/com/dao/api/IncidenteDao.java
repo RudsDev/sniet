@@ -23,23 +23,6 @@ public class IncidenteDao {
 		return incidenteManaged;
 	}
 
-	public Incidente teste(){
-
-		Incidente i = em.find(Incidente.class, 1);
-		em.close();
-		return i;
-	}
-	
-	
-	@SuppressWarnings("unchecked")
-	public List<Incidente> teste1(){
-		//Realizando teste
-		Query query = this.em.createQuery("select incidente from Incidente incidente");
-		//query.setParameter("nomeCientifico", nomeCientifico);
-		  
-		return query.getResultList();
-	}	
-
 	public Incidente getIncidenteById(Integer idIncidente){
 
 		Query query = em.createQuery("select e from Incidente e where e.idIncidente = :idIncidente",

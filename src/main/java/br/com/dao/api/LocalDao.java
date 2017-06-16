@@ -22,4 +22,22 @@ public class LocalDao {
 		return query.getResultList();
 	}
 
+	public Local teste(){
+
+		Local i = em.find(Local.class, 1);
+		em.close();
+		return i;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Local> teste1(){
+		//Realizando teste
+		Query query = this.em.createQuery("select local from Local local");
+		//query.setParameter("nomeCientifico", nomeCientifico);
+		  
+		return query.getResultList();
+	}	
+
+	
 }

@@ -25,8 +25,25 @@ html, body {
 </head>
 <body>
 	<% 
-		Geografico geo = new Geografico();
-		out.println(geo.getPais());
+		Maps maps = new Maps();
+	
+	out.println("<br>"+maps.local());
+	out.println("<br>"+maps.cidade());
+	out.println("<br>"+maps.uf());
+	out.println("<br>"+maps.pais());
+	out.println("<br>"+maps.latitude());
+	out.println("<br>"+maps.longitude());
+	out.println("<br>"+maps.enderecoFormatado());
+	
+	//out.println(maps.localLatitude());
+	//out.println(maps.localLongitude());
+	//out.println(maps.location());
+	//out.println(maps.teste());
+	//out.println(maps.testeJson());
+	//out.println(maps.testeLatitude());
+	
+		//Geografico geo = new Geografico();
+		//out.println(geo.getPais());
 		//out.println(maps.latitude());
 		//out.println("<br>"+maps.longitude());
 		//out.println("<br>" + maps.teste());
