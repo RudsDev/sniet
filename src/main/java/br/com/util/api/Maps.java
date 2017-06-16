@@ -6,20 +6,87 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.GeocodingApiRequest;
 import com.google.maps.errors.ApiException;
+import com.google.maps.model.AddressComponentType;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 
+import br.com.dao.api.LocalDao;
 import br.com.model.api.Local;
 
 public class Maps {
 
 	private GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBL3U0sz0c75omwtSikefpx2AIXLqoQLuk");
 	private LatLng location;
-	private Local nomelocal;
+	private Local nomeLocal = new Local();
 	private GeocodingApiRequest reverso, direto; //reverso
-	private String address = "praia de copacabana";
+	private String address = "praia de boa viagem";
 	
-	/*
+	
+	@SuppressWarnings("static-access")
+	public String local(){
+	
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			AddressComponentType a = T[0].addressComponents[0].types[0].SUBLOCALITY_LEVEL_1;
+			//address_components[i][componentForm[addressType]]
+			return a.toString();
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return "Erro!";
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public String cidade(){
+
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			AddressComponentType a = T[0].addressComponents[0].types[0].LOCALITY;
+			return a.toString();
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return "Erro!";
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public String uf(){
+
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			AddressComponentType a = T[0].addressComponents[0].types[0].ADMINISTRATIVE_AREA_LEVEL_1;
+			return a.toString();
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return "Erro!";
+		}
+	}
+	
+	@SuppressWarnings("static-access")
+	public String pais(){
+
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			AddressComponentType a = T[0].addressComponents[0].types[0].COUNTRY;
+			return a.toString();
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return "Erro!";
+		}
+	}
+	
 	public String latitude(){
 		direto = GeocodingApi.geocode(context, address);
 		GeocodingResult[] T;
@@ -34,43 +101,6 @@ public class Maps {
 		}
 	}
 	
-	public String testeJson(){
-		
-		IncidenteDao i = new IncidenteDao();
-		List<Incidente> incidentes =  i.teste1();
-		
-		return Util.objectToJson(incidentes);
-		
-	}
-
-	public List<Incidente> testeLatitude(){
-
-		IncidenteDao i = new IncidenteDao();
-		List<Incidente> incidentes =  i.teste1();
-		
-		return incidentes;
-	}
-
-	public String incidenteLatitude(){
-
-		IncidenteDao i = new IncidenteDao();
-
-		return i.teste().getLocal().getLatitude().toString();
-	}
-
-	public String incidenteLongitude(){
-
-		IncidenteDao i = new IncidenteDao();
-
-		return i.teste().getLocal().getLongitude().toString();
-
-	}
-
-	public String incidenteDescricao(){
-
-		return "";
-	}
-
 	public String longitude(){
 		direto = GeocodingApi.geocode(context, address);
 		GeocodingResult[] T;
@@ -84,14 +114,71 @@ public class Maps {
 			return "Erro!";
 		}
 	}
+	
+	public String enderecoFormatado(){
+		
+		direto = GeocodingApi.geocode(context, address);
+		GeocodingResult[] T;
+		try {
+			T = direto.await();
+			String a = T[0].formattedAddress;
+			return a;
+		} catch (ApiException | InterruptedException | IOException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			return "Erro!";
+		}
+	}
+	
+	
+/*	
+	
+	public String testeJson(){
+		
+		LocalDao i = new LocalDao();
+		List<Local> locals =  i.teste1();
+		
+		return Util.objectToJson(locals);
+		
+	}
 
-	public String descricao(){
+	public List<Local> testeLatitude(){
 
-		location = new LatLng(incidente.getLocal().getLatitude(), incidente.getLocal().getLongitude());
+		LocalDao i = new LocalDao();
+		List<Local> locals =  i.teste1();
+		
+		return locals;
+	}
+
+	public String localLatitude(){
+
+		LocalDao i = new LocalDao();
+
+		return i.teste().getLatitude().toString();
+	}
+
+	public String localLongitude(){
+
+		LocalDao i = new LocalDao();
+
+		return i.teste().getLongitude().toString();
+
+	}
+
+	public String localDescricao(){
 
 		return "";
 	}
 
+	
+/*
+	public String descricao(){
+
+		location = new LatLng(nomeLocal.getLocal().getLatitude(), local.getLocal().getLongitude());
+
+		return "";
+	}
+	
 	public LatLng location(){
 
 		direto = GeocodingApi.geocode(context, address);
@@ -110,28 +197,28 @@ public class Maps {
 	
 	public String teste(){
 
-		incidente.getLocal().setLatitude(Double.parseDouble(latitude()));//(-22.792438);
-		incidente.getLocal().setLongitude(Double.parseDouble(longitude()));//(-43.169765);
-		//location = new LatLng(incidente.getLatitude(), incidente.getLongitude());
+		//nomeLocal.setLatitude(Double.parseDouble(latitude()));//(-22.792438);
+		//nomeLocal.setLongitude(Double.parseDouble(longitude()));//(-43.169765);
+		//location = new LatLng(nomeLocal.getLatitude(), nomeLocal.getLongitude());
 		location = new LatLng(-22.139380, -43.297960);
 		reverso = GeocodingApi.reverseGeocode(context, location);
 		direto = GeocodingApi.geocode(context, address);
 		try {
 			GeocodingResult[] T = reverso.await();
 			//Aqui ter� na sa�da o endere�o mais pr�ximo em riqueza de detalhes 
-			//System.out.println("\nEndere�o Formatado: "+T[0].formattedAddress);
-			//System.out.println("\nPlace ID: "+T[0].placeId);
+			System.out.println("\nEndereço Formatado: "+T[0].formattedAddress);
+			System.out.println("\nPlace ID: "+T[0].placeId);
 			
 			return T[0].formattedAddress;
 
-
-			/*Aqui ter� na sa�da todos os endere�os que foi recebido.
+/*
+			//Aqui ter� na sa�da todos os endere�os que foi recebido.
 			for (int i=1; i<T.length;i++){
 				System.out.println("\nEndere�o Formatado: "+T[i].formattedAddress);
 				System.out.println("\nPlace ID: "+T[i].placeId);
-			}*/
+			}
 			//Existem outros atributos dentro do objeto.
-/*
+
 		} catch (ApiException | InterruptedException | IOException e) {
 			// TODO Auto-generated catch block
 			//	e.printStackTrace();

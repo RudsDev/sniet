@@ -1,16 +1,16 @@
 
 
-$(document).ready(function (){
+$(document).ready(function () {
 
 	var user = localStorage.getItem('user');
 
 	console.log(user);
 
-	if(user!=undefined){
+	if (user != undefined) {
 
 		for (var param in user)
 			console.log(user[param]);
-		
+
 
 		$('#name').text(user.name);
 		$('#secondName').val(user.secondName);
@@ -20,13 +20,13 @@ $(document).ready(function (){
 		$('#email').val(user.email);
 		$('#telefone').val(user.telefone);
 		$('#login').val(user.login);
-	  }
+	}
 
 
 
-	$('#command').on('click', function(){
+	$('#command').on('click', function () {
 
-	  var user = {
+		var user = {
 			name: $('#name').val(),
 			secondName: $('#secondName').val(),
 			sex: $('#sex').val(),
@@ -39,8 +39,8 @@ $(document).ready(function (){
 			instituicao: {
 				nome: $('#instituicao').val(),
 				registro: $('#registro_inst').val(),
-				tipoInstituicao:$('#tipo_instituicao').val(),
-				endereco:{
+				tipoInstituicao: $('#tipo_instituicao').val(),
+				endereco: {
 					pais: $('#pais_inst').val(),
 					uf: $('#uf_inst').val(),
 					cidade: $('#cidade_inst').val(),
@@ -50,77 +50,77 @@ $(document).ready(function (){
 					numero: $('#numero_inst').val(),
 					cep: $('#cep_inst').val(),
 				}
-	  		}
-	  };
+			}
+		};
 
-	  $.ajax({
-			url:'http://52.14.130.196/apirestex/servlet/usuarios/',
- 
-			
+		$.ajax({
+			url: 'http://52.14.130.196/apirestex/servlet/usuarios/',
+
+
 			//ip aws
 			//url:'http://52.14.130.196/
 			//data: JSON.stringify({user:userModel, instituicao:instituicaoModel}),
 			data: JSON.stringify(user),
-			type:'POST',
+			type: 'POST',
 			crossDomain: true,
-	    	contentType: 'application/json; charset=utf-8',
+			contentType: 'application/json; charset=utf-8',
 			dataType: 'json',
-			async:true,
-			success: function(JsonData) {
+			async: true,
+			success: function (JsonData) {
 				console.log("Success!!!");
 				for (var prop in JsonData) {
 					console.log(JsonData[prop]);
 				}
 			},
-			error: function() { console.log();('Failed!'); },
-	  });
-
-	});
-
-
-	$('#btn-delete').on('click', function(){
-
-		var id_user = $('#id-user').val();
-		console.log('ID: ' + id_user);
-
-		$.ajax({
-			url:'http://52.14.130.196/apirestex/servlet/usuarios/'+id_user,
-			type:'DELETE',
-			crossDomain: true,
-			contentType: 'text/plain; charset=utf-8',
-			dataType: 'text',
-			async:true,
-			success: function(JsonData) {
-				console.log("Success!!!");
-				for (var prop in JsonData) {
-					console.log(JsonData[prop]);
-				}
-			},
-			error: function() { console.log();('Failed!'); },
+			error: function () { console.log(); ('Failed!'); },
 		});
 
 	});
 
 
-	$('#btn-update').on('click', function(){
+	$('#btn-delete').on('click', function () {
 
 		var id_user = $('#id-user').val();
 		console.log('ID: ' + id_user);
 
 		$.ajax({
-			url:'http://52.14.130.196/apirestex/servlet/usuarios/'+id_user,
-			type:'DELETE',
+			url: 'http://52.14.130.196/apirestex/servlet/usuarios/' + id_user,
+			type: 'DELETE',
 			crossDomain: true,
 			contentType: 'text/plain; charset=utf-8',
 			dataType: 'text',
-			async:true,
-			success: function(JsonData) {
+			async: true,
+			success: function (JsonData) {
 				console.log("Success!!!");
 				for (var prop in JsonData) {
 					console.log(JsonData[prop]);
 				}
 			},
-			error: function() { console.log();('Failed!'); },
+			error: function () { console.log(); ('Failed!'); },
+		});
+
+	});
+
+
+	$('#btn-update').on('click', function () {
+
+		var id_user = $('#id-user').val();
+		console.log('ID: ' + id_user);
+
+		$.ajax({
+			url: 'http://52.14.130.196/apirestex/servlet/usuarios/' + id_user,
+			type: 'DELETE',
+			crossDomain: true,
+			contentType: 'text/plain; charset=utf-8',
+			dataType: 'text',
+			async: true,
+			success: function (JsonData) {
+				console.log("Success!!!");
+				for (var prop in JsonData) {
+					console.log(JsonData[prop]);
+				}
+			},
+			error: function () { console.log(); ('Failed!'); },
 		});
 
 	});
