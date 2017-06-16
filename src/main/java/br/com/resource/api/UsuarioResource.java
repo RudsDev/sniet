@@ -306,19 +306,13 @@ public class UsuarioResource {
 				String loginJson,
 				@Context UriInfo uriInfo){
 
-			UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
+			//UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 		
 			Usuario userLogado = userService.logar(loginJson);
-			
-			System.out.println(userLogado);
-			
+
 			if(userLogado!=null){
-				//Coloca o ID do user recém salvo na resposta para o client (Location)
-				builder.path(Integer.toString(userLogado.getIdUsuario()));
-				return Response.created(builder.build()).status(200)
-			            .build();	
+				return Response.ok(Util.objectToJson(userLogado).toString(), MediaType.APPLICATION_JSON).status(200).build();
 			}
-			
 			
 		    return Response.status(401)
 		            .build();
