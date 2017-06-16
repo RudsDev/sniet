@@ -306,8 +306,6 @@ public class UsuarioResource {
 				String loginJson,
 				@Context UriInfo uriInfo){
 
-			//UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
-		
 			Usuario userLogado = userService.logar(loginJson);
 
 			if(userLogado!=null){
