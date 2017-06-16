@@ -16,11 +16,11 @@ import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
 import br.com.model.api.Incidente;
+import br.com.model.api.IncidenteWrapper;
 import br.com.model.api.Individuo;
 import br.com.model.api.Local;
 import br.com.service.api.IncidenteService;
 import br.com.service.api.IndividuoService;
-import br.com.test.api.IncidenteWrapper;
 import br.com.util.api.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
