@@ -10,7 +10,7 @@ public class CORSFilter implements ContainerResponseFilter {
 
     @Override
     public void filter(ContainerRequestContext creq, ContainerResponseContext cres) {
-    	cres.getHeaders().add("Access-Control-Expose-Headers", "Location");
+    	cres.getHeaders().add("Access-Control-Expose-Headers", "Location, Authorization");
     	cres.getHeaders().add("Access-Control-Allow-Origin", "*");
         cres.getHeaders().add("Access-Control-Allow-Headers", "Authentication, Content-Type, X-Requested-With, X-Codingpedia");
         cres.getHeaders().add("Access-Control-Allow-Headers", "origin, content-type, accept, authorization");

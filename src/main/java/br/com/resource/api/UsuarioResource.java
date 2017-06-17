@@ -2,6 +2,8 @@ package br.com.resource.api;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -19,6 +21,7 @@ import javax.ws.rs.core.UriInfo;
 import br.com.model.api.Incidente;
 import br.com.model.api.Usuario;
 import br.com.service.api.UsuarioService;
+import br.com.test.api.MyTokenGen;
 import br.com.util.api.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -304,12 +307,20 @@ public class UsuarioResource {
 					required=true
 				)
 				String loginJson,
-				@Context UriInfo uriInfo){
+				@Context UriInfo uriInfo,
+				@Context HttpServletResponse servletResponse){
 
 			Usuario userLogado = userService.logar(loginJson);
 
 			if(userLogado!=null){
-				return Response.ok(Util.objectToJson(userLogado).toString(), MediaType.APPLICATION_JSON).status(200).build();
+				
+				String token  = MyTokenGen.createToken(userLogado);
+				
+				System.out.println(token);
+				
+				
+				return Response.ok(Util.objectToJson(userLogado).toString(), MediaType.APPLICATION_JSON)
+							   .header("Authorization", token).status(200).build();
 			}
 			
 		    return Response.status(401)

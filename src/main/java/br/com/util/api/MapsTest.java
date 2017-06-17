@@ -96,7 +96,7 @@ public class MapsTest {
 	 *  
 	 * @return String
 	 */
-	public String listaIncidentesJson(){
+	/*public String listaIncidentesJson(){
 		
 		IncidenteDao i = new IncidenteDao();
 		List<Incidente> incidentes =  i.teste1();
@@ -110,7 +110,7 @@ public class MapsTest {
 	public String incidenteLongitude(){
 		IncidenteDao i = new IncidenteDao();
 		return i.teste().getLocal().getLongitude().toString();
-	}
+	}*/
 
 	
 	public String teste(String address){
