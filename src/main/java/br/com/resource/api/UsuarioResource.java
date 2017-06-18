@@ -21,7 +21,7 @@ import javax.ws.rs.core.UriInfo;
 import br.com.model.api.Incidente;
 import br.com.model.api.Usuario;
 import br.com.service.api.UsuarioService;
-import br.com.test.api.MyTokenGen;
+import br.com.util.api.MyTokenGen;
 import br.com.util.api.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
