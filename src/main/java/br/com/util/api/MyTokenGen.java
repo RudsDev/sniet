@@ -18,6 +18,7 @@ public class MyTokenGen {
 		try {
 			Algorithm algorithm = Algorithm.HMAC256(myKey);
 			String token = JWT.create().withIssuer(myIssuer)
+							.withClaim("name", usuario.getName())
 							.withClaim("acessLevel", usuario.getAcessLevel())
 							.withClaim("password", usuario.getPassword())
 							.sign(algorithm);
