@@ -2,7 +2,6 @@ package br.com.resource.api;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -13,11 +12,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
-
+import br.com.exceptions.api.UnauthorizedAcessException;
 import br.com.model.api.Incidente;
 import br.com.model.api.Usuario;
 import br.com.service.api.UsuarioService;
@@ -70,20 +70,30 @@ public class UsuarioResource {
 				required=true
 			)
 			String usuarioJson,
-			@Context UriInfo uriInfo){
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
-		System.out.println(usuarioJson);
+		Integer acessLevel = 1;
 		
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
-	
-		Usuario userSaved = userService.save((Usuario) 
-				Util.jsonToObject(usuarioJson, Usuario.class));
+		String token = headers.getHeaderString("Authorization");
 		
-		//Coloca o ID do user recém salvo na resposta para o client (Location)
-		builder.path(Integer.toString(userSaved.getIdUsuario()));
-		
-	    return Response.created(builder.build()).status(201)
-	            .build();
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
+			
+			Usuario userSaved = userService.save((Usuario) 
+					Util.jsonToObject(usuarioJson, Usuario.class));
+			
+			//Coloca o ID do user recém salvo na resposta para o client (Location)
+			builder.path(Integer.toString(userSaved.getIdUsuario()));
+			
+		    return Response.created(builder.build()).status(201)
+		            .build();
+		}
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+		    return Response.status(401).build();
+		}
 	}
 
 	
@@ -105,11 +115,21 @@ public class UsuarioResource {
 	public Response deleteById(
 			@PathParam(value="id")
 			int id,
-			@Context UriInfo uriInfo){
-
-		this.userService.deleteById(id);
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
-	    return Response.ok().build();
+		Integer acessLevel = 1;
+		
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);	
+			this.userService.deleteById(id);
+		    return Response.ok().build();
+		}
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+			return Response.status(401).build();
+		}
 	}
 	
 	
@@ -133,10 +153,21 @@ public class UsuarioResource {
 					name="usuarioJson",
 					required=true
 			)String usuarioJson,
-			@Context UriInfo uriInfo){
-		userService.deleteByObj((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));	
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
-	    return Response.ok().build();
+		Integer acessLevel = 1;
+		
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			userService.deleteByObj((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));	
+		    return Response.ok().build();
+		}
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+			return Response.status(401).build();
+		} 
 	}
 	
 	
@@ -169,18 +200,33 @@ public class UsuarioResource {
 					required=true
 			)
 			String usuarioJson,
-			@Context UriInfo uriInfo){
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
-		UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+		Integer acessLevel = 1;
+		
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 
-		Usuario userSaved = userService.update((Usuario)Util.jsonToObject(usuarioJson,Usuario.class));
+			Usuario userSaved = userService.update((Usuario)Util.jsonToObject(usuarioJson,Usuario.class));
+			
+			//Coloca o ID do user recém salvo na resposta para o client (Location)
+			builder.path(Integer.toString(userSaved.getIdUsuario()));
+			
+			 
+		    return Response.created(builder.build()).status(201)
+		            .build();
+		}
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+			return Response.status(401).build();
+		}
 		
-		//Coloca o ID do user recém salvo na resposta para o client (Location)
-		builder.path(Integer.toString(userSaved.getIdUsuario()));
-		
-		 
-	    return Response.created(builder.build()).status(201)
-	            .build();
+
+	    
+	    
 	}
 	
 
@@ -199,15 +245,27 @@ public class UsuarioResource {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscaTodosUsuarios(
-			@Context UriInfo uriInfo){
+			@Context UriInfo uriInfo, @Context  HttpHeaders headers){
 		
-		List<Usuario> usuarios = this.userService.getAllUsers();
-		List<String> usuariosJson = new ArrayList<>();
+		Integer acessLevel = 1;
 		
-		for(int i=0; i<usuarios.size();i++){
-			usuariosJson.add(Util.objectToJson(usuarios.get(i)));
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			List<Usuario> usuarios = this.userService.getAllUsers();
+			List<String> usuariosJson = new ArrayList<>();
+			
+			for(int i=0; i<usuarios.size();i++){
+				usuariosJson.add(Util.objectToJson(usuarios.get(i)));
+			}
+			return Response.ok(usuariosJson.toString(), MediaType.APPLICATION_JSON).build();
+		} 
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+		    return Response.status(401)
+		            .build();
 		}
-		return Response.ok(usuariosJson.toString(), MediaType.APPLICATION_JSON).build();
 	}
 	
 
@@ -230,16 +288,27 @@ public class UsuarioResource {
 	public Response buscaPorLogin(
 			@PathParam(value="login")
 			String login,
-			@Context UriInfo uriInfo){
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
-		List<Usuario> users = this.userService.searchByLogin(login);
-		List<String> usersJson = new ArrayList<>();
+		Integer acessLevel = 1;
 		
-		for(int i=0; i<users.size();i++){
-			usersJson.add(Util.objectToJson(users.get(i)));
-		}
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			List<Usuario> users = this.userService.searchByLogin(login);
+			List<String> usersJson = new ArrayList<>();
+			
+			for(int i=0; i<users.size();i++){
+				usersJson.add(Util.objectToJson(users.get(i)));
+			}
 
-		return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();
+			return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();
+		} 
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+			return Response.status(401).build();
+		}
 	}
 	
 	
@@ -263,13 +332,23 @@ public class UsuarioResource {
 	public Response qtdStatus(
 			@PathParam(value="status")
 			String status,
-			@Context UriInfo uriInfo){
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
-		Integer quantidade = this.userService.quantidadeStatus(status);
+		Integer acessLevel = 1;
 		
-		System.out.println("Quantidade: " + quantidade);
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			Integer quantidade = this.userService.quantidadeStatus(status);
+			
+			System.out.println("Quantidade: " + quantidade);
 
-		return Response.ok(quantidade.toString(), MediaType.APPLICATION_JSON).build();
+			return Response.ok(quantidade.toString(), MediaType.APPLICATION_JSON).build();
+		} catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+			return Response.status(401).build();
+		}
 	}
 	
 
@@ -315,10 +394,7 @@ public class UsuarioResource {
 			if(userLogado!=null){
 				
 				String token  = MyTokenGen.createToken(userLogado);
-				
-				System.out.println(token);
-				
-				
+						
 				return Response.ok(Util.objectToJson(userLogado).toString(), MediaType.APPLICATION_JSON)
 							   .header("Authorization", token).status(200).build();
 			}
