@@ -104,3 +104,13 @@ buildNumber.properties
 !/.mvn/wrapper/maven-wrapper.jar
 
 # End of https://www.gitignore.io/api/git,java,maven,eclipse
+
+# Created by https://www.gitignore.io/api/bower
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+# End of https://www.gitignore.io/api/bower
