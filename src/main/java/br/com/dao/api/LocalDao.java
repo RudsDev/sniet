@@ -13,17 +13,17 @@ public class LocalDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Local> getLocalByName(String nomeLocal){
-
+		em.getTransaction().begin();
 		Query query = em.createQuery("select l from Local l where l.nomeLocal = :nomeLocal",
 				Local.class);
 
 		query.setParameter("nomeLocal", nomeLocal);
-
+		em.close();
 		return query.getResultList();
 	}
 
 	public Local teste(){
-
+		em.getTransaction().begin();
 		Local i = em.find(Local.class, 1);
 		em.close();
 		return i;
