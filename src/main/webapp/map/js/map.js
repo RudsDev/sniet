@@ -11,7 +11,7 @@ function initMap() {
 		async: true,
 
 		success: function (JsonData) {
-			console.log("Success!!!");
+			//console.log("Success!!!");
 			var json = JSON.parse(JsonData);
 
 			for (var index in json){
@@ -29,7 +29,7 @@ function initMap() {
 				'<h1 id="firstHeading" class="firstHeading">Rio de Janeiro</h1>' +
 				'<div id="bodyContent">' +
 				'<p>' + incidente.descIncidente + '</p>' +
-				'<p>Attribution: Os caçadores de Tubarões!<br>' +
+				'<p>Attribution: Tubarões!<br>' +
 				'Liderados por Daniel Silos ' +
 				'(last visited June 18, 2017).</p>' +
 				'</div>' +
@@ -54,8 +54,8 @@ function initMap() {
 			lati  = lati/aux; var asd = lati.toString();
 			long  = long/aux;
 
-			console.log(asd);
-			console.log(long);
+			//console.log(asd);
+			//console.log(long);
 		}
 	});
 

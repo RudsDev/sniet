@@ -29,8 +29,11 @@ public class IncidenteDao {
 				Incidente.class);
 
 		query.setParameter("idIncidente", idIncidente);
+		
+		Incidente incidente = (Incidente) query.getSingleResult();
+		
 		em.close();
-		return (Incidente) query.getSingleResult();
+		return incidente;
 	}
 	
 	
