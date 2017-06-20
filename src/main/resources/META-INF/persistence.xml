@@ -38,7 +38,16 @@
 			<property name="hibernate.show_sql"              value="true" />
 			<property name="hibernate.flushMode"             value="FLUSH_AUTO" />
 			<property name="hibernate.hbm2ddl.auto"          value="update" />
-
+			
+			
+            <property name="hibernate.connection.provider"
+          		value="org.hibernate.connection.C3P0ConnectionProvider" />
+          	<property name="hibernate.c3p0.min_size" value="10" />
+		    <property name="hibernate.c3p0.max_size" value="150" />
+		    <property name="hibernate.c3p0.timeout" value="240" /> <!-- seconds -->
+		    <property name="hibernate.c3p0.max_statements" value="50" />
+		    <property name="hibernate.c3p0.idle_test_period" value="30" /> <!-- seconds -->
+		    
 		</properties>
 
 	</persistence-unit>
