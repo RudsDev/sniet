@@ -36,7 +36,11 @@ public class MyTokenGen {
 	public static void verifyTokenAcess(String token, Integer acessLevel)
 			throws UnauthorizedAcessException{
 		
-		System.out.println("verifyTokenAcess");
+		System.out.println("verifyTokenAcess: " + token);
+		
+		if(token==null)
+			throw new UnauthorizedAcessException("Token is empty!");
+			
 		
 		try {
 		    Algorithm algorithm = Algorithm.HMAC256(myKey);
@@ -45,11 +49,9 @@ public class MyTokenGen {
 		        .withClaim("acessLevel", acessLevel)
 		        .build().verify(token); 
 		} catch (UnsupportedEncodingException exception){
-			exception.printStackTrace();
-			throw new UnauthorizedAcessException();
+			throw new UnauthorizedAcessException("Invalid encoding token");
 		} catch (JWTVerificationException exception){
-			exception.printStackTrace();
-			throw new UnauthorizedAcessException();
+			throw new UnauthorizedAcessException("Sem privilégios suficientes para essa ação.");
 		}
 	}
 }
