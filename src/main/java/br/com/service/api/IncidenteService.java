@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import br.com.dao.api.IncidenteDao;
 import br.com.model.api.Incidente;
@@ -92,6 +91,10 @@ public class IncidenteService {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	public Incidente update(Incidente incidente) {
+		return this.dao.atualizar(incidente);
 	}
 	
 }

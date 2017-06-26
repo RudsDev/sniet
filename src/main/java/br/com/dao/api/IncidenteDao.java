@@ -95,5 +95,14 @@ public class IncidenteDao {
 		em.close();
 		return listaDeIncidentes;
 	}
+	
+	public Incidente atualizar(Incidente incidente){
+		em.getTransaction().begin();
+		Incidente inc = em.merge(incidente);
+		em.getTransaction().commit();
+		em.close();
+		
+		return inc;
+	}
 
 }

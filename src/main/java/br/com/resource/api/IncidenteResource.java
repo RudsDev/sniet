@@ -6,21 +6,25 @@ import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 
+import br.com.exceptions.api.UnauthorizedAcessException;
 import br.com.model.api.Incidente;
 import br.com.model.api.IncidenteWrapper;
 import br.com.model.api.Individuo;
 import br.com.model.api.Local;
 import br.com.service.api.IncidenteService;
 import br.com.service.api.IndividuoService;
+import br.com.util.api.MyTokenGen;
 import br.com.util.api.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -249,6 +253,45 @@ public class IncidenteResource {
 
 		return Response.ok(listaIncidenteJson.toString(), MediaType.APPLICATION_JSON).build();
 		
+	}
+	
+	@Path("/")
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response update(
+			@ApiParam(
+					value="Incidente",
+					name="incidenteJson",
+					required=true
+			)
+			String incidenteJson,
+			@Context UriInfo uriInfo, @Context HttpHeaders headers){
+		
+		Integer acessLevel = 1;
+		
+		String token = headers.getHeaderString("Authorization");
+		
+		try {
+			MyTokenGen.verifyTokenAcess(token, acessLevel);
+			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+
+			Incidente incidenteSaved = this.incidenteService.update((Incidente)Util.jsonToObject(incidenteJson,Incidente.class));
+			
+			//Coloca o ID do user recém salvo na resposta para o client (Location)
+			builder.path(Integer.toString(incidenteSaved.getidIncidente()));
+			
+			 
+		    return Response.created(builder.build()).status(201)
+		            .build();
+		}
+		catch (UnauthorizedAcessException e) {
+			e.printStackTrace();
+			return Response.status(401).build();
+		}
+		
+
+	    
+	    
 	}
 	
 }
