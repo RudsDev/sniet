@@ -114,3 +114,7 @@ bower_components
 .bower-tmp
 
 # End of https://www.gitignore.io/api/bower
+
+
+### Folders ####
+src/main/webapp/sniet_client/
