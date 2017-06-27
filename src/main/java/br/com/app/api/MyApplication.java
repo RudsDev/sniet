@@ -26,7 +26,7 @@ public class MyApplication extends Application {
 				+ " no padrão SNIET.");
 		config.setVersion("1.0.1");
 		config.setHost("http://52.14.130.196");
-		config.setBasePath("/apirestex/servlet");
+		config.setBasePath("/sniet_api/servlet");
 		config.setSchemes(new String[]{"http"});
 		config.setResourcePackage("br.com.resource.api");
 		config.setScan(true);

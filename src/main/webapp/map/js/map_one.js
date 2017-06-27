@@ -22,7 +22,7 @@ function initMap() {
 	
 	$.ajax({	
 		//http://localhost:8282/sniet_api/servlet/incidentes
-		url: 'http://localhost:8282/apirestex/servlet/incidentes/'+id,
+		url: 'http://localhost:8282/sniet_api/servlet/incidentes/'+id,
 		type: 'GET',
 		crossDomain: true,
 		contentType: 'text/plain; charset=utf-8',

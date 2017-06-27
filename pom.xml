@@ -104,7 +104,7 @@
   </dependencies>
   
   <build>
-    <finalName>apirestex</finalName>
+    <finalName>sniet_api</finalName>
     	<plugins>
 		<plugin>
 			<artifactId>maven-compiler-plugin</artifactId>

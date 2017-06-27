@@ -12,7 +12,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  	<display-name>apirestex</display-name>
+  	<display-name>sniet_api</display-name>
   	
     <servlet>
         <servlet-name>br.com.app.api.MyApplication</servlet-name>
