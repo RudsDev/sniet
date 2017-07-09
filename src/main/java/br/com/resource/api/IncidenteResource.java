@@ -35,7 +35,7 @@ import io.swagger.annotations.ResponseHeader;
 
 
 @Api
-@Path("/incidentes")
+@Path("/incidents")
 public class IncidenteResource {
 	
 	
@@ -69,8 +69,8 @@ public class IncidenteResource {
 		@Consumes(MediaType.APPLICATION_JSON)
 		public Response save(
 				@ApiParam(
-					value="incidenteWrapper",
-					name="incidenteWrapperJson",
+					value="incidentWrapper",
+					name="incidentWrapperJson",
 					required=true
 				)
 				String incidenteWrapperJson,
@@ -109,7 +109,7 @@ public class IncidenteResource {
 	@Path("/")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscaTodasIncidentes(
+	public Response allIncidents(
 			@Context UriInfo uriInfo){
 		
 		List<Incidente> incidentes = this.incidenteService.getAllIncidentes();
@@ -137,7 +137,7 @@ public class IncidenteResource {
 	@Path("/all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscaTodasIncidentesComIndividuos(
+	public Response allIncidentsFull(
 			@Context UriInfo uriInfo){
 		
 		List<Individuo> individuos = this.incidenteService.getAllIncidentesFull();
@@ -150,6 +150,8 @@ public class IncidenteResource {
 		return Response.ok(incidentesJson.toString(), MediaType.APPLICATION_JSON).build();
 	}
 	
+	//TODO	Criar resource que retorne apenas os incidentes com links
+	//para individuos. Seguindo o HATEOAS.
 	
 	@ApiOperation(
 			value="Busca uma incidente a partir de seu ID.",
@@ -167,7 +169,7 @@ public class IncidenteResource {
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscaPorId(
+	public Response searchById(
 			@PathParam(value="id")
 			int id,
 			@Context UriInfo uriInfo){
@@ -196,18 +198,18 @@ public class IncidenteResource {
 		)
 	)
 	
-	@Path("/periodo/{datainicial;dataFinal}")
+	@Path("/between/{datainicial;dataFinal}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscaPorPerido(
-			@PathParam(value="dataInicial")
-			String dataInicial,
-			@PathParam(value="dataFinal")
-			String dataFinal,
+	public Response searchBetweenDates(
+			@PathParam(value="initialDate")
+			String initialDate,
+			@PathParam(value="lastDate")
+			String lastDate,
 			@Context UriInfo uriInfo){
 		
-		List<Incidente> incidentes = this.incidenteService.searchByPeriodo(dataInicial, dataFinal);
+		List<Incidente> incidentes = this.incidenteService.searchByPeriodo(initialDate, lastDate);
 		
 		List<String> incidentesJson = new ArrayList<>();
 		
@@ -233,18 +235,16 @@ public class IncidenteResource {
 			response = Local.class
 		)
 	)
-	@Path("/local/{nomeLocal}")
+	@Path("/local/{nameLocal}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response localIncidente(
-			@PathParam(value="nomeLocal")
-			String nomeLocal,
+	public Response localIncident(
+			@PathParam(value="nameLocal")
+			String nameLocal,
 			@Context UriInfo uriInfo){
 		
-		System.out.println(nomeLocal);
-		
-		List<Incidente> listaIncidente = this.incidenteService.searchByLocalNameIncidente(nomeLocal);
+		List<Incidente> listaIncidente = this.incidenteService.searchByLocalNameIncidente(nameLocal);
 		List<String> listaIncidenteJson = new ArrayList<>();
 		
 		for(int i=0; i<listaIncidente.size();i++){
@@ -255,16 +255,16 @@ public class IncidenteResource {
 		
 	}
 	
-	@Path("/{id}")
+	@Path("/")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(
 			@ApiParam(
 					value="Incidente",
-					name="incidenteJson",
+					name="incidentJson",
 					required=true
 			)
-			String incidenteJson,
+			String incidentJson,
 			@Context UriInfo uriInfo, @Context HttpHeaders headers){
 		
 		Integer acessLevel = 1;
@@ -275,7 +275,7 @@ public class IncidenteResource {
 			MyTokenGen.verifyTokenAcess(token, acessLevel);
 			UriBuilder builder = uriInfo.getAbsolutePathBuilder();
 
-			Incidente incidenteSaved = this.incidenteService.update((Incidente)Util.jsonToObject(incidenteJson,Incidente.class));
+			Incidente incidenteSaved = this.incidenteService.update((Incidente)Util.jsonToObject(incidentJson,Incidente.class));
 			
 			//Coloca o ID do user recém salvo na resposta para o client (Location)
 			builder.path(Integer.toString(incidenteSaved.getidIncidente()));
