@@ -134,7 +134,7 @@ public class IncidenteResource {
 			response = Individuo.class
 		)
 	)
-	@Path("/full")
+	@Path("/all")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response buscaTodasIncidentesComIndividuos(
@@ -183,7 +183,7 @@ public class IncidenteResource {
 	
 	
 	@ApiOperation(
-			value="Busca uma incidente acontecedido em determinado periodo."
+			value="Busca uma incidente que ocorreu em determinado periodo."
 				 + "O formato das datas deverá seguir o padrão MM/DD/YYYY.",
 			consumes = MediaType.TEXT_PLAIN,
 			produces = MediaType.APPLICATION_JSON
@@ -195,8 +195,8 @@ public class IncidenteResource {
 			response = Incidente.class
 		)
 	)
-	//TODO Melhorar esse path...
-	@Path("datainicial/{dataInicial}/datainicial/{dataFinal}")
+	
+	@Path("/periodo/{datainicial;dataFinal}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -255,7 +255,7 @@ public class IncidenteResource {
 		
 	}
 	
-	@Path("/")
+	@Path("/{id}")
 	@PUT
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response update(
@@ -287,11 +287,7 @@ public class IncidenteResource {
 		catch (UnauthorizedAcessException e) {
 			e.printStackTrace();
 			return Response.status(401).build();
-		}
-		
-
-	    
-	    
+		} 
 	}
 	
 }
