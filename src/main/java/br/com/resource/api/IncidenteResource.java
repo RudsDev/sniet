@@ -198,7 +198,7 @@ public class IncidenteResource {
 		)
 	)
 	
-	@Path("/between/{datainicial;dataFinal}")
+	@Path("/between/{initialDate}/{lastDate}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
