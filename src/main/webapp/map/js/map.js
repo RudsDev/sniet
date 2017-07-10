@@ -3,7 +3,8 @@ function initMap() {
 	var lati=0, long=0, aux=0;
 
 	$.ajax({
-		url: 'http://localhost:8282/apirestex/servlet/incidentes/full',
+		url: '/sniet_api/servlet/incidents/full',
+		//url: 'http://localhost:8282/sniet_api/servlet/incidents/full',
 		type: 'GET',
 		crossDomain: true,
 		contentType: 'text/plain; charset=utf-8',
