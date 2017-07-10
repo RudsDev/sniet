@@ -6,8 +6,6 @@ angular.module('snietApp').controller('consultaIncidentesCtrl', function($scope,
 
 	$scope.pontos = function(){
 		console.log('pontos!');
-		// http://localhost:8282//sniet_api/map/maps.html
-		// http://localhost:8282/apirestex/map/maps.html
 		var map = "<iframe src='http://localhost:8282/sniet_api/map/maps.html' width='90%' height='300px' style='position: relative; left: 5%; top: -10px'></iframe>";
 
 		$('#mapa').empty().append(map);
@@ -15,8 +13,6 @@ angular.module('snietApp').controller('consultaIncidentesCtrl', function($scope,
 
 	$scope.ponto = function(id){
 		console.log('ponto!!!');
-		// http://localhost:8282//sniet_api/map/maps.html
-		// http://localhost:8282/apirestex/map/maps.html
 		var map = "<iframe src='http://localhost:8282/sniet_api/map/map_one.html?individuoID="+id+"' width='90%' height='300px' style='position: relative; left: 5%; top: -10px'></iframe>";
 
 		$('#mapa').empty().append(map);
