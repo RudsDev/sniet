@@ -117,4 +117,10 @@ bower_components
 
 
 ### Folders ####
-src/main/webapp/sniet_client/
+src/main/webapp/sniet_client/fonts
+src/main/webapp/sniet_client/lib
+
+### Files ####
+src/main/webapp/sniet_client/css/font-awesome.min.css
+src/main/webapp/sniet_client/css/materialize.css
+src/main/webapp/sniet_client/css/materialize.min.css
