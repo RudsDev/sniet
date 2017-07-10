@@ -1,0 +1,17 @@
+
+### Git ###
+*.orig
+
+
+### Bower ###
+bower_components
+.bower-cache
+.bower-registry
+.bower-tmp
+
+
+### Folders ####
+src/main/webapp/sniet_client/
+.vscode/
+fonts/
+lib

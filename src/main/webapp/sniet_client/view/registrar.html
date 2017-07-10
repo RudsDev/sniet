@@ -1,0 +1,77 @@
+<a href="#login"  class="btn waves-effect waves-light btn-floating btn-large right pulse" ><i class="material-icons right">navigate_before</i></a>
+        <form name="registrarForm" role="form" class="col s12 col m12">
+            <div class="row">
+          		<div class="input-field col s12 col m12">	
+				    <input type="text" class="validate" ng-model="nome" required minlength="3"/>
+                    <label>Nome</label>
+				</div>
+            
+                <div class="input-field col s12 col m12">
+					<input type="text" class="validate" ng-model="sobrenome" name="sobrenome" id="sobrenome" required minlength="3"/>
+                    <label for="sobrenome">Sobrenome</label>
+          		</div>
+            
+                <div class="input-field col s6 col m6">
+                    <input type="text" class="validate" ng-model="email"  name="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+                    <label for="email">E-mail</label>
+                </div>
+                
+            
+                <div class="input-field col s6 col m6">
+                    <input type="text" class="validate" ng-model="telefone" name="telefone" id="telefone1" pattern="\([0-9]{2}\) [0-9]{4,6}-[0-9]{3,4}$" required/>
+                    <label for="telefone1">Telefone</label>	
+                </div> 
+
+                <div class="input-field col s6 col m6">
+                    <select id="perfil" name="perfil"> 
+                        <option value="" disabled selected>Perfil</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Pesquisador</option>
+                        <option value="3">Usuário Comum</option>
+                    </select>
+                </div>
+
+                <div class="input-field col s4 col m4 hide">
+                    <select id="status" name="status">
+                        <option value="2" selected>Inativo</option>
+                    </select>
+                </div>
+
+          		<div class="input-field col s6 col m6">
+                      <input type="radio" name="radioBtn" ng-model="sexo" name="feminino" id="feminino1" value="f"/>
+          			    <label for="feminino1">Feminino</label>
+                      <input type="radio" name="radioBtn" ng-model="sexo" name="masculino" id="masculino1" value="m"/>
+          			  <label for="masculino1">Masculino</label>
+          	    </div>
+                  
+                <div class="input-field col s12 col m12">
+                    <input type="text" class="validate" name="login" id="login" ng-model="login" required minlength="6"/>
+                    <label for="login">Login</label>
+                </div> 
+
+                <div class="input-field col s6 col m6">
+                    <input type="password"  class="validate" name="senha" id="senha" ng-model="senha" minlength="6"/>
+                    <label for="senha">Senha</label>	
+                </div>
+
+                <div class="input-field col s6 col m6">
+                    <input type="password"  class="validate" name="confirmaSenha" id="confirmaSenha" ng-model="confirmaSenha" minlength="6"/>
+                    <label for="confirmaSenha">Confirma senha</label>	
+                </div>
+
+                <div class="input-field col s12 col m12">
+                        <a href="#" class="btn waves-effect waves-light" ng-click="inserirUsuario()">Salvar<i class="material-icons right">send</i></a>  
+                        <a href="#registrar"  class="btn waves-effect waves-light" >Limpar <i class="material-icons right">delete</i></a>  
+                </div> 
+
+          </div>
+        </form>
+                
+
+      <script>
+     $(document).ready(function(){
+       $('select').material_select();
+        $('.modal').modal();
+    });
+    </script>
+ 
