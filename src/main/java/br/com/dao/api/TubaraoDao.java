@@ -7,7 +7,7 @@ import br.com.persist.api.JPAUtil;
 
 public class TubaraoDao {
 
-	 private EntityManager em = new JPAUtil().getEntityManager();
+	 private EntityManager em = JPAUtil.getEntityManager();
 
 	  public void gravarTubarao(Tubarao tubarao) {
 	        this.em.getTransaction().begin();

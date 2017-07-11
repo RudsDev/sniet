@@ -9,7 +9,7 @@ import br.com.model.api.Dorso;
 import br.com.persist.api.JPAUtil;
 
 public class DorsoDao {
-    private EntityManager em = new JPAUtil().getEntityManager();
+    private EntityManager em = JPAUtil.getEntityManager();
 
     public void gravarDorso(Dorso dorso) {
         this.em.getTransaction().begin();

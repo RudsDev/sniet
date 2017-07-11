@@ -7,7 +7,7 @@ import br.com.persist.api.JPAUtil;
 
 public class AtaqueDao {
 	
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 
 	public void gravar(Ataque ataque){
 		em.getTransaction().begin();

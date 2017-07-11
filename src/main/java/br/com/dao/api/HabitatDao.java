@@ -9,7 +9,7 @@ import br.com.model.api.Habitat;
 import br.com.persist.api.JPAUtil;
 
 public class HabitatDao {
-    private EntityManager em = new JPAUtil().getEntityManager();
+    private EntityManager em = JPAUtil.getEntityManager();
 
     public void gravarHabitat(Habitat habitat) {
         this.em.getTransaction().begin();

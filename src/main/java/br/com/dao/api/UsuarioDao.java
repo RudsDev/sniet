@@ -20,7 +20,7 @@ import br.com.persist.api.JPAUtil;
 public class UsuarioDao {
 
 
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 
 	//CREATE
 

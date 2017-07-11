@@ -8,7 +8,7 @@ import br.com.persist.api.JPAUtil;
 
 public class IndividuoDao {
 	
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 	
 	public Individuo gravar(Individuo individuo){
 		em.getTransaction().begin();

@@ -8,7 +8,7 @@ import br.com.persist.api.JPAUtil;
 public class PraticaDao {
 
 	
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 	
 	public void gravar(Pratica pratica){
 		em.getTransaction().begin();

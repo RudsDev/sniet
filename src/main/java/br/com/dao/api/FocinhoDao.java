@@ -10,7 +10,7 @@ import br.com.persist.api.JPAUtil;
 
 public class FocinhoDao {
 	
-    private EntityManager em = new JPAUtil().getEntityManager();
+    private EntityManager em = JPAUtil.getEntityManager();
 
     public void gravarFocinho(Focinho focinho) {
         this.em.getTransaction().begin();

@@ -7,7 +7,7 @@ import br.com.persist.api.JPAUtil;
 
 public class FonteDao {
 	
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 
 	public void gravar(Fonte fonte){
 		em.getTransaction().begin();

@@ -10,7 +10,7 @@ import br.com.persist.api.JPAUtil;
 
 public class VentreDao {
 
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 
 	public void gravarVentre(Ventre ventre) {
 		this.em.getTransaction().begin();

@@ -8,7 +8,7 @@ import br.com.model.api.Especie;
 import br.com.persist.api.JPAUtil;
 
 public class EspecieDao {
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 
 	public void gravarEspecie(Especie especie) {
 		this.em.getTransaction().begin();

@@ -9,7 +9,7 @@ import br.com.persist.api.JPAUtil;
 
 public class LocalDao {
 	
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 	
 	@SuppressWarnings("unchecked")
 	public List<Local> getLocalByName(String nomeLocal){

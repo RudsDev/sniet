@@ -11,7 +11,7 @@ import br.com.persist.api.JPAUtil;
 
 public class IncidenteDao {
 
-	private EntityManager em = new JPAUtil().getEntityManager();
+	private EntityManager em = JPAUtil.getEntityManager();
 	
 	public Incidente gravar(Incidente incidente){
 
