@@ -95,42 +95,6 @@ public class UsuarioResource {
 		    return Response.status(401).build();
 		}
 	}
-
-	
-	
-	@ApiOperation(
-			value="Apaga um usuário do sistema a partir de seu id.",
-			consumes = MediaType.TEXT_PLAIN
-	)
-	@ApiResponses(
-		@ApiResponse(
-			code=200,
-			message="Usuário apagado do sistema.",
-			response = Usuario.class
-		)
-	)
-	@Path("{id}")
-	@DELETE
-	@Consumes(MediaType.TEXT_PLAIN)
-	public Response deleteById(
-			@PathParam(value="id")
-			int id,
-			@Context UriInfo uriInfo, @Context HttpHeaders headers){
-		
-		Integer acessLevel = 1;
-		
-		String token = headers.getHeaderString("Authorization");
-		
-		try {
-			MyTokenGen.verifyTokenAcess(token, acessLevel);	
-			this.userService.deleteById(id);
-		    return Response.ok().build();
-		}
-		catch (UnauthorizedAcessException e) {
-			e.printStackTrace();
-			return Response.status(401).build();
-		}
-	}
 	
 	
 	@ApiOperation(
@@ -161,7 +125,7 @@ public class UsuarioResource {
 		
 		try {
 			MyTokenGen.verifyTokenAcess(token, acessLevel);
-			userService.deleteByObj((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));	
+			userService.delete((Usuario) Util.jsonToObject(usuarioJson, Usuario.class));	
 		    return Response.ok().build();
 		}
 		catch (UnauthorizedAcessException e) {
@@ -267,50 +231,6 @@ public class UsuarioResource {
 		            .build();
 		}
 	}
-	
-
-	@ApiOperation(
-			value="Busca um usuario pelo seu login.",
-			consumes = MediaType.TEXT_PLAIN,
-			produces = MediaType.APPLICATION_JSON
-	)
-	@ApiResponses(
-		@ApiResponse(
-			code=200,
-			message="Usuario localizado.",
-			response = Usuario.class
-		)
-	)
-	@Path("{login}")
-	@GET
-	@Consumes(MediaType.TEXT_PLAIN)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response buscaPorLogin(
-			@PathParam(value="login")
-			String login,
-			@Context UriInfo uriInfo, @Context HttpHeaders headers){
-		
-		Integer acessLevel = 1;
-		
-		String token = headers.getHeaderString("Authorization");
-		
-		try {
-			MyTokenGen.verifyTokenAcess(token, acessLevel);
-			List<Usuario> users = this.userService.searchByLogin(login);
-			List<String> usersJson = new ArrayList<>();
-			
-			for(int i=0; i<users.size();i++){
-				usersJson.add(Util.objectToJson(users.get(i)));
-			}
-
-			return Response.ok(usersJson.toString(), MediaType.APPLICATION_JSON).build();
-		} 
-		catch (UnauthorizedAcessException e) {
-			e.printStackTrace();
-			return Response.status(401).build();
-		}
-	}
-	
 	
 	
 	@ApiOperation(

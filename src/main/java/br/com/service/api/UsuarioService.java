@@ -26,16 +26,8 @@ public class UsuarioService {
 		return this.dao.atualizar(usuario);
 	}
 	
-	public void deleteById (Integer id){
-		this.dao.apagarUsuarioPorId(id);
-	}
-	
-	public void deleteByObj (Usuario usuario){
-		this.dao.apagarUsuarioPorObjeto(usuario);
-	}
-	
-	public  List<Usuario> searchByLogin(String login){
-		return this.dao.getUsuarioByLogin(login);
+	public void delete (Usuario usuario){
+		this.dao.deletar(usuario);
 	}
 	
 	public Integer quantidadeStatus(String status){
