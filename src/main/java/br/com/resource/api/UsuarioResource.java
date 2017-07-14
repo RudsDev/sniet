@@ -310,6 +310,8 @@ public class UsuarioResource {
 				@Context HttpServletResponse servletResponse){
 
 			Usuario userLogado = userService.logar(loginJson);
+			
+			System.out.println(userLogado);
 
 			if(userLogado!=null){
 				
