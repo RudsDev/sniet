@@ -20,12 +20,10 @@ public class MyApplication extends Application {
 	public MyApplication() {
 		BeanConfig config = new BeanConfig();
 		
-		config.setTitle("SNIET API - Usuários");
-		config.setDescription("Protótipo para a persistência"
-				+ " de usuários"
-				+ " no padrão SNIET.");
-		config.setVersion("1.0.1");
-		config.setHost("http://52.14.130.196");
+		config.setTitle("SNIET API - Usuarios");
+		config.setDescription("Prototipo SNIET.");
+		config.setVersion("1.2.1");
+		config.setHost("http://191.252.101.19");
 		config.setBasePath("/sniet_api/servlet");
 		config.setSchemes(new String[]{"http"});
 		config.setResourcePackage("br.com.resource.api");
