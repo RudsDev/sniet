@@ -14,6 +14,9 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import br.com.adpters.api.UsuarioTypeAdpater;
+import br.com.model.api.Usuario;
+
 public class Util {
 	
 	private static final JsonParser parser = new JsonParser();
@@ -34,7 +37,9 @@ public class Util {
 	};
 	
 	private static Gson gson = new GsonBuilder().registerTypeAdapter(Date.class, ser).
-			registerTypeAdapter(Date.class, deser).create();
+			registerTypeAdapter(Date.class, deser).
+			registerTypeAdapter(Usuario.class, new UsuarioTypeAdpater()).
+			create();
 	
 	
 	
