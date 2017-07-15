@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,38 +52,38 @@ public class Especie {
 	private String extincao;
 	
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Nome> nomes;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "codhabitat")
 	private Habitat habitat;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "codreprod")
 	private Reproducao reproducao;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "codfocinho")
 	private Focinho focinho;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "idfamilia")
 	private Familia familia;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "coddorso")
 	private Dorso dorso;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "codventre")
 	private Ventre ventre;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "coddenticao")
 	private Denticao denticao;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "codbarbatana")
 	private Barbatana Barbatana;
 
@@ -243,13 +242,4 @@ public class Especie {
 
 	public void setFotoPadrao(String fotoPadrao) {
 		this.fotoPadrao = fotoPadrao;
-	}
-	
-	public void exibir(){
-		System.out.println("Objeto: " +  this);
-		System.out.println("ID: " +  this.getIdEspecie());
-		System.out.println("Nome: " +  this.getNomeCientifico());
-		System.out.println("Tamanho Medio: " +  this.getTamMedio());
-		System.out.println("Descricao: " +  this.getDescricao());
-	}
-}
+	}}

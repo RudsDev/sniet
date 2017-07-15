@@ -34,7 +34,7 @@ public class Incidente {
 	private Date dataIncidente;
 	
 	@JsonIgnore
-	@OneToOne(fetch = FetchType.EAGER,cascade=CascadeType.ALL)
+	@OneToOne(fetch = FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="IdTubarao")
 	private Tubarao tubarao;
 	
