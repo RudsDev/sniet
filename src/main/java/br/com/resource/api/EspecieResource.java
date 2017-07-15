@@ -81,8 +81,6 @@ public class EspecieResource {
 		
 		Especie especie = this.service.searchByID(id);
 		
-		especie.exibir();
-		
 		String especieJson = Util.objectToJson(especie);
 
 		return Response.ok(especieJson.toString(), MediaType.APPLICATION_JSON).build();
