@@ -11,22 +11,15 @@ public class IndividuoDao {
 	private EntityManager em = JPAUtil.getEntityManager();
 	
 	public Individuo gravar(Individuo individuo){
-		em.getTransaction().begin();
 		Individuo individuoManaged = em.merge(individuo);
-		em.getTransaction().commit();
-		em.close();
 		return individuoManaged;
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Individuo> buscarTodosIndividuos(){
-
 		List<Individuo>listaDeIndividuos;
-		em.getTransaction().begin();
 		Query query = em.createQuery("select i from Individuo i");
 		listaDeIndividuos =  query.getResultList();
-		em.close();
 		return listaDeIndividuos;
 	}	
-	
 }

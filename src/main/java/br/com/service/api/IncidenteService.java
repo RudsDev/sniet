@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 import br.com.dao.api.IncidenteDao;
 import br.com.model.api.Incidente;
 import br.com.model.api.Individuo;
+import br.com.persist.api.JPAUtil;
 import br.com.util.api.Util;
 
 
@@ -24,7 +25,20 @@ public class IncidenteService {
 		this.individuoService = new IndividuoService();
 	}
 	
-	public  Individuo save(Incidente incidente, Individuo individuo){
+	/*public  Individuo save(Incidente incidente, Individuo individuo){
+		
+		try {
+			JPAUtil.beginTransaction();
+			
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
 		
 		incidente.exibir();
 		incidente.getLocal().exibir();
@@ -35,15 +49,69 @@ public class IncidenteService {
 		saved.exibir();
 		
 		return saved;
+	}*/
+
+	public  Individuo save(Incidente incidente, Individuo individuo){
+		
+		//TODO Refatorar usando lado forte e fraco.
+		
+		Individuo saved = null;
+		individuo.setIncidente(incidente);
+		
+		try {
+			JPAUtil.beginTransaction();
+			saved = this.individuoService.gravar(individuo);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
+		return saved;
 	}
 	
 	public  Incidente searchByID(Integer id){
-		return this.dao.getIncidenteById(id);
+
+		Incidente incidente = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			incidente = this.dao.getIncidenteById(id);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return incidente;
 	}
 	
 	
 	public List<Incidente> searchByLocalNameIncidente(String nomeLocal){
-		return this.dao.getIncidenteByNomeLocal(nomeLocal);
+		
+		List<Incidente> incidentes = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			incidentes = this.dao.getIncidenteByNomeLocal(nomeLocal);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
+		
+		return incidentes;
 	}
 	
 	
@@ -51,16 +119,83 @@ public class IncidenteService {
 		//TODO converter para o formato correto de Date aqui
 		//return this.dao.getByPeriodo(dataInicial, dataFinal);
 		
+		try {
+			JPAUtil.beginTransaction();
+			
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
+		
 		return null;
 	}
 	
 	public List<Incidente> getAllIncidentes(){
-		return this.dao.buscarTodosInicidentes();
+		
+		List<Incidente> incidentes = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			incidentes = this.dao.buscarTodosInicidentes();
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
+		
+		return incidentes;
 	}
 	
 	public List<Individuo> getAllIncidentesFull(){
-		return this.individuoService.getAllIndividuos();
+		
+		List<Individuo> individuos = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			individuos = this.individuoService.getAllIndividuos();
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
+		
+		return individuos;
 	}
+
+	
+	public Incidente update(Incidente incidente) {
+	
+		Incidente incidenteUpdate = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			incidenteUpdate = this.dao.atualizar(incidente);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}		
+		
+		return incidenteUpdate;
+	}
+
 	
 	public Incidente convertToIncidenteObject(String incidenteWrapperJson){
 		
@@ -91,10 +226,6 @@ public class IncidenteService {
 			e.printStackTrace();
 		}
 		return null;
-	}
-
-	public Incidente update(Incidente incidente) {
-		return this.dao.atualizar(incidente);
 	}
 	
 }

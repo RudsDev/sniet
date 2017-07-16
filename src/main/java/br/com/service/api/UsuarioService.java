@@ -5,53 +5,142 @@ import javax.persistence.NoResultException;
 import com.google.gson.JsonObject;
 import br.com.dao.api.UsuarioDao;
 import br.com.model.api.Usuario;
+import br.com.persist.api.JPAUtil;
 import br.com.util.api.Util;
 
 public class UsuarioService {
 	
-	
 	private UsuarioDao dao;
-	
 	
 	public UsuarioService(){
 		this.dao = new UsuarioDao();
 	}
 	
 	public Usuario save(Usuario usuario){
-		//Tratar exceptions
-		return this.dao.gravar(usuario);
+		
+		Usuario usuarioSave = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			usuarioSave = this.dao.gravar(usuario);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return usuarioSave;
 	}
+	
 	
 	public Usuario update (Usuario usuario){
-		return this.dao.atualizar(usuario);
+		
+		Usuario usuarioUpdate = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			usuarioUpdate = this.dao.atualizar(usuario);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return usuarioUpdate;
 	}
+	
 	
 	public void delete (Usuario usuario){
-		this.dao.deletar(usuario);
+	
+		try {
+			JPAUtil.beginTransaction();
+			this.dao.deletar(usuario);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
 	}
+	
 	
 	public Integer quantidadeStatus(String status){
-		return (Integer) this.dao.getQuantByStatus(status);
+		
+		Integer quant = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			quant = this.dao.getQuantByStatus(status);
+			JPAUtil.commitTransaction();
+			return quant;
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return quant; 
 	}
 
+	
 	public List<Usuario> getAllUsers() {
-		return this.dao.buscarTodosUsuario();
+		
+		List<Usuario> usuarios = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			usuarios = this.dao.buscarTodosUsuario();
+			JPAUtil.commitTransaction();
+			return usuarios;
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return usuarios;
 	}
 	
 	
-	@SuppressWarnings("finally")
 	public Usuario logar(String loginJson){
 		
 		Usuario usuario = null;
 		
 		try {
+			JPAUtil.beginTransaction();
 			usuario = this.dao.logar(this.convertToUsuarioLoginObject(loginJson));
-		} catch (NoResultException e) {
-			System.out.println("Login ou senha inválidos.");
-		}
-		finally {
+			JPAUtil.commitTransaction();
 			return usuario;
 		}
+		catch(NoResultException e) {
+			System.out.println("Login ou senha inválidos.");
+		}
+		catch(Exception e) {
+			System.out.println("Erro na infraestrutura.");
+			JPAUtil.rollbackTransaction();
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return usuario;
 	}
 	
 	
