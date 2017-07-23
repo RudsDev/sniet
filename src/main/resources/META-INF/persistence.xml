@@ -35,7 +35,7 @@
 	
 		<persistence-unit name="aws-docker" transaction-type="RESOURCE_LOCAL">
 
-		<class>br.com.model.api.Usuario</class>
+		<class>br.com.api.model.Usuario</class>
 
 		<properties>
 
