@@ -43,9 +43,9 @@ public class UsuarioService {
 		Usuario usuarioUpdate = null;
 		
 		try {
-			JPAUtil.beginTransaction();
+			/*JPAUtil.beginTransaction();
 			usuarioUpdate = this.dao.atualizar(usuario);
-			JPAUtil.commitTransaction();
+			JPAUtil.commitTransaction();*/
 		}
 		catch(Exception ex) {
 			// TODO criar uma exception apropriada
