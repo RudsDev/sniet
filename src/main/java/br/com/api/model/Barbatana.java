@@ -17,18 +17,18 @@ public class Barbatana {
 	@SequenceGenerator(name = "seq_barbatana", sequenceName = "seq_barbatana", initialValue = 1, allocationSize = 1)
 
 	@Column(name = "codbarbatana")
-	private Integer codBarbatana;
+	private Integer idBarbatana;
 	
 	@Column(name = "desccorbarbatana", length=50)
 	private String descCorBarbatana;
 
 	
-	public Integer getCodBarbatana() {
-		return codBarbatana;
+	public Integer getIdBarbatana() {
+		return idBarbatana;
 	}
 
-	public void setCodBarbatana(Integer codBarbatana) {
-		this.codBarbatana = codBarbatana;
+	public void setIdBarbatana(Integer idBarbatana) {
+		this.idBarbatana = idBarbatana;
 	}
 
 	public String getDescCorBarbatana() {

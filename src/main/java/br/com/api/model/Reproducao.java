@@ -19,8 +19,8 @@ public class Reproducao {
 		    sequenceName="seq_reproducao",
 		    initialValue=1,
 		    allocationSize=1)
-	@Column(name="CodReprod")
-	private Integer codReproducao;
+	@Column(name="codreprod")
+	private Integer idReproducao;
 	
 	@Column(name="TipoReprod", length=20)
 	private String tipoReproducao;
@@ -33,15 +33,15 @@ public class Reproducao {
 	
 	@Override
 	public String toString() {
-		return "Reproducao [codReproducao=" + codReproducao + ", tipoReproducao=" + tipoReproducao + "]";
+		return "Reproducao [idReproducao=" + idReproducao + ", tipoReproducao=" + tipoReproducao + "]";
 	}
 
 
-	public Integer getCodReproducao() {
-		return codReproducao;
+	public Integer getIdReproducao() {
+		return idReproducao;
 	}
-	public void setCodReproducao(Integer codReproducao) {
-		this.codReproducao = codReproducao;
+	public void setIdReproducao(Integer idReproducao) {
+		this.idReproducao = idReproducao;
 	}
 	public String getTipoReproducao() {
 		return tipoReproducao;

@@ -20,7 +20,7 @@ public class Habitat {
 		    initialValue=1,
 		    allocationSize=1)
 	@Column(name="CodHabitat")
-	private Integer codHabitat;
+	private Integer idHabitat;
 	
 	@Column(name="DescHabitat", length=50)
 	private String descHabitat;
@@ -32,15 +32,15 @@ public class Habitat {
 	
 	@Override
 	public String toString() {
-		return "Habitat [codHabitat=" + codHabitat + ", descHabitat=" + descHabitat + "]";
+		return "Habitat [idHabitat=" + idHabitat + ", descHabitat=" + descHabitat + "]";
 	}
 
 
-	public Integer getCodHabitat() {
-		return codHabitat;
+	public Integer getIdHabitat() {
+		return idHabitat;
 	}
-	public void setCodHabitat(Integer codHabitat) {
-		this.codHabitat = codHabitat;
+	public void setIdHabitat(Integer idHabitat) {
+		this.idHabitat = idHabitat;
 	}
 	public String getDescHabitat() {
 		return descHabitat;

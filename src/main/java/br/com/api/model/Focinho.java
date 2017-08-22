@@ -20,7 +20,7 @@ public class Focinho {
 		    initialValue=1,
 		    allocationSize=1)
 	@Column(name="CodFocinho")
-	private Integer codFocinho;
+	private Integer idFocinho;
 	
 	@Column(name="TipoFocinho", length=30)
 	private String tipoFocinho;
@@ -35,15 +35,15 @@ public class Focinho {
 	
 	@Override
 	public String toString() {
-		return "Focinho [codFocinho=" + codFocinho + ", tipoFocinho=" + tipoFocinho + ", descFocinho=" + descFocinho
+		return "Focinho [idFocinho=" + idFocinho + ", tipoFocinho=" + tipoFocinho + ", descFocinho=" + descFocinho
 				+ "]";
 	}
 
-	public Integer getCodFocinho() {
-		return codFocinho;
+	public Integer getIdFocinho() {
+		return idFocinho;
 	}
-	public void setCodFocinho(Integer codFocinho) {
-		this.codFocinho = codFocinho;
+	public void setIdFocinho(Integer idFocinho) {
+		this.idFocinho = idFocinho;
 	}
 	public String getTipoFocinho() {
 		return tipoFocinho;

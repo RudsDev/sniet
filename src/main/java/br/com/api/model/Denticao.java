@@ -17,18 +17,18 @@ public class Denticao {
 	@SequenceGenerator(name = "seq_denticao", sequenceName = "seq_denticao", initialValue = 1, allocationSize = 1)
 
 	@Column(name = "coddenticao")
-	private Integer codDenticao;
+	private Integer idDenticao;
 	
 	@Column(name = "caracdenticao", length=80)
 	private String caracDenticao;
 	
 
-	public Integer getCodDenticao() {
-		return codDenticao;
+	public Integer getIdDenticao() {
+		return idDenticao;
 	}
 
-	public void setCodDenticao(Integer codDenticao) {
-		this.codDenticao = codDenticao;
+	public void setIdDenticao(Integer idDenticao) {
+		this.idDenticao = idDenticao;
 	}
 
 	public String getCaracDenticao() {

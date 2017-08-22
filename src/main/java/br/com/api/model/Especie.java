@@ -49,7 +49,7 @@ public class Especie {
 	private Double tamMedioFilhote;
 	
 	@Column (name = "statusextincao", length=1)
-	private String extincao;
+	private char extincao;
 	
 	
 	@OneToMany(cascade=CascadeType.ALL)
@@ -156,11 +156,11 @@ public class Especie {
 		this.tamMedioFilhote = tamMedioFilhote;
 	}
 
-	public String getExtincao() {
+	public char getExtincao() {
 		return extincao;
 	}
 
-	public void setExtincao(String extincao) {
+	public void setExtincao(char extincao) {
 		this.extincao = extincao;
 	}
 
@@ -243,3 +243,5 @@ public class Especie {
 	public void setFotoPadrao(String fotoPadrao) {
 		this.fotoPadrao = fotoPadrao;
 	}}
+
+	

@@ -16,7 +16,7 @@ public class Dorso {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_dorso")
 	@SequenceGenerator(name = "seq_dorso", sequenceName = "seq_dorso", initialValue = 1, allocationSize = 1)
 	@Column(name = "coddorso")
-	private Integer codDorso;
+	private Integer idDorso;
 	
 	@Column(name = "desccordorso", length=50)
 	private String descCorDorso;
@@ -27,15 +27,15 @@ public class Dorso {
 
 	@Override
 	public String toString() {
-		return "Dorso [codDorso=" + codDorso + ", descCorDorso=" + descCorDorso + "]";
+		return "Dorso [codDorso=" + idDorso + ", descCorDorso=" + descCorDorso + "]";
 	}
 
-	public Integer getCodDorso() {
-		return codDorso;
+	public Integer getIdDorso() {
+		return idDorso;
 	}
 
-	public void setCodDorso(Integer codDorso) {
-		this.codDorso = codDorso;
+	public void setIdDorso(Integer idDorso) {
+		this.idDorso = idDorso;
 	}
 
 	public String getDescCorDorso() {
