@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.com.api.dao.EspecieDao;
 import br.com.api.model.Especie;
+import br.com.api.persist.JPAUtil;
 
 public class EspecieService {
 	
@@ -24,6 +25,26 @@ public class EspecieService {
 	
 	public List<Especie> getAllEspecies(){
 		return this.dao.buscarTodasAsEspecies();
+	}
+
+	public Especie save(Especie especie) {
+		
+		Especie especieSave = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			especieSave = this.dao.gravar(especie);
+			JPAUtil.commitTransaction();
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();			
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return especieSave;
 	}
 	
 }
