@@ -11,11 +11,9 @@ import br.com.api.persist.JPAUtil;
 public class EspecieDao {
 	private EntityManager em = JPAUtil.getEntityManager();
 
-	public void gravarEspecie(Especie especie) {
-		this.em.getTransaction().begin();
-		this.em.merge(especie);
-		this.em.getTransaction().commit();
-		this.em.close();
+	public Especie gravar(Especie especie) {
+		Especie especieManaged = em.merge(especie);
+		return especieManaged;
 	}
 
 	@SuppressWarnings("unchecked")
