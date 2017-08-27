@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.api.model.Reproducao;
 import br.com.api.persist.JPAUtil;
 
-public class ReproducaoDao {
+public class ReproducaoDao implements DaoInterface {
 	
 	 private EntityManager em = JPAUtil.getEntityManager();
 
@@ -27,7 +27,7 @@ public class ReproducaoDao {
 	        return reproducao;
 	  }
 	
-	  @SuppressWarnings("unchecked")
+	 @SuppressWarnings("unchecked")
 	public List<Reproducao> buscarTodasReproducoes(){
 			
 			List<Reproducao>listaDeReproducao;

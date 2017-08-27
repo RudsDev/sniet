@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.api.model.Denticao;
 import br.com.api.persist.JPAUtil;
 
-public class DenticaoDao {
+public class DenticaoDao  implements DaoInterface{
 	private EntityManager em = JPAUtil.getEntityManager();
 
 	public void gravarDenticao(Denticao denticao) {

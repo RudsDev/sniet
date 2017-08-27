@@ -8,6 +8,7 @@ import javax.ws.rs.core.Application;
 
 import br.com.api.resource.EspecieResource;
 import br.com.api.resource.IncidenteResource;
+import br.com.api.resource.Resource;
 import br.com.api.resource.UsuarioResource;
 import io.swagger.jaxrs.config.BeanConfig;
 import io.swagger.jaxrs.listing.ApiListingResource;
@@ -39,6 +40,7 @@ public class MyApplication extends Application {
 		classes.add(EspecieResource.class);
 		classes.add(IncidenteResource.class);
 		classes.add(UsuarioResource.class);
+		classes.add(Resource.class);
 		classes.add(CORSFilter.class);
 		classes.add(ApiListingResource.class);
 		classes.add(SwaggerSerializers.class);

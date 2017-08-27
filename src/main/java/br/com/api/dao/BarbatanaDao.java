@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.api.model.Barbatana;
 import br.com.api.persist.JPAUtil;
 
-public class BarbatanaDao {
+public class BarbatanaDao implements DaoInterface {
 
 	private EntityManager em = JPAUtil.getEntityManager();
 	

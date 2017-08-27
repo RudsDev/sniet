@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.api.model.Habitat;
 import br.com.api.persist.JPAUtil;
 
-public class HabitatDao {
+public class HabitatDao implements DaoInterface {
     private EntityManager em = JPAUtil.getEntityManager();
 
     public void gravarHabitat(Habitat habitat) {

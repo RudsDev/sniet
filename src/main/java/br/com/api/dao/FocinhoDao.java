@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.api.model.Focinho;
 import br.com.api.persist.JPAUtil;
 
-public class FocinhoDao {
+public class FocinhoDao implements DaoInterface {
 	
     private EntityManager em = JPAUtil.getEntityManager();
 
@@ -27,15 +27,17 @@ public class FocinhoDao {
         return focinho;
     }
     
-@SuppressWarnings("unchecked")
-public List<Focinho> buscarTodosOsFocinhos(){
-		
-		List<Focinho>listaDeFocinhos;
- 		em.getTransaction().begin();
- 		Query query = em.createQuery("select f from Focinho f");
- 		listaDeFocinhos =  query.getResultList();
-		em.close();
-		return listaDeFocinhos;
-		
-	}
+	@SuppressWarnings("unchecked")
+	public List<Focinho> buscarTodosOsFocinhos(){
+			
+			List<Focinho>listaDeFocinhos;
+	 		em.getTransaction().begin();
+	 		Query query = em.createQuery("select f from Focinho f");
+	 		listaDeFocinhos =  query.getResultList();
+			em.close();
+			return listaDeFocinhos;
+			
+		}
+	
+	
 }

@@ -8,7 +8,7 @@ import javax.persistence.Query;
 import br.com.api.model.Ventre;
 import br.com.api.persist.JPAUtil;
 
-public class VentreDao {
+public class VentreDao implements DaoInterface {
 
 	private EntityManager em = JPAUtil.getEntityManager();
 
