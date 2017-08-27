@@ -38,4 +38,9 @@ public class Barbatana {
 	public void setDescCorBarbatana(String descCorBarbatana) {
 		this.descCorBarbatana = descCorBarbatana;
 	}
+
+	@Override
+	public String toString() {
+		return "Barbatana [idBarbatana=" + idBarbatana + ", descCorBarbatana=" + descCorBarbatana + "]";
+	}
 }

@@ -38,4 +38,9 @@ public class Denticao {
 	public void setCaracDenticao(String caracDenticao) {
 		this.caracDenticao = caracDenticao;
 	}
+
+	@Override
+	public String toString() {
+		return "Denticao [idDenticao=" + idDenticao + ", caracDenticao=" + caracDenticao + "]";
+	}
 }
