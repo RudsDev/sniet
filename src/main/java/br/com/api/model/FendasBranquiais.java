@@ -16,7 +16,7 @@ public class FendasBranquiais {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_fendasbranquiais")
 	@SequenceGenerator(name = "seq_fendasbranquiais", sequenceName = "seq_fendasbranquiais", initialValue = 1, allocationSize = 1)
 
-	@Column(name = "IDFendasBranquiais")
+	@Column(name = "idfendabranquiais")
 	private Integer id;
 	
 	@Column(name = "QtdFendasBranquiais", length=15)
