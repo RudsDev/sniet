@@ -10,7 +10,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import br.com.api.util.GenerateClass;
+import br.com.api.service.Service;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -40,7 +40,7 @@ public class Resource implements GenericResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllByType(@PathParam(value="type")String type, @Context UriInfo uriInfo) {
 		
-		Response response  = this.getAll(GenerateClass.generateServiceClass(type), uriInfo);
+		Response response  = this.getAll(new Service(type), uriInfo);
 		
 		return response;
 	}

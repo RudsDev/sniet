@@ -12,8 +12,14 @@ public class Service implements GenericService {
 	public Service(){
 		
 	}
-	
+
 	public Service(Class<?> classType) {
+		this.dao = GenerateClass.generateDaoClass(classType.getSimpleName());
+		this.classType = classType;
+	}
+	
+	public Service(String simpleName) {
+		Class<?> classType = GenerateClass.generateModelClass(simpleName);
 		this.dao = GenerateClass.generateDaoClass(classType.getSimpleName());
 		this.classType = classType;
 	}
@@ -25,9 +31,7 @@ public class Service implements GenericService {
 			throw new NullPointerException("Objeto criado manualmente. Inicia suas"
 					+ " propriedades manualmente utilizando os respectivos métodos set().");
 		}
-		
 		return this.getAll(this.dao, this.classType);
-	
 	}
 
 	@Override

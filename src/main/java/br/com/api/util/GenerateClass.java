@@ -8,9 +8,8 @@ import br.com.api.service.GenericService;
 public abstract class GenerateClass {
 
 	private static final String servicesPath = "br.com.api.service.";
-	
 	private static final String daoPath = "br.com.api.dao.";
-	
+	private static final String modelsPath = "br.com.api.model.";
 	
 	//TODO Usar Enums para type
 	/*public static Object generateClass(String type, String simpleName){
@@ -125,6 +124,31 @@ public abstract class GenerateClass {
 			e.printStackTrace();
 		}
 		return dao;
+	}
+	
+	public static Class<?> generateModelClass(String simpleName){
+
+		Class<?> classe = null;
+		
+		try {
+			classe =  Class.forName(modelsPath+simpleName)
+					.getConstructor().newInstance().getClass();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return classe;
 	}
 	
 }
