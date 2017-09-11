@@ -63,7 +63,9 @@ local.properties
 
 ### Java ###
 #Project ignored files
-src/main/java/br/com/test/
+src/main/java/br/com/api/app/
+src/main/java/br/com/api/util/
+src/main/resources/
 WebContent
 
 # Compiled class file
