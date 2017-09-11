@@ -2,7 +2,7 @@ package br.com.api.service;
 
 import java.util.List;
 import br.com.api.dao.DaoInterface;
-import br.com.api.util.GenerateClass;
+import br.com.api.reflect.GenerateClass;
 
 public class Service implements GenericService {
 

@@ -18,9 +18,9 @@ import br.com.api.model.Focinho;
 import br.com.api.model.Habitat;
 import br.com.api.model.Reproducao;
 import br.com.api.model.Ventre;
+import br.com.api.reflect.GenerateClass;
 import br.com.api.service.GenericService;
 import br.com.api.service.Service;
-import br.com.api.util.GenerateClass;
 
 @WebListener
 public class LoadDataServlet implements ServletContextListener {
