@@ -55,6 +55,29 @@ public interface GenericService {
 		return list;
 	}
 	
+	public default List<?> getAllPaginate(DaoInterface dao,Class<?> classType,
+			int maxResults, int firstResults){
+		
+		List<?> list = null;
+		
+		try {
+			JPAUtil.beginTransaction();
+			list =  (List<?>) dao
+					.searchAllPaginate(JPAUtil.getEntityManager(), classType, maxResults, firstResults);
+			JPAUtil.commitTransaction();
+			return list;
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return list;
+	}
+	
 	public List<?> getAll();
 	
 	public default void setDao(DaoInterface dao){

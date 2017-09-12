@@ -28,5 +28,7 @@ public interface GenericResource {
 	
 	public Response getAll(@Context UriInfo uriInfo);
 	public Response getAllByType(@PathParam(value="type")String type, @Context UriInfo uriInfo);
+	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
+			int max,  int first );
 		
 }

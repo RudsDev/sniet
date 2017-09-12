@@ -18,4 +18,15 @@ public interface DaoInterface {
 		return query.getResultList();
 	};
 	
+	public default List<?> searchAllPaginate(EntityManager em, Class<?> classType,
+			int maxResults, int firsResults){
+		
+		Query query = em.createQuery("from "+classType.getName());
+		
+		query.setFirstResult(0);
+		query.setMaxResults(maxResults);
+		
+		return query.getResultList();
+	};
+	
 }

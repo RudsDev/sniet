@@ -44,6 +44,33 @@ public class Resource implements GenericResource{
 		
 		return response;
 	}
+	
+	@Override
+	@ApiOperation(
+			value="Retorna todos os elementos do Type informado presente na base de dados. "
+					+ "Com possibilidade de paginação",
+			produces = MediaType.APPLICATION_JSON
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Retornada listagem de elementos com possibilidade de paginação.",
+			response = Object.class
+		)
+	)
+	@Path("/{type}/{max}/{qtd}")
+	@GET
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
+			@PathParam(value = "int") int max, @PathParam(value = "int") int first) {
+		
+		System.out.println("PAGINAÇÃO!");
+		
+		Response response  = this.getAllByTypePaginate(type, uriInfo, max, first);
+		
+		return response;
+	}
 
 	@Override
 	public Response getAll(UriInfo uriInfo) {
