@@ -58,16 +58,14 @@ public class Resource implements GenericResource{
 			response = Object.class
 		)
 	)
-	@Path("/{type}/{max}/{qtd}")
+	@Path("/{type}/{maxResults}/{firstResults}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
-			@PathParam(value = "int") int max, @PathParam(value = "int") int first) {
+			@PathParam("maxResults") Integer maxResults, @PathParam("firstResults") Integer firstResults) {
 		
-		System.out.println("PAGINAÇÃO!");
-		
-		Response response  = this.getAllByTypePaginate(type, uriInfo, max, first);
+		Response response  = GenericResource.super.getAllByTypePaginate(type, uriInfo, maxResults, firstResults);
 		
 		return response;
 	}

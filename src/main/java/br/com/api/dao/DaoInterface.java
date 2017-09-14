@@ -9,7 +9,7 @@ public interface DaoInterface {
 	public default Object save(EntityManager em, Object object){
 		Object objectSaved = em.merge(object);
 		return objectSaved;
-	}
+	};
 	
 	public default List<?> searchAll(EntityManager em, Class<?> classType){
 		
@@ -19,11 +19,11 @@ public interface DaoInterface {
 	};
 	
 	public default List<?> searchAllPaginate(EntityManager em, Class<?> classType,
-			int maxResults, int firsResults){
+			int maxResults, int firstResults){
 		
 		Query query = em.createQuery("from "+classType.getName());
 		
-		query.setFirstResult(0);
+		query.setFirstResult(firstResults * maxResults);
 		query.setMaxResults(maxResults);
 		
 		return query.getResultList();
