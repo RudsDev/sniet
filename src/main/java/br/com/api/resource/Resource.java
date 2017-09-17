@@ -68,17 +68,18 @@ public class Resource {
 			response = Object.class
 		)
 	)
-	@Path("/{type}/{max}/{qtd}")
+	@Path("/{type}/{maxResults}/{firstResults}")
 	@GET
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
-			@PathParam(value = "int") int max, @PathParam(value = "int") int first) {
+			@PathParam("maxResults") Integer maxResults, @PathParam("firstResults") Integer firstResults) {
 		
-		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(type), max, first);
+		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(type), maxResults, firstResults);
 		List<String> listJson = new ArrayList<>();
 		
 		System.out.println(listObjs);
+
 		
 		for(int i=0; i<listObjs.size();i++){
 			listJson.add(Util.objectToJson(listObjs.get(i)));

@@ -1,16 +1,26 @@
 package br.com.api.service;
 
 import java.util.List;
-
 import javax.el.MethodNotFoundException;
-
 import br.com.api.dao.DaoInterface;
 import br.com.api.dao.GenericDao;
+<<<<<<< HEAD
+=======
+import br.com.api.model.Usuario;
+>>>>>>> a1cd112e7197eeabcd872a624681e83fc77e1aee
 import br.com.api.persist.JPAUtil;
+import br.com.api.reflect.GenerateClass;
 
 public class GenericService {
 	
+<<<<<<< HEAD
 	private static final DaoInterface dao = new GenericDao();
+=======
+	public static GenericService getService(String type){
+		return GenerateClass.generateServiceClass(type);
+	}
+	
+>>>>>>> a1cd112e7197eeabcd872a624681e83fc77e1aee
 	
 	public Object save(Object object){
 		
@@ -56,9 +66,15 @@ public class GenericService {
 		return list;
 	}
 	
+<<<<<<< HEAD
 	public List<?> getAllPaginate(Class<?> classType,
+=======
+	public default List<?> getAllPaginate(String type,
+>>>>>>> a1cd112e7197eeabcd872a624681e83fc77e1aee
 			int maxResults, int firstResults){
 		
+		DaoInterface dao = new GenericDao();
+		Class<?> classType = GenerateClass.generateModelClass(type);
 		List<?> list = null;
 		
 		try {
