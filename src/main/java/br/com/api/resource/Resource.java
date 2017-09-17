@@ -1,6 +1,7 @@
 package br.com.api.resource;
 
-import javax.el.MethodNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -10,7 +11,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
-import br.com.api.service.Service;
+import br.com.api.reflect.GenerateClass;
+import br.com.api.service.GenericService;
+import br.com.api.util.Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,11 +21,12 @@ import io.swagger.annotations.ApiResponses;
 
 @Api
 @Path("/resource")
-public class Resource implements GenericResource{
+public class Resource {
+	
+	private static final GenericService service = new GenericService();
 	
 	public Resource(){}
 	
-	@Override
 	@ApiOperation(
 			value="Retorna todos os elementos do Type informado presente na base de dados.",
 			produces = MediaType.APPLICATION_JSON
@@ -40,12 +44,18 @@ public class Resource implements GenericResource{
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllByType(@PathParam(value="type")String type, @Context UriInfo uriInfo) {
 		
-		Response response  = this.getAll(new Service(type), uriInfo);
+		List<?> listObjs = service.getAll(null);
+		List<String> listJson = new ArrayList<>();
 		
-		return response;
+		System.out.println(listObjs);
+		
+		for(int i=0; i<listObjs.size();i++){
+			listJson.add(Util.objectToJson(listObjs.get(i)));
+		}
+		return Response.ok(listJson.toString(), MediaType.APPLICATION_JSON).build();
 	}
 	
-	@Override
+	
 	@ApiOperation(
 			value="Retorna todos os elementos do Type informado presente na base de dados. "
 					+ "Com possibilidade de paginação",
@@ -65,17 +75,37 @@ public class Resource implements GenericResource{
 	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
 			@PathParam(value = "int") int max, @PathParam(value = "int") int first) {
 		
-		System.out.println("PAGINAÇÃO!");
+		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(type), max, first);
+		List<String> listJson = new ArrayList<>();
 		
-		Response response  = this.getAllByTypePaginate(type, uriInfo, max, first);
+		System.out.println(listObjs);
 		
-		return response;
+		for(int i=0; i<listObjs.size();i++){
+			listJson.add(Util.objectToJson(listObjs.get(i)));
+		}
+		
+		return Response.ok(listJson.toString(), MediaType.APPLICATION_JSON).build();
+	}
+	
+	
+	@ApiOperation(
+			value="Retorna a quantidade de registros existentes do elemento solicitado.",
+			produces = MediaType.TEXT_PLAIN
+	)
+	@ApiResponses(
+		@ApiResponse(
+			code=200,
+			message="Retornada a quantidade de registros existentes do elemento solicitado.",
+			response = Object.class
+		)
+	)
+	@Path("/qtd/{type}")
+	@GET
+	@Consumes(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.TEXT_PLAIN)
+	public Response qtdElements(@PathParam(value="type")String type, @Context UriInfo uriInfo) {
+		Integer qtd = service.count(GenerateClass.generateModelClass(type));
+		return Response.ok(qtd.toString(), MediaType.TEXT_PLAIN).build();		
 	}
 
-	@Override
-	public Response getAll(UriInfo uriInfo) {
-		throw new MethodNotFoundException("Método não implementado!");
-	}
-	
-	
 }

@@ -29,4 +29,11 @@ public interface DaoInterface {
 		return query.getResultList();
 	};
 	
+	public default Integer count(EntityManager em, Class<?> classType){
+		Query query = em.createQuery("select count(*) from "+classType.getName());
+		return Integer.parseInt(query.getSingleResult().toString());
+	};
+	
+	
+	
 }

@@ -5,19 +5,20 @@ import java.util.List;
 import javax.el.MethodNotFoundException;
 
 import br.com.api.dao.DaoInterface;
-import br.com.api.model.Usuario;
+import br.com.api.dao.GenericDao;
 import br.com.api.persist.JPAUtil;
 
-public interface GenericService {
+public class GenericService {
 	
+	private static final DaoInterface dao = new GenericDao();
 	
-	public default Object save(DaoInterface dao,Object object){
+	public Object save(Object object){
 		
-		Usuario objectSave = null;
+		Object objectSave = null;
 		
 		try {
 			JPAUtil.beginTransaction();
-			objectSave = (Usuario) dao
+			objectSave = dao
 					.save(JPAUtil.getEntityManager(), object);
 			JPAUtil.commitTransaction();
 		}
@@ -33,7 +34,7 @@ public interface GenericService {
 	}
 	
 	
-	public default List<?> getAll(DaoInterface dao,Class<?> classType){
+	public List<?> getAll(Class<?> classType){
 		
 		List<?> list = null;
 		
@@ -55,7 +56,7 @@ public interface GenericService {
 		return list;
 	}
 	
-	public default List<?> getAllPaginate(DaoInterface dao,Class<?> classType,
+	public List<?> getAllPaginate(Class<?> classType,
 			int maxResults, int firstResults){
 		
 		List<?> list = null;
@@ -78,13 +79,27 @@ public interface GenericService {
 		return list;
 	}
 	
-	public List<?> getAll();
+	public Integer count(Class<?> classType){
+		
+		try {
+			JPAUtil.beginTransaction();
+			Integer qtd =  dao
+					.count(JPAUtil.getEntityManager(), classType);
+			JPAUtil.commitTransaction();
+			return qtd;
+		}
+		catch(Exception ex) {
+			// TODO criar uma exception apropriada
+			//JPAUtil_new.rollbackTransaction();
+		}
+		finally {
+			JPAUtil.closeEntityManager();
+		}
+		
+		return 0;
+	}
 	
-	public default void setDao(DaoInterface dao){
-		throw new MethodNotFoundException("Método não implementado!");
-	};
-	
-	public default void setClassType(Class<?> classType){
+	public void setClassType(Class<?> classType){
 		throw new MethodNotFoundException("Método não implementado!");
 	};
 	
