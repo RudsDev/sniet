@@ -44,7 +44,7 @@ public class Resource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllByType(@PathParam(value="type")String type, @Context UriInfo uriInfo) {
 		
-		List<?> listObjs = service.getAll(null);
+		List<?> listObjs = service.getAll(GenerateClass.generateModelClass(type));
 		List<String> listJson = new ArrayList<>();
 		
 		System.out.println(listObjs);
@@ -75,7 +75,7 @@ public class Resource {
 	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
 			@PathParam("maxResults") Integer maxResults, @PathParam("firstResults") Integer firstResults) {
 		
-		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(type), firstResults, firstResults);
+		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(type), maxResults, firstResults);
 		List<String> listJson = new ArrayList<>();
 		
 		System.out.println(listObjs);
