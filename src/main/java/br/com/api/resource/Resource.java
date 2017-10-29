@@ -11,6 +11,9 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+
+import org.apache.commons.lang3.text.WordUtils;
+
 import br.com.api.reflect.GenerateClass;
 import br.com.api.service.GenericService;
 import br.com.api.util.Util;
@@ -75,11 +78,8 @@ public class Resource {
 	public Response getAllByTypePaginate(@PathParam(value="type")String type, @Context UriInfo uriInfo,
 			@PathParam("maxResults") Integer maxResults, @PathParam("firstResults") Integer firstResults) {
 		
-		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(type), maxResults, firstResults);
+		List<?> listObjs = service.getAllPaginate(GenerateClass.generateModelClass(WordUtils.capitalize(type)), maxResults, firstResults);
 		List<String> listJson = new ArrayList<>();
-		
-		System.out.println(listObjs);
-
 		
 		for(int i=0; i<listObjs.size();i++){
 			listJson.add(Util.objectToJson(listObjs.get(i)));
@@ -105,7 +105,7 @@ public class Resource {
 	@Consumes(MediaType.TEXT_PLAIN)
 	@Produces(MediaType.TEXT_PLAIN)
 	public Response qtdElements(@PathParam(value="type")String type, @Context UriInfo uriInfo) {
-		Integer qtd = service.count(GenerateClass.generateModelClass(type));
+		Integer qtd = service.count(GenerateClass.generateModelClass(WordUtils.capitalize(type)));
 		return Response.ok(qtd.toString(), MediaType.TEXT_PLAIN).build();		
 	}
 
