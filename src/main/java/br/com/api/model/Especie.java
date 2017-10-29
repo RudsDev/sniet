@@ -85,7 +85,7 @@ public class Especie {
 
 	@ManyToOne
 	@JoinColumn(name = "codbarbatana")
-	private Barbatana Barbatana;
+	private Barbatana barbatana;
 
 	public Especie() {
 		
@@ -97,7 +97,7 @@ public class Especie {
 				+ ", fotoPadrao=" + ", tamMenor=" + tamMenor + ", tamMedio=" + tamMedio + ", tamMaior="
 				+ tamMaior + ", tamMedioFilhote=" + tamMedioFilhote + ", habitat=" + habitat + ", reproducao="
 				+ reproducao + ", focinho=" + focinho + ", familia=" + familia + ", dorso=" + dorso + ", ventre="
-				+ ventre + ", denticao=" + denticao + ", Barbatana=" + Barbatana + "]";
+				+ ventre + ", denticao=" + denticao + ", Barbatana=" + barbatana + "]";
 	}
 
 	public Integer getIdEspecie() {
@@ -221,11 +221,11 @@ public class Especie {
 	}
 
 	public Barbatana getBarbatana() {
-		return Barbatana;
+		return barbatana;
 	}
 
 	public void setBarbatana(Barbatana barbatana) {
-		Barbatana = barbatana;
+		this.barbatana = barbatana;
 	}
 
 	public List<Nome> getNomes() {
