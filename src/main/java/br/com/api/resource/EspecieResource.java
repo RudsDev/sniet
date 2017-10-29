@@ -73,11 +73,15 @@ public class EspecieResource {
 				
 				UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
 
-				Especie especieSaved = this.especieService.save((Especie) 
-						Util.jsonToObject(especieJson, Especie.class));
+				System.out.println(especieJson);
+				
+//				System.out.println(Util.jsonToObject(especieJson, Especie.class));
+				
+//				Especie especieSaved = this.especieService.save((Especie) 
+//						Util.jsonToObject(especieJson, Especie.class));
 				
 				//Coloca o ID do user recém salvo na resposta para o client (Location)
-				builder.path(Integer.toString(especieSaved.getIdEspecie()));
+//				builder.path(Integer.toString(especieSaved.getIdEspecie()));
 				
 			    return Response.created(builder.build()).status(201)
 			            .build();
