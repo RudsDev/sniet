@@ -14,8 +14,10 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import br.com.api.adpters.EspecieTypeAdpater;
 import br.com.api.adpters.InstituicaoTypeAdpater;
 import br.com.api.adpters.UsuarioTypeAdpater;
+import br.com.api.model.Especie;
 import br.com.api.model.Instituicao;
 import br.com.api.model.Usuario;
 
@@ -42,6 +44,7 @@ public class Util {
 			registerTypeAdapter(Date.class, deser).
 			registerTypeAdapter(Usuario.class, new UsuarioTypeAdpater()).
 			registerTypeAdapter(Instituicao.class, new InstituicaoTypeAdpater()).
+			registerTypeAdapter(Especie.class, new EspecieTypeAdpater()).
 			create();
 	
 	

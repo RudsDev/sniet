@@ -1,18 +1,19 @@
 package br.com.api.adpters;
 
 import java.io.IOException;
-
+import java.util.ArrayList;
+import java.util.List;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonToken;
 import com.google.gson.stream.JsonWriter;
-
 import br.com.api.model.Barbatana;
 import br.com.api.model.Denticao;
 import br.com.api.model.Dorso;
 import br.com.api.model.Especie;
 import br.com.api.model.Familia;
 import br.com.api.model.Focinho;
+import br.com.api.model.Nome;
 import br.com.api.model.Reproducao;
 import br.com.api.model.Ventre;
 import br.com.api.util.Util;
@@ -66,8 +67,31 @@ public class EspecieTypeAdpater extends TypeAdapter<Especie> {
 				      break;
 
 				      case "nomes":
-				    	  especie.setNomes(null);
+				          in.beginArray();
+				          final List<Nome> nomesPopulares = new ArrayList<Nome>();
+				          while (in.hasNext()) {
+				            in.beginObject();
+				            final Nome name = new Nome();
+				            while (in.hasNext()) {
+				              switch (in.nextName()) {
+					              case "idNome":
+					                name.setIdNome(in.nextInt());
+					              break;
+					              case "nomePopular":
+					                name.setNomePopular(in.nextString());
+					              break;
+					              case "country":
+					              break;
+				              }
+				            }
+				            nomesPopulares.add(name);
+				            in.endObject();
+				          }
+//				          book.setAuthors(nomesPopulares.toArray(new Author[authors.size()]));
+				          especie.setNomes(nomesPopulares);
+				          in.endArray();
 				      break;
+				
 				      
 				      case "reproducao":
 				    	especie.setReproducao((Reproducao) Util.jsonToObject(in.nextString(), Reproducao.class));  
@@ -124,7 +148,14 @@ public class EspecieTypeAdpater extends TypeAdapter<Especie> {
 		out.name("tamMaior").value(especie.getTamMaior());
 		out.name("tamMedioFilhote").value(especie.getTamMedioFilhote());
 		out.name("extincao").value(especie.getExtincao());
-		out.name("nomes").jsonValue(Util.objectToJson(especie.getNomes()));
+//		out.name("nomes").jsonValue(Util.objectToJson(especie.getNomes()));
+	    for (final Nome nome : especie.getNomes()) {
+	        out.beginObject();
+	        out.name("idNome").value(nome.getIdNome());
+	        out.name("nomePopular").value(nome.getNomePopular());
+	        out.name("country").value("");
+	        out.endObject();
+	    }
 		out.name("reproducao").jsonValue(Util.objectToJson(especie.getReproducao()));
 		out.name("focinho").jsonValue(Util.objectToJson(especie.getFocinho()));
 		out.name("familia").jsonValue(Util.objectToJson(especie.getFamilia()));
@@ -133,7 +164,5 @@ public class EspecieTypeAdpater extends TypeAdapter<Especie> {
 		out.name("denticao").jsonValue(Util.objectToJson(especie.getDenticao()));
 		out.name("barbatana").jsonValue(Util.objectToJson(especie.getBarbatana()));
 		out.endObject();
-	}
-		
-	
+	}	
 }
