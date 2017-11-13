@@ -72,7 +72,7 @@ public class EspecieResource {
 				//MyTokenGen.verifyTokenAcess(token, acessLevel);*/
 				
 				UriBuilder builder = uriInfo.getAbsolutePathBuilder();		
-
+				System.out.println("Bateu no server");
 				System.out.println(especieJson);
 				
 //				System.out.println(Util.jsonToObject(especieJson, Especie.class));
