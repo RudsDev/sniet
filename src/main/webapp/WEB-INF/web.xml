@@ -12,7 +12,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
-  	<display-name>sniet_api</display-name>
+  	<display-name>sniet</display-name>
   	
 	<listener>
 		<listener-class>br.com.api.init.LoadDataServlet</listener-class>
@@ -44,8 +44,8 @@
     </servlet>
  
     <servlet-mapping>
-        <servlet-name>br.com.app.api.MyApplication</servlet-name>
-        <url-pattern>/servlet</url-pattern>
+        <servlet-name>br.com.api.app.MyApplication</servlet-name>
+        <url-pattern>/sniet</url-pattern>
     </servlet-mapping>
 	
 </web-app>
