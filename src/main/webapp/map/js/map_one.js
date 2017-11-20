@@ -21,8 +21,8 @@ function initMap() {
 	var id = getUrlParameter('individuoID');
 	
 	$.ajax({	
-		url: '/sniet_api/servlet/incidents/'+id,
-		//url: 'http://localhost:8282/sniet_api/servlet/incidents/'+id,
+		url: '/sniet/servlet/incidents/'+id,
+		//url: 'http://localhost:8282/sniet/servlet/incidents/'+id,
 		type: 'GET',
 		crossDomain: true,
 		contentType: 'text/plain; charset=utf-8',
