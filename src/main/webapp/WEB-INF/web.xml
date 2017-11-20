@@ -14,9 +14,9 @@
   
   	<display-name>sniet</display-name>
   	
-	<listener>
+	<!--<listener>
 		<listener-class>br.com.api.init.LoadDataServlet</listener-class>
-	</listener>
+	</listener> -->
   	
     <servlet>
         <servlet-name>br.com.api.app.MyApplication</servlet-name>
@@ -31,7 +31,7 @@
         <!-- Register resources and providers under my.package. -->
         <init-param>
             <param-name>jersey.config.server.provider.packages</param-name>
-            <param-value>br.com.api.resource.api;br.com.web.api</param-value>
+            <param-value>br.com.api.resource.api;br.com.api.app</param-value>
         </init-param>
  
         <!-- Register my custom provider (not needed if it's in my.package) AND LoggingFilter. -->
@@ -45,7 +45,7 @@
  
     <servlet-mapping>
         <servlet-name>br.com.api.app.MyApplication</servlet-name>
-        <url-pattern>/sniet</url-pattern>
+        <url-pattern>/app/*</url-pattern>
     </servlet-mapping>
 	
 </web-app>
