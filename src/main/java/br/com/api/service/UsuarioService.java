@@ -130,14 +130,15 @@ public class UsuarioService {
 			JPAUtil.commitTransaction();
 		}
 		catch(NoResultException e) {
-			System.out.println("Login ou senha inválidos.");
+			System.out.println("Login ou senha invï¿½lidos.");
 		}
 		catch(Exception e) {
 			System.out.println("Erro na infraestrutura.");
 			JPAUtil.rollbackTransaction();
 		}
 		finally {
-			JPAUtil.getEntityManager().detach(usuario);
+			if(usuario!=null)
+				JPAUtil.getEntityManager().detach(usuario);
 			JPAUtil.closeEntityManager();
 		}
 		
